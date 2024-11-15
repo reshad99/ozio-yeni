@@ -70,7 +70,15 @@ class ApiService extends CommonService
     public function updateProfile(UpdateProfileRequest $request)
     {
         try {
-            auth()->guard('api')->user()->update($request->all());
+            /** 
+             * @var User? $user
+             */
+            $user = auth()->guard('api')->user();
+            if (!$user) {
+                throw new Exception('User not authenticated');
+            }
+            $user->fill($request->all());
+            $user->save();
             return  new DataResource(new UserResource(auth()->guard('api')->user()));
         } catch (\Exception $e) {
             $this->errorLogging('updateProfile: ' . $e->getMessage());
