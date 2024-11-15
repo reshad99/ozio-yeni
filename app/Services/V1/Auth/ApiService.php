@@ -6,6 +6,7 @@ use App\Http\Requests\V1\Auth\LoginRequest;
 use App\Http\Requests\V1\Auth\RegisterRequest;
 use App\Http\Requests\V1\Auth\UpdateProfileRequest;
 use App\Http\Requests\V1\Auth\UpdateRequest;
+use App\Http\Resources\V1\DataResource;
 use App\Http\Resources\V1\User\UserResource;
 use App\Models\User;
 use App\Services\V1\CommonService;
@@ -70,7 +71,7 @@ class ApiService extends CommonService
     {
         try {
             auth()->guard('api')->user()->update($request->all());
-            return $this->dataResponse('Məlumatlar yeniləndi', new UserResource(auth()->user()));
+            return  new DataResource(new UserResource(auth()->guard('api')->user()));
         } catch (\Exception $e) {
             $this->errorLogging('updateProfile: ' . $e->getMessage());
             throw $e;
