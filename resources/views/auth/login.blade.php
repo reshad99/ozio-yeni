@@ -110,9 +110,7 @@
                         </div>
                         <!-- End Checkbox -->
                         <!-- forget password -->
-                        <div class="form-group" id="forget-password" style="display:
-{{--                        {{ $role == 'admin' ? '' : 'none' }};--}}
-                        ">
+                        <div class="form-group" id="forget-password">
                             <div class="custom-control">
                                 <span type="button" data-toggle="modal" class="text-primary"
                                       data-target="#forgetPassModal">Forget Password?</span>
