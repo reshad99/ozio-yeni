@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\Log;
 class BaseRepository implements BaseIRepository
 {
     /**
-     * @var Builder
+     * @var Builder<\Illuminate\Database\Eloquent\Model>
      */
     protected Builder $query;
 
     /**
-     * @param $model
+     * @param  \Illuminate\Database\Eloquent\Model  $model
      */
     public function __construct(
         private $model
@@ -32,12 +32,22 @@ class BaseRepository implements BaseIRepository
         return $this;
     }
 
+    /**
+     * @param string $column
+     * @param string $sort
+     * @return self
+     */
     public function orderBy($column, $sort): self
     {
         $this->query->orderBy($column, $sort);
         return $this;
     }
 
+    /**
+     * @param int $start
+     * @param int $limit
+     * @return Collection<int, \Illuminate\Database\Eloquent\Model>
+     */
     public function get(int $start, int $limit): Collection
     {
         return $this->query->skip($start)->take($limit)->get();
@@ -114,9 +124,6 @@ class BaseRepository implements BaseIRepository
     {
         $newRelations = [];
         foreach ($relations as $key => $value) {
-            if (!is_string($key)) {
-                continue;
-            }
             $newRelations[$key] = function ($query) use ($value) {
                 if (isset($value['orderBy']) && isset($value['sort'])) {
                     $query->orderBy($value['orderBy'], $value['sort']);

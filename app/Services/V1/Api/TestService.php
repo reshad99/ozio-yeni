@@ -3,6 +3,8 @@
 namespace App\Services\V1\Api;
 
 use App\Services\V1\CommonService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 class TestService extends CommonService
@@ -11,6 +13,10 @@ class TestService extends CommonService
     {
     }
 
+    /**
+     * @return Response | JsonResponse
+     * @throws \Exception
+     */
     public function test()
     {
         try {

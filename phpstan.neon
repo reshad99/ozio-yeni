@@ -1,0 +1,83 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+
+    paths:
+        - app/
+
+    # Level 9 is the highest level
+    level: 6
+
+    ignoreErrors:
+    -
+      message: '#^Method App\\Models\\User\:\:getJWTCustomClaims\(\) return type has no value type specified in iterable type array\.$#'
+      identifier: missingType.iterableValue
+      count: 1
+      path: app/Models/User.php
+
+    -
+      message: '#^PHPDoc type array\<int, string\> of property App\\Models\\User\:\:\$fillable is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$fillable\.$#'
+      identifier: property.phpDocType
+      count: 1
+      path: app/Models/User.php
+
+    -
+      message: '#^PHPDoc type array\<int, string\> of property App\\Models\\User\:\:\$hidden is not covariant with PHPDoc type list\<string\> of overridden property Illuminate\\Database\\Eloquent\\Model\:\:\$hidden\.$#'
+      identifier: property.phpDocType
+      count: 1
+      path: app/Models/User.php
+
+    -
+      message: '#^Call to an undefined static method Tymon\\JWTAuth\\Facades\\JWTAuth\:\:fromUser\(\)\.$#'
+      identifier: staticMethod.notFound
+      count: 1
+      path: app/Services/V1/Auth/ApiService.php
+
+    -
+      message: '#^Method App\\Services\\V1\\Auth\\ApiService\:\:logout\(\) should return Illuminate\\Http\\JsonResponse but returns Illuminate\\Http\\Response\.$#'
+      identifier: return.type
+      count: 1
+      path: app/Services/V1/Auth/ApiService.php
+
+    -
+      message: '#^Parameter \#1 \$token of method App\\Services\\V1\\Auth\\ApiService\:\:respondWithToken\(\) expects string, true given\.$#'
+      identifier: argument.type
+      count: 1
+      path: app/Services/V1/Auth/ApiService.php
+
+    -
+      message: '#^Method App\\Services\\V1\\CommonService\:\:requestCaptureEjector\(\) return type has no value type specified in iterable type array\.$#'
+      identifier: missingType.iterableValue
+      count: 1
+      path: app/Services/V1/CommonService.php
+
+    -
+      message: '#^Method App\\Services\\V1\\CommonService\:\:setRequestCapture\(\) has parameter \$capture with no value type specified in iterable type array\.$#'
+      identifier: missingType.iterableValue
+      count: 1
+      path: app/Services/V1/CommonService.php
+
+    -
+      message: '#^Method App\\Services\\V1\\CommonService\:\:validate\(\) has parameter \$rules with no value type specified in iterable type array\.$#'
+      identifier: missingType.iterableValue
+      count: 1
+      path: app/Services/V1/CommonService.php
+
+    -
+      message: '#^Method App\\Services\\V1\\Curl\\CurlService\:\:groupBy\(\) should return Illuminate\\Support\\Collection\<string, Illuminate\\Support\\Collection\<int\|string, mixed\>\> but returns Illuminate\\Support\\Collection\<\(int\|string\), Illuminate\\Support\\Collection\<int, mixed\>\>\.$#'
+      identifier: return.type
+      count: 1
+      path: app/Services/V1/Curl/CurlService.php
+
+    -
+      message: '#^Unable to resolve the template type TKey in call to function collect$#'
+      identifier: argument.templateType
+      count: 1
+      path: app/Services/V1/Curl/CurlService.php
+
+    -
+      message: '#^Unable to resolve the template type TValue in call to function collect$#'
+      identifier: argument.templateType
+      count: 1
+      path: app/Services/V1/Curl/CurlService.php

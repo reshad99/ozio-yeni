@@ -14,11 +14,19 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ApiService extends CommonService
 {
+    /**
+     * ApiService constructor.
+     */
     public function __construct()
     {
         parent::__construct(null, [], 'auth');
     }
 
+    /**
+     * @param LoginRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws Exception
+     */
     public function login(LoginRequest $request)
     {
         try {
@@ -27,7 +35,7 @@ class ApiService extends CommonService
                 'password' => $request->password
             ];
 
-            if (!$token = auth()->guard('api')->attempt($credentials)) {
+            if (!($token = auth()->guard('api')->attempt($credentials))) {
                 throw new Exception('Telefon nömrəsi və ya şifrə səhvdir');
             } else {
                 return $this->respondWithToken($token, auth()->guard('api')->user());
@@ -38,6 +46,11 @@ class ApiService extends CommonService
         }
     }
 
+    /**
+     * @param RegisterRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws Exception
+     */
     public function register(RegisterRequest $request)
     {
         try {
@@ -50,6 +63,10 @@ class ApiService extends CommonService
         }
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * @throws Exception
+     */
     public function logout()
     {
         try {
@@ -66,11 +83,15 @@ class ApiService extends CommonService
         }
     }
 
+    /**
+     * @return DataResource
+     * @throws Exception
+     */
     public function updateProfile(UpdateProfileRequest $request)
     {
         try {
             /**
-             * @var User? $user
+             * @var ?User $user
              */
             $user = auth()->guard('api')->user();
             if (!$user) {
@@ -89,7 +110,6 @@ class ApiService extends CommonService
      * Get the token array structure.
      *
      * @param  string $token
-     *
      * @return \Illuminate\Http\JsonResponse
      */
     protected function respondWithToken($token, User $user)
