@@ -1,10 +1,4 @@
 <!DOCTYPE html>
-<?php
-//
-//$log_email_succ = session()->get('log_email_succ');
-//?><!---->
-
-{{--<html dir="{{ $site_direction }}" lang="{{ $locale }}" class="{{ $site_direction === 'rtl'?'active':'' }}">--}}
 <head>
     <!-- Required Meta Tags Always Come First -->
     <meta charset="utf-8">
