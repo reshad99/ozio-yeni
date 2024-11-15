@@ -15,8 +15,8 @@ class DataResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'success'=> true,
-            'message'=> true,
+            'success' => true,
+            'message' => true,
             'data' => $this->collection ?? $this->resource
         ];
     }

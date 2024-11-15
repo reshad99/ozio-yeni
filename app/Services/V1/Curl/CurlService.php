@@ -23,7 +23,7 @@ class CurlService
             'query' => $query,
         ]);
 
-        $collection =  collect($response->json());
+        $collection = collect($response->json());
         $collection = $groupBy ? $this->groupBy($collection, $groupBy) : $collection;
         return $collection;
     }
@@ -47,7 +47,7 @@ class CurlService
         return $this->sendRequest('DELETE', $url);
     }
 
-    private function groupBy(Collection $collection,$key)
+    private function groupBy(Collection $collection, $key)
     {
         return $collection->groupBy($key);
     }
