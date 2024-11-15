@@ -50,7 +50,7 @@
                 <!-- Form -->
                 <form class="" action="#" method="post" id="form-id">
                     @csrf
-{{--                    <input type="hidden" name="role" value="{{  $role ?? null }}">--}}
+                    {{--                    <input type="hidden" name="role" value="{{  $role ?? null }}">--}}
                     <div class="auth-header">
                         <div class="mb-5">
                             <h2 class="title">Admin signin</h2>
@@ -179,7 +179,7 @@
                         A mail will be send to your registered email with a link to change passowrd
                     </p>
                     <a class="btn btn-lg btn-block btn--primary mt-3"
-                        {{--                       href="{{route('reset-password')}}"--}}
+                            {{--                       href="{{route('reset-password')}}"--}}
                     >
                         Send Mail
                     </a>
