@@ -5,22 +5,28 @@ namespace App\Services\V1\Auth;
 use App\Http\Requests\V1\Auth\LoginRequest;
 use App\Http\Requests\V1\Auth\RegisterRequest;
 use App\Http\Requests\V1\Auth\UpdateProfileRequest;
-use App\Http\Requests\V1\Auth\UpdateRequest;
 use App\Http\Resources\V1\DataResource;
 use App\Http\Resources\V1\User\UserResource;
 use App\Models\User;
 use App\Services\V1\CommonService;
 use Exception;
-use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ApiService extends CommonService
 {
+    /**
+     * ApiService constructor.
+     */
     public function __construct()
     {
         parent::__construct(null, [], 'auth');
     }
 
+    /**
+     * @param LoginRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws Exception
+     */
     public function login(LoginRequest $request)
     {
         try {
@@ -29,10 +35,10 @@ class ApiService extends CommonService
                 'password' => $request->password
             ];
 
-            if (!$token = auth()->guard('api')->attempt($credentials)) {
+            if (!($token = auth()->guard('api')->attempt($credentials))) {
                 throw new Exception('Telefon nömrəsi və ya şifrə səhvdir');
             } else {
-                return $this->respondWithToken($token, auth()->user());
+                return $this->respondWithToken($token, auth()->guard('api')->user());
             }
         } catch (\Exception $e) {
             $this->errorLogging('login: ' . $e->getMessage());
@@ -40,6 +46,11 @@ class ApiService extends CommonService
         }
     }
 
+    /**
+     * @param RegisterRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws Exception
+     */
     public function register(RegisterRequest $request)
     {
         try {
@@ -52,13 +63,18 @@ class ApiService extends CommonService
         }
     }
 
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * @throws Exception
+     */
     public function logout()
     {
         try {
-            if (auth()->check())
-                auth()->logout();
+            if (auth()->guard('api')->check()) {
+                auth()->guard('api')->logout();
+            }
 
-            $this->infoLogging('logout check: ' . auth()->check());
+            $this->infoLogging('logout check: ' . auth()->guard('api')->check());
 
             return $this->successResponse('Hesabdan çıxıldı');
         } catch (\Exception $e) {
@@ -67,10 +83,22 @@ class ApiService extends CommonService
         }
     }
 
+    /**
+     * @return DataResource
+     * @throws Exception
+     */
     public function updateProfile(UpdateProfileRequest $request)
     {
         try {
-            auth()->guard('api')->user()->update($request->all());
+            /**
+             * @var ?User $user
+             */
+            $user = auth()->guard('api')->user();
+            if (!$user) {
+                throw new Exception('User not authenticated');
+            }
+            $user->fill($request->all());
+            $user->save();
             return  new DataResource(new UserResource(auth()->guard('api')->user()));
         } catch (\Exception $e) {
             $this->errorLogging('updateProfile: ' . $e->getMessage());
@@ -82,7 +110,6 @@ class ApiService extends CommonService
      * Get the token array structure.
      *
      * @param  string $token
-     *
      * @return \Illuminate\Http\JsonResponse
      */
     protected function respondWithToken($token, User $user)
