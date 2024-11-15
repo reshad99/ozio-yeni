@@ -31,7 +31,7 @@ class ApiService extends CommonService
             if (!$token = auth()->guard('api')->attempt($credentials)) {
                 throw new Exception('Telefon nömrəsi və ya şifrə səhvdir');
             } else {
-                return $this->respondWithToken($token, auth()->user());
+                return $this->respondWithToken($token, auth()->guard('api')->user());
             }
         } catch (\Exception $e) {
             $this->errorLogging('login: ' . $e->getMessage());
@@ -54,10 +54,10 @@ class ApiService extends CommonService
     public function logout()
     {
         try {
-            if (auth()->check())
-                auth()->logout();
+            if (auth()->guard('api')->check())
+                auth()->guard('api')->logout();
 
-            $this->infoLogging('logout check: ' . auth()->check());
+            $this->infoLogging('logout check: ' . auth()->guard('api')->check());
 
             return $this->successResponse('Hesabdan çıxıldı');
         } catch (\Exception $e) {

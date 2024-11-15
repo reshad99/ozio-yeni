@@ -11,15 +11,15 @@ use Illuminate\Support\Facades\Log;
 
 class TestService extends CommonService
 {
-    public function __construct()
-    {
-      
-    }
+    public function __construct() {}
 
     public function test()
-{
+    {
         try {
-            return response(['status' => 'success', 'data' => auth()->user()]);
+            /*
+            * This is a test function
+            */
+            return response(['status' => 'success', 'data' => Auth::user()], 200);
         } catch (\Exception $e) {
             return $this->errorResponse($e);
         }

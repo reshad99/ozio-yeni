@@ -5,6 +5,7 @@ namespace App\Services\V1;
 
 use App\Http\Resources\Mobile\UserResource;
 use App\Models\User;
+use App\Repositories\Abstract\BaseIRepository;
 use App\Repositories\DefaultModelInterface;
 use Exception;
 use Illuminate\Contracts\Auth\Authenticatable;
@@ -32,13 +33,12 @@ abstract class CommonService
 
     protected LoggerInterface $channel;
 
-
     /**
-     * @var DefaultModelInterface
+     * @var BaseIRepository
      * */
     protected $mainRepository;
 
-    public function __construct(DefaultModelInterface $mainRepository = null, array $request = [], $logChannel = '')
+    public function __construct(BaseIRepository $mainRepository = null, array $request = [], $logChannel = '')
     {
         $this->channel = Log::channel($logChannel);
         $this->mainRepository = $mainRepository;
