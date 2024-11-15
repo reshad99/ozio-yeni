@@ -5,13 +5,11 @@ namespace App\Services\V1\Auth;
 use App\Http\Requests\V1\Auth\LoginRequest;
 use App\Http\Requests\V1\Auth\RegisterRequest;
 use App\Http\Requests\V1\Auth\UpdateProfileRequest;
-use App\Http\Requests\V1\Auth\UpdateRequest;
 use App\Http\Resources\V1\DataResource;
 use App\Http\Resources\V1\User\UserResource;
 use App\Models\User;
 use App\Services\V1\CommonService;
 use Exception;
-use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ApiService extends CommonService
@@ -55,8 +53,9 @@ class ApiService extends CommonService
     public function logout()
     {
         try {
-            if (auth()->guard('api')->check())
+            if (auth()->guard('api')->check()) {
                 auth()->guard('api')->logout();
+            }
 
             $this->infoLogging('logout check: ' . auth()->guard('api')->check());
 
@@ -70,7 +69,7 @@ class ApiService extends CommonService
     public function updateProfile(UpdateProfileRequest $request)
     {
         try {
-            /** 
+            /**
              * @var User? $user
              */
             $user = auth()->guard('api')->user();
