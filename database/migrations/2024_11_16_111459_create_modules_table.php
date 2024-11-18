@@ -12,24 +12,11 @@ return new class () extends Migration {
     {
         Schema::disableForeignKeyConstraints();
 
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email');
-            $table->string('password');
-            $table->string('remember_token');
-            $table->string('country_code');
-            $table->string('phone');
-            $table->string('device_id');
-            $table->string('bonus_card_no');
-            $table->enum('interest', [""]);
-            $table->bigInteger('ref_code');
-            //add start date time
-
-            $table->dateTime('start_date');
-
-
-            //timestamps
+            $table->enum('type', ["market","restaurant"]);
+            $table->enum('status', ["active","inactive"]);
             $table->timestamps();
             //solf delete
             $table->softDeletes();
@@ -43,6 +30,6 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('modules');
     }
 };
