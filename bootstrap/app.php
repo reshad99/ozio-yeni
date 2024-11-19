@@ -27,7 +27,11 @@ return Application::configure(basePath: dirname(__DIR__))
 
 
             Route::middleware('web')
+<<<<<<< HEAD
                 ->group(base_path('routes/web.php'));
+=======
+            ->group(base_path('routes/web.php'));
+>>>>>>> 9ef3c67c0b3949d6b909e094f210bf7f766c6c62
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
