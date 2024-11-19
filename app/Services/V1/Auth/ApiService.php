@@ -87,7 +87,7 @@ class ApiService extends CommonService
      * @return DataResource
      * @throws Exception
      */
-    public function updateProfile(UpdateProfileRequest $request)
+    public function updateProfile(UpdateProfileRequest $request): DataResource
     {
         try {
             /**
@@ -99,7 +99,7 @@ class ApiService extends CommonService
             }
             $user->fill($request->all());
             $user->save();
-            return  new DataResource(new UserResource(auth()->guard('api')->user()));
+            return new DataResource(new UserResource(auth()->guard('api')->user()));
         } catch (\Exception $e) {
             $this->errorLogging('updateProfile: ' . $e->getMessage());
             throw $e;
