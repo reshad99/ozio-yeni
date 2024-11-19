@@ -22,6 +22,9 @@ class CreateVersion extends Command
      */
     protected $description = 'Copy controllers, requests, and resources to new version folder';
 
+    /**
+     * @var string[]
+     */
     private $appDirectories = [
         'Http/Controllers',
         'Http/Resources',
@@ -29,12 +32,15 @@ class CreateVersion extends Command
         'Services',
     ];
 
+    /**
+     * @var string[]
+     */
     private $rootDirectories = [
         'routes',
     ];
 
     /**
-     * Execute the console command.
+     * @return int
      */
     public function handle()
     {
@@ -83,7 +89,13 @@ class CreateVersion extends Command
         return 0;
     }
 
-    private function replaceNamespace($path, $oldVersion, $newVersion)
+    /**
+     * @param string $path
+     * @param string $oldVersion
+     * @param string $newVersion
+     * @return void
+     */
+    private function replaceNamespace(string $path, string $oldVersion, string $newVersion)
     {
         $items = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path), \RecursiveIteratorIterator::SELF_FIRST);
 
