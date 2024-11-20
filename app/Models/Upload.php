@@ -11,10 +11,16 @@ use Ramsey\Uuid\Nonstandard\Uuid;
 
 class Upload extends Model
 {
+    use HasFactory;
     use SoftDeletes;
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array<string>|bool
+     */
+    protected $guarded = [];
 
-    use HasFactory;
     //on created set size 031
     protected static function boot()
     {
@@ -32,6 +38,7 @@ class Upload extends Model
     {
         return $this->attributes['uploadable_id'];
     }
+
     public function getUploadableType()
     {
         return $this->attributes['uploadable_type'];
@@ -103,7 +110,7 @@ class Upload extends Model
      */
     public function getId(): int
     {
-        return (int) $this->attributes['id'];
+        return (int)$this->attributes['id'];
     }
 
     /**
@@ -121,6 +128,7 @@ class Upload extends Model
     {
         return $this->attributes['mime_type'];
     }
+
     /**
      * @param string $type
      */
