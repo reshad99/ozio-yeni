@@ -22,7 +22,7 @@ class SaveUploadListener
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param SaveUploadEvent $event
      * @return void
      */
     public function handle(SaveUploadEvent $event)
