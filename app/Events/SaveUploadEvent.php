@@ -40,6 +40,7 @@ class SaveUploadEvent
      */
     public $filePath = null;
 
+
     /**
      * Create a new event instance.
      * 
