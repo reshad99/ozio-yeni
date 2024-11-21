@@ -13,8 +13,6 @@ class Upload extends Model
 {
     use SoftDeletes;
 
-
-    use HasFactory;
     //on created set size 031
     protected static function boot()
     {
@@ -28,11 +26,11 @@ class Upload extends Model
     // 'uploadable_id' => $this->upload->getUploadableId(),
     // 'uploadable_type' => $this->upload->getUploadableType(),
 
-    public function getUploadableId()
+    public function getUploadableId(): ?int
     {
         return $this->attributes['uploadable_id'];
     }
-    public function getUploadableType()
+    public function getUploadableType(): ?string
     {
         return $this->attributes['uploadable_type'];
     }
@@ -51,6 +49,7 @@ class Upload extends Model
         'type'
     ];
 
+    /** @phpstan-ignore-next-line */
     public function uploadable(): MorphTo
     {
         return $this->morphTo();

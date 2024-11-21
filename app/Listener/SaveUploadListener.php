@@ -22,15 +22,30 @@ class SaveUploadListener
     /**
      * Handle the event.
      *
-     * @param  object  $event
+     * @param SaveUploadEvent $event
      * @return void
      */
     public function handle(SaveUploadEvent $event)
     {
+        /**
+         * @var \Illuminate\Http\UploadedFile $file
+         */
         $file = $event->file;
+
+        /**
+         * @var Model $model
+         */
         $model = $event->model;
+        /**
+         * @var string $type
+         */
         $type = $event->type;
+        /**
+         * @var bool $overwrite
+         */
         $overwrite = $event->overwrite;
+
+        $uploadId = $event->uploadId;
 
         if ($type == null) {
             $type = 'default';
@@ -49,14 +64,18 @@ class SaveUploadListener
         $upload->setExtension($ext);
         $upload->setType($type);
 
-        //check overwrite
-        if ($overwrite && isset($event->uploadId) && $event->uploadId != null) {
+        /**
+         * @var ?int $uploadId
+         */
+        $uploadId = $event->uploadId;
+        if ($overwrite && isset($uploadId) && $uploadId != null) {
             //get upload
-            $oldUpload = Upload::where('id', $event->uploadId)->first();
+            $oldUpload = Upload::where('id', $uploadId)->first();
             $oldUpload->delete();
             $event->uploadId = null;
         }
 
+        /** @phpstan-ignore-next-line */
         if ($model instanceof Model) {
             $upload->setUploadable($model);
         }

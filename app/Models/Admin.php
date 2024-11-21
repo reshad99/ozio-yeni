@@ -10,6 +10,7 @@ class Admin extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+
     /**
      * The attributes that aren't mass assignable.
      *
