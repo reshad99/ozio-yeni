@@ -4,12 +4,16 @@ namespace Modules\Admin\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Modules\Admin\Http\Requests\AdminLoginRequest;
+use Modules\Admin\Services\Auth\AdminLoginService;
 
 class LoginController extends Controller
 {
+    public function __construct(protected AdminLoginService $adminLoginService)
+    {
+    }
+
     /**
      * @return View
      */
@@ -24,11 +28,9 @@ class LoginController extends Controller
      */
     public function authenticate(AdminLoginRequest $request): RedirectResponse
     {
-        $credentials = $request->only('email', 'password');
-        $remember_me = $request->has('remember_me');
-
-        if (!Auth::guard('admin')->attempt($credentials, $remember_me)) {
-            return redirect()->back()->withErrors(__('admin::general.auth.failed'))->withInput();
+        $login = $this->adminLoginService->login($request);
+        if (!$login['success']) {
+            return redirect()->back()->withErrors($login['message'])->withInput();
         }
 
         return redirect()->route('admin.dashboard');
