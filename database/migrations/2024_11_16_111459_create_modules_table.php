@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\ModuleTypeEnum;
+use App\Enums\StatusEnum;
 
 return new class () extends Migration {
     /**
@@ -15,8 +17,8 @@ return new class () extends Migration {
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->enum('type', ["market","restaurant"]);
-            $table->enum('status', ["active","inactive"]);
+            $table->enum('type', array_column(ModuleTypeEnum::cases(), 'value'));
+            $table->enum('status', array_column(StatusEnum::cases(), 'value'));
             $table->timestamps();
             //solf delete
             $table->softDeletes();
