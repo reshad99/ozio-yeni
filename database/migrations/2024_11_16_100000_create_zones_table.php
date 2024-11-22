@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\StatusEnum;
+use App\Enums\ZoneTypeEnum;
 
 return new class () extends Migration {
     /**
@@ -14,9 +16,9 @@ return new class () extends Migration {
 
         Schema::create('zones', function (Blueprint $table) {
             $table->id();
-            $table->enum('type', ["service","price"]);
-            $table->geometry('cordinates');
-            $table->enum('status', ["active","inactive"]);
+            $table->enum('type', array_column(ZoneTypeEnum::cases(), 'value'));
+            $table->geometry('coordinates');
+            $table->enum('status', array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);
             $table->timestamps();
             //solf delete
             $table->softDeletes();

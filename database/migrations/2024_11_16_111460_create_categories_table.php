@@ -16,7 +16,7 @@ return new class() extends Migration {
             $table->id();
             $table->json('name');
             $table->enum('status', [""]);
-            $table->enum('featured', [""]);
+            $table->smallInteger('featured');
             $table->smallInteger('priorty');
             $table->bigInteger('module_id');
             $table->foreign('module_id')->references('id')->on('modules');

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\UploadTypeEnum;
 
 class CreateUploadsTable extends Migration
 {
@@ -21,7 +22,7 @@ class CreateUploadsTable extends Migration
             $table->string('extension', '10');
             $table->string('original_name');
             $table->nullableMorphs('uploadable');
-            $table->enum('type', ['thumb', 'cover'])->default('thumb');
+            $table->enum('type', array_column(UploadTypeEnum::cases(), 'value'))->default(UploadTypeEnum::THUMBNAIL->value);
             $table->softDeletes();
             $table->timestamps();
         });
