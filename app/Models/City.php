@@ -19,7 +19,7 @@ class City extends Model
     protected $guarded = [];
 
     /**
-     * @return BelongsTo<Country>
+     * @return BelongsTo<Country, self>
      */
     public function country(): BelongsTo
     {

@@ -18,7 +18,7 @@ class UserNotification extends Model
     protected $guarded = [];
 
     /**
-     * @return BelongsTo<User>
+     * @return BelongsTo<User, self>
      */
     public function user(): BelongsTo
     {

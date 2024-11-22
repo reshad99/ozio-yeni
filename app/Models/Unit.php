@@ -18,9 +18,9 @@ class Unit extends Model
     protected $guarded = [];
 
     /**
-     * @return BelongsTo<Unit, self>
+     * @return BelongsTo<UnitType, self>
      */
-    public function unit(): BelongsTo
+    public function unitType(): BelongsTo
     {
         return $this->belongsTo(UnitType::class);
     }
