@@ -19,7 +19,7 @@ class StoreBranch extends Model
     protected $guarded = [];
 
     /**
-     * @return HasMany<Store,self>
+     * @return HasMany<Store>
      */
     public function stores(): HasMany
     {
