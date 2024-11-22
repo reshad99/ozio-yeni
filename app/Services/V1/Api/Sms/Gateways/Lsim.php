@@ -5,7 +5,6 @@ namespace App\Services\V1\Sms\Gateways;
 use App\Enums\LsimResponseCode;
 use App\Services\V1\Sms\SmsGateway;
 use Exception;
-use Illuminate\Support\Facades\Log;
 use App\Services\V1\Curl\CurlService;
 use Nette\Utils\Json;
 
@@ -48,7 +47,7 @@ class Lsim implements SmsGateway
 
     private function setRequestBody($controlId): void
     {
-        $controlId  =  $controlId == null ? time() :  $controlId;
+        $controlId = $controlId == null ? time() : $controlId;
         $this->body = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
             <request>
                 <head>

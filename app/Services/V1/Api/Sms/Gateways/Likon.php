@@ -4,7 +4,6 @@ namespace App\Services\V1\Sms\Gateways;
 
 use App\Services\V1\Sms\SmsGateway;
 use Exception;
-use Illuminate\Support\Facades\Log;
 use Nette\Utils\Json;
 
 class Likon implements SmsGateway
