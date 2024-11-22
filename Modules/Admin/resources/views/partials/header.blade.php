@@ -1931,9 +1931,7 @@
 
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <form action="
-{{--                            {{ route('admin.logout') }}--}}
-                            " method="post">
+                            <form action="{{ route('logout') }}" method="post">
                                 @csrf
                                 <a class="menu-link px-5"><button class="btn-reset" type="submit">
                                         {{ __('admin::general.layout.header.logout') }}</button></a>

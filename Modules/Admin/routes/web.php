@@ -21,6 +21,7 @@ Route::group([], function () {
 
 Route::get('login', [LoginController::class, 'showLogin'])->name('login');
 Route::post('authenticate', [LoginController::class, 'authenticate'])->name('admin.authenticate');
+Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::middleware('auth:admin')->group(function () {
     Route::view('dashboard', 'admin::pages.dashboard.index')->name('admin.dashboard');
