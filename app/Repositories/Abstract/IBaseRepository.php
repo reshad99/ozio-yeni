@@ -5,7 +5,7 @@ namespace App\Repositories\Abstract;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
-interface BaseIRepository
+interface IBaseRepository
 {
     /**
      * @param string $search
