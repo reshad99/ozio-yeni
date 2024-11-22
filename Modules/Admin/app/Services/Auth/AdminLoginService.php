@@ -9,7 +9,7 @@ class AdminLoginService
 {
     /**
      * @param AdminLoginRequest $request
-     * @return array|true[]
+     * @return array<bool,string>|true[]
      */
     public function login(AdminLoginRequest $request)
     {

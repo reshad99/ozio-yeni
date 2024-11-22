@@ -9,7 +9,7 @@ class AdminLogoutService
     /**
      * Handle admin logout process.
      *
-     * @return array
+     * @return array[]
      */
     public function logout(): array
     {
