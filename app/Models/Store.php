@@ -2,11 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Store extends Model
 {
+    use HasFactory, SoftDeletes;
+
     /**
      * The attributes that aren't mass assignable.
      *
@@ -39,11 +43,11 @@ class Store extends Model
     }
 
     /**
-     * @return BelongsTo<StoreCategory, self>
+     * @return BelongsTo<Category, self>
      */
-    public function storeCategory(): BelongsTo
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(StoreCategory::class);
+        return $this->belongsTo(Category::class);
     }
 
     /**

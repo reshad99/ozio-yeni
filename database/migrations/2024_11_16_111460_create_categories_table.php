@@ -20,12 +20,11 @@ return new class() extends Migration {
             $table->smallInteger('priorty');
             $table->bigInteger('module_id');
             $table->foreign('module_id')->references('id')->on('modules');
-            // $table->bigInteger('parent_id');
-            // $table->foreign('parent_id')->references('id')->on('categories');
+            $table->integer('left');
+            $table->integer('right');
+            $table->integer('depth')->default(0);
             $table->nestedSet();
-
             $table->timestamps();
-            //solf delete
             $table->softDeletes();
         });
 
