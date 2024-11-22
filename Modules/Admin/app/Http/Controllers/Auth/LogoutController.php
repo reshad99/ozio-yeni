@@ -20,7 +20,7 @@ class LogoutController extends Controller
         $logout = $this->adminLogoutService->logout();
 
         if ($logout['success']) {
-            return redirect()->route('login')->with('status', $logout['message']);
+            return redirect()->route('login')->with('status');
         }
 
         return redirect()->back();
