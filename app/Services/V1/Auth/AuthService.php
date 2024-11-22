@@ -2,24 +2,43 @@
 
 namespace App\Services\V1\Auth;
 
+use App\Enums\SmsText;
 use App\Http\Requests\V1\Auth\LoginRequest;
 use App\Http\Requests\V1\Auth\RegisterRequest;
 use App\Http\Requests\V1\Auth\UpdateProfileRequest;
 use App\Http\Resources\V1\DataResource;
+use App\Http\Resources\V1\SuccessResource;
 use App\Http\Resources\V1\User\UserResource;
 use App\Models\User;
 use App\Services\V1\CommonService;
+use App\Services\V1\Sms\SmsService;
 use Exception;
+use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class ApiService extends CommonService
+class AuthService extends CommonService
 {
+    protected SmsService $smsService;
+
     /**
-     * ApiService constructor.
+     * AuthService constructor.
      */
-    public function __construct()
+    public function __construct(SmsService $smsService)
     {
         parent::__construct(null, [], 'auth');
+        $this->smsService = $smsService;
+    }
+
+    public function sendOtpCode(Request $request): SuccessResource
+    {
+        $request->validate(rules: [
+            'phone' => 'required|exists:users,phone'
+        ]);
+        $phone = $request->phone;
+        $otp = mt_rand(1000, 9999);
+        $this->smsService->send(receiver: $phone, sms: SmsText::OTP, variables: ['otp' => $otp]);
+
+        return new SuccessResource(message: 'Otp code sended');
     }
 
     /**
@@ -31,17 +50,17 @@ class ApiService extends CommonService
     {
         try {
             $credentials = [
-                $this->loginType($request->login) => $request->login,
+                $this->loginType(login: $request->login) => $request->login,
                 'password' => $request->password
             ];
 
-            if (!($token = auth()->guard('api')->attempt($credentials))) {
-                throw new Exception('Telefon nömrəsi və ya şifrə səhvdir');
+            if (!($token = auth()->guard(name: 'api')->attempt(credentials: $credentials))) {
+                throw new Exception(message: 'Telefon nömrəsi və ya şifrə səhvdir');
             } else {
                 return $this->respondWithToken($token, auth()->guard('api')->user());
             }
         } catch (\Exception $e) {
-            $this->errorLogging('login: ' . $e->getMessage());
+            $this->errorLogging(message: 'login: ' . $e->getMessage());
             throw $e;
         }
     }

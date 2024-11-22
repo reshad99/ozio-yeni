@@ -14,7 +14,7 @@ use Nette\Utils\Json;
  */
 class SmsService
 {
-    protected $gateway;
+    protected SmsGateway $gateway;
 
     /**
      * Whatever pattern you use, please keep VAR_NAME to be overwritten
@@ -39,15 +39,15 @@ class SmsService
      * Then, after successfully sending the sms it inserts a new row to sms_logs table
      *
      * @param string|int $receiver
-     * @param SmsText $sms Either raw sms text or id from sms_texts table
-     * @param array $variables
+     * @param SmsText $sms
+     * @param array<string, mixed> $variables
      * @return boolean
      *
      * Example usage:
      * $gateway = new Lsim();
      * $isSent = (new SmsService($gateway))->send($receiver, $content);
      */
-    public function execute($receiver, SmsText $sms, array $variables = []): bool
+    public function execute(string|int $receiver, SmsText $sms, array $variables = []): bool
     {
         $smsText = $sms->getText();
 
@@ -68,15 +68,15 @@ class SmsService
      * Method adds the process to queue
      *
      * @param string|int $receiver
-     * @param string|int $sms Either raw sms text or id from sms_texts table
-     * @param array $variables
+     * @param SmsText $sms Either raw sms text or id from sms_texts table
+     * @param array<string, mixed> $variables
      * @return boolean
      *
      * Example usage:
      * $gateway = new Lsim();
      * $isSent = (new SmsService($gateway))->send($receiver, $content);
      */
-    public function send($receiver, string|int $sms, array $variables = []): bool
+    public function send(string|int $receiver, SmsText $sms, array $variables = []): bool
     {
         $receiver = getCleanNumber($receiver);
         SmsBulk::dispatch(new SmsService($this->gateway), compact('receiver', 'sms', 'variables'));
@@ -86,7 +86,7 @@ class SmsService
     /**
      * Send multiple smses in a row (using Laravel jobs)
      *
-     * @param array $messages
+     * @param array<string, mixed> $messages
      * $messages = [
      *   [
      *     'receiver'=>'994551112233',
@@ -115,7 +115,7 @@ class SmsService
     /**
      * Store sms log
      *
-     * @param array $data
+     * @param array<string, mixed> $data
      * @return void
      */
     private function storeSmsLog(array $data)
@@ -164,7 +164,7 @@ class SmsService
      * The methods apply dynamic data to the text
      *
      * @param string &$content
-     * @param array $variables
+     * @param array<string, mixed> $variables
      * @return string
      */
     public static function evaluateSmsText(string &$content, array $variables): string
@@ -179,7 +179,7 @@ class SmsService
     /**
      * Log the sent sms
      *
-     * @param array $result
+     * @param array<string, mixed> $result
      * @return void
      */
     private function log($result)

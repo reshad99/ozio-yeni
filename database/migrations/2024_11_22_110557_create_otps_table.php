@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sms_texts', function (Blueprint $table) {
+        Schema::create(table: 'otps', callback: function (Blueprint $table): void {
             $table->id();
-            $table->text('sms_text');
-            $table->string('process_key')->nullable();
-            $table->boolean('is_published')->default(1);
+            $table->integer(column: 'code');
+            $table->foreignId(column: 'user_id')->constrained(table: 'users');
             $table->timestamps();
         });
     }
@@ -25,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sms_texts');
+        Schema::dropIfExists('otps');
     }
 };

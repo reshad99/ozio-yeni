@@ -37,6 +37,11 @@ return [
 
     'versions' => [
         'v1'
+    ],
+    'lsim' => [
+        'user' => 'ozio',
+        'password' => 'L5JDu@ZmxtQi',
+        'url' => 'https://apps.lsim.az/quicksms/v1/smssender'
     ]
 
 ];

@@ -11,32 +11,33 @@ use Nette\Utils\Json;
 
 class Lsim implements SmsGateway
 {
-    private $user;
-    private $password;
-    private $url;
+    private string $user;
+    private string $password;
+    private string $url;
 
-    private $receiver;
-    private $content;
+    private string $receiver;
+    private string $content;
 
-    private $headers;
-    private $body;
-    private $curlService;
+    /**
+     * @var array<string, mixed>
+     */
+    private array $headers;
+    private string $body;
 
-    private $response;
+    private mixed $response;
 
-    public function __construct(CurlService $curlService)
+    public function __construct()
     {
-        $this->user = config('app.sms_lsim_user');
-        $this->password = config('app.sms_lsim_pwd');
-        $this->curlService = $curlService;
+        $this->user = config(key: 'services.lsim.user');
+        $this->password = config(key: 'services.lsim.password');
 
         $this->setHost();
         $this->setRequestHeaders();
     }
 
-    private function setHost()
+    private function setHost(): void
     {
-        $this->url = config('app.sms_lsim_baseurl');
+        $this->url = config(key: 'services.lsim.url');
     }
 
     private function setRequestHeaders(): void
@@ -46,7 +47,7 @@ class Lsim implements SmsGateway
         ];
     }
 
-    private function setRequestBody($controlId): void
+    private function setRequestBody(int $controlId = null): void
     {
         $controlId  =  $controlId == null ? time() :  $controlId;
         $this->body = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -67,7 +68,16 @@ class Lsim implements SmsGateway
             </request>';
     }
 
-    public function sendSms($receiver, $content, $controlId = null): array
+    /**
+     *
+     * @return array{
+     *     status: bool,
+     *     message: string,
+     *     response?: mixed
+     * }
+     */
+
+    public function sendSms(string $receiver, string $content, int $controlId = null): array
     {
         $this->receiver = $receiver;
         $this->content = $content;
@@ -97,13 +107,13 @@ class Lsim implements SmsGateway
         ];
     }
 
-    private function parseResponse($response): mixed
+    private function parseResponse(mixed $response): mixed
     {
         $response = simplexml_load_string($response->getBody(), 'SimpleXMLElement', LIBXML_NOCDATA);
         return Json::decode(Json::encode($response), true);
     }
 
-    public function validateResponse($response): bool
+    public function validateResponse(mixed $response): bool
     {
         $isSent = ($response['head']['responsecode'] ?? '') == LsimResponseCode::SUCCESS->value;
         return $isSent;
@@ -114,12 +124,12 @@ class Lsim implements SmsGateway
         return $this->response;
     }
 
-    public function getReceiver(): mixed
+    public function getReceiver(): string
     {
         return $this->receiver;
     }
 
-    public function getContent(): mixed
+    public function getContent(): string
     {
         return $this->content;
     }

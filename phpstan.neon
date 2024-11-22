@@ -32,19 +32,19 @@ parameters:
       message: '#^Call to an undefined static method Tymon\\JWTAuth\\Facades\\JWTAuth\:\:fromUser\(\)\.$#'
       identifier: staticMethod.notFound
       count: 1
-      path: app/Services/V1/Auth/ApiService.php
+      path: app/Services/V1/Auth/AuthService.php
 
     -
-      message: '#^Method App\\Services\\V1\\Auth\\ApiService\:\:logout\(\) should return Illuminate\\Http\\JsonResponse but returns Illuminate\\Http\\Response\.$#'
+      message: '#^Method App\\Services\\V1\\Auth\\AuthService\:\:logout\(\) should return Illuminate\\Http\\JsonResponse but returns Illuminate\\Http\\Response\.$#'
       identifier: return.type
       count: 1
-      path: app/Services/V1/Auth/ApiService.php
+      path: app/Services/V1/Auth/AuthService.php
 
     -
-      message: '#^Parameter \#1 \$token of method App\\Services\\V1\\Auth\\ApiService\:\:respondWithToken\(\) expects string, true given\.$#'
+      message: '#^Parameter \#1 \$token of method App\\Services\\V1\\Auth\\AuthService\:\:respondWithToken\(\) expects string, true given\.$#'
       identifier: argument.type
       count: 1
-      path: app/Services/V1/Auth/ApiService.php
+      path: app/Services/V1/Auth/AuthService.php
 
     -
       message: '#^Method App\\Services\\V1\\CommonService\:\:requestCaptureEjector\(\) return type has no value type specified in iterable type array\.$#'
