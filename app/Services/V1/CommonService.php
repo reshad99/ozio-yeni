@@ -2,7 +2,7 @@
 
 namespace App\Services\V1;
 
-use App\Repositories\Abstract\BaseIRepository;
+use App\Repositories\Abstract\IBaseRepository;
 use Exception;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
@@ -44,18 +44,18 @@ abstract class CommonService
     protected LoggerInterface $channel;
 
     /**
-     * @var BaseIRepository
+     * @var IBaseRepository
      * */
     protected $mainRepository;
 
     /**
      * CommonService constructor.
-     * @param BaseIRepository|null $mainRepository
+     * @param IBaseRepository|null $mainRepository
      * @param array<string, mixed> $request
      * @param string $logChannel
      * @return void
      */
-    public function __construct(BaseIRepository $mainRepository = null, array $request = [], string $logChannel = '')
+    public function __construct(IBaseRepository $mainRepository = null, array $request = [], string $logChannel = '')
     {
         $this->channel = Log::channel($logChannel);
         $this->mainRepository = $mainRepository;
