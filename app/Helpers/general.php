@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Get clean number from string
+ *
+ * @param string $number
+ * @return string
+ */
 function getCleanNumber($number): string
 {
     $cleanNumber = '';

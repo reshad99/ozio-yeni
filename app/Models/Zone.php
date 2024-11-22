@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -20,7 +19,7 @@ class Zone extends Model
     protected $guarded = [];
 
     /**
-     * @return HasMany
+     * @return HasMany<ZonePricing>
      */
     public function zonePricing(): HasMany
     {
@@ -28,7 +27,7 @@ class Zone extends Model
     }
 
     /**
-     * @return HasMany
+     * @return HasMany<Store>
      */
     public function stores(): HasMany
     {
@@ -36,7 +35,7 @@ class Zone extends Model
     }
 
     /**
-     * @return BelongsToMany
+     * @return BelongsToMany<Module>
      */
     public function modules(): BelongsToMany
     {

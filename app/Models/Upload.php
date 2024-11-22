@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
@@ -11,7 +10,7 @@ use Ramsey\Uuid\Nonstandard\Uuid;
 
 class Upload extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     //on created set size 031
     protected static function boot()
