@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AdminController;
+use Modules\Admin\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,12 @@ use Modules\Admin\Http\Controllers\AdminController;
 
 Route::group([], function () {
     Route::resource('admin', AdminController::class)->names('admin');
+});
+
+Route::get('login', [LoginController::class, 'showLogin'])->name('login');
+Route::post('authenticate', [LoginController::class, 'authenticate'])->name('admin.authenticate');
+Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
+
+Route::middleware('auth:admin')->group(function () {
+    Route::view('dashboard', 'admin::pages.dashboard.index')->name('admin.dashboard');
 });

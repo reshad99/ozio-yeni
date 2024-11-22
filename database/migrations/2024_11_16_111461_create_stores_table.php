@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\StatusEnum;
 
 return new class () extends Migration {
     /**
@@ -28,10 +29,10 @@ return new class () extends Migration {
             $table->string('device_id')->nullable();
             $table->string('lat');
             $table->string('lng');
-            $table->enum('status', ["active","inactive"]);
+            $table->enum('status', array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);
             $table->string('rating')->default('0');
-            $table->bigInteger('store_category_id')->nullable();
-            $table->foreign('store_category_id')->references('id')->on('store_categories');
+            $table->bigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories');
             $table->smallInteger('have_vegan')->default(0);
             $table->smallInteger('have_not_vegan')->default(0);
             $table->time('open_time');
