@@ -8,7 +8,7 @@ class AdminLogoutService
 {
     /**
      * Handle admin logout process.
-     * 
+     *
      * @return array
      */
     public function logout(): array

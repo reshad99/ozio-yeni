@@ -21,9 +21,9 @@ class SmsService
      *
      * Bu constant-da pattern-i dəyişmək istədikdə VAR_NAME açarına toxunmayın
      */
-    const INTERPOLATION_PATTERN = '@{VAR_NAME}';
+    public const INTERPOLATION_PATTERN = '@{VAR_NAME}';
 
-    function __construct(SmsGateway $gateway)
+    public function __construct(SmsGateway $gateway)
     {
         $this->gateway = $gateway;
     }
@@ -153,9 +153,11 @@ class SmsService
 
         // +1 to i cos we have to account for calling this function
         for ($i = 1; $i < count($trace); $i++) {
-            if (isset($trace[$i])) // is it set?
-                if ($class != $trace[$i]['class']) // is it a different class
+            if (isset($trace[$i])) { // is it set?
+                if ($class != $trace[$i]['class']) { // is it a different class
                     return $trace[$i]['class'];
+                }
+            }
         }
         return $class;
     }

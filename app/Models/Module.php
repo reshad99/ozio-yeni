@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Module extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that aren't mass assignable.
@@ -20,7 +19,7 @@ class Module extends Model
     protected $guarded = [];
 
     /**
-     * @return HasMany<Store,self>
+     * @return HasMany<Store>
      */
     public function stores(): HasMany
     {
@@ -28,7 +27,7 @@ class Module extends Model
     }
 
     /**
-     * @return BelongsToMany<Zone,self>
+     * @return BelongsToMany<Zone>
      */
     public function zones(): BelongsToMany
     {
@@ -36,7 +35,7 @@ class Module extends Model
     }
 
     /**
-     * @return HasMany<Category,self>
+     * @return HasMany<Category>
      */
     public function categories(): HasMany
     {

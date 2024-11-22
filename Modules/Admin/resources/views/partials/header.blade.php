@@ -1933,13 +1933,12 @@
                         <div class="menu-item px-5">
                             <form action="{{ route('logout') }}" method="post">
                                 @csrf
-                                <a class="menu-link px-5"><button class="btn-reset" type="submit">
-                                        {{ __('admin::general.layout.header.logout') }}</button></a>
+                                <button class="btn-reset w-100 p-0" type="submit">
+                                    <a class="menu-link px-5">
+                                        {{ __('admin::general.layout.header.logout') }}
+                                    </a>
+                                </button>
                             </form>
-                            {{-- <a href="/metronic8/demo1/../demo1/authentication/layouts/corporate/sign-in.html"
-                               class="menu-link px-5">
-                                Sign Out
-                            </a> --}}
                         </div>
                         <!--end::Menu item-->
 

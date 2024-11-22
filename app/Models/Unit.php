@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Unit extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that aren't mass assignable.
@@ -19,9 +18,9 @@ class Unit extends Model
     protected $guarded = [];
 
     /**
-     * @return BelongsTo<Unit, self>
+     * @return BelongsTo<UnitType, self>
      */
-    public function unit(): BelongsTo
+    public function unitType(): BelongsTo
     {
         return $this->belongsTo(UnitType::class);
     }

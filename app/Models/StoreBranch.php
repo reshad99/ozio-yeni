@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class StoreBranch extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that aren't mass assignable.
@@ -19,7 +18,7 @@ class StoreBranch extends Model
     protected $guarded = [];
 
     /**
-     * @return HasMany<Store,self>
+     * @return HasMany<Store>
      */
     public function stores(): HasMany
     {

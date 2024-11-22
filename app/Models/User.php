@@ -12,9 +12,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, SoftDeletes;
-
+    use Notifiable, SoftDeletes;
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
@@ -39,19 +37,9 @@ class User extends Authenticatable implements JWTSubject
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var array<string>
      */
     protected $guarded = [];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
 
     /**
      * Get the attributes that should be cast.
@@ -67,7 +55,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * @return HasMany<UserAddress,self>
+     * @return HasMany<UserAddress>
      */
     public function addresses(): HasMany
     {
@@ -75,7 +63,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * @return HasMany<UserNotification,self>
+     * @return HasMany<UserNotification>
      */
     public function notifications(): HasMany
     {

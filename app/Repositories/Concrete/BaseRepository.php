@@ -2,13 +2,13 @@
 
 namespace App\Repositories\Concrete;
 
-use App\Repositories\Abstract\BaseIRepository;
+use App\Repositories\Abstract\IBaseRepository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 
-class BaseRepository implements BaseIRepository
+class BaseRepository implements IBaseRepository
 {
     /**
      * @var Builder<\Illuminate\Database\Eloquent\Model>

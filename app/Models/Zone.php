@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Zone extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that aren't mass assignable.
@@ -20,7 +19,7 @@ class Zone extends Model
     protected $guarded = [];
 
     /**
-     * @return HasMany<ZonePricing,self>
+     * @return HasMany<ZonePricing>
      */
     public function zonePricing(): HasMany
     {
@@ -28,7 +27,7 @@ class Zone extends Model
     }
 
     /**
-     * @return HasMany<Store,self>
+     * @return HasMany<Store>
      */
     public function stores(): HasMany
     {
@@ -36,7 +35,7 @@ class Zone extends Model
     }
 
     /**
-     * @return BelongsToMany<Module,self>
+     * @return BelongsToMany<Module>
      */
     public function modules(): BelongsToMany
     {

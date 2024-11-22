@@ -6,7 +6,6 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\File;
 
 class SaveUploadEvent
 {
@@ -43,7 +42,7 @@ class SaveUploadEvent
 
     /**
      * Create a new event instance.
-     * 
+     *
      * @param UploadedFile $file
      * @param string $model
      * @param ?string $type
