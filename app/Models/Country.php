@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Country extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that aren't mass assignable.
@@ -19,7 +19,7 @@ class Country extends Model
     protected $guarded = [];
 
     /**
-     * @return HasMany<City,self>
+     * @return HasMany<City>
      */
     public function cities(): HasMany
     {

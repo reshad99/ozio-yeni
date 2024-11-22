@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Currency extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that aren't mass assignable.
@@ -19,7 +19,7 @@ class Currency extends Model
     protected $guarded = [];
 
     /**
-     * @return HasMany<Tip,self>
+     * @return HasMany<Tip>
      */
     public function tips(): HasMany
     {
@@ -27,7 +27,7 @@ class Currency extends Model
     }
 
     /**
-     * @return HasMany<Store,self>
+     * @return HasMany<Store>
      */
     public function stores(): HasMany
     {

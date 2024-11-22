@@ -11,7 +11,7 @@ use Ramsey\Uuid\Nonstandard\Uuid;
 
 class Upload extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     //on created set size 031
     protected static function boot()

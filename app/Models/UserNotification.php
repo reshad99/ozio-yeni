@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserNotification extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The attributes that aren't mass assignable.
@@ -19,7 +19,7 @@ class UserNotification extends Model
     protected $guarded = [];
 
     /**
-     * @return BelongsTo<User,self>
+     * @return BelongsTo<User>
      */
     public function user(): BelongsTo
     {

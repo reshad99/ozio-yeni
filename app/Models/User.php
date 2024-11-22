@@ -12,9 +12,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, SoftDeletes;
-
+    use Notifiable, SoftDeletes;
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
@@ -67,7 +65,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * @return HasMany<UserAddress,self>
+     * @return HasMany<UserAddress>
      */
     public function addresses(): HasMany
     {
@@ -75,7 +73,7 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-     * @return HasMany<UserNotification,self>
+     * @return HasMany<UserNotification>
      */
     public function notifications(): HasMany
     {

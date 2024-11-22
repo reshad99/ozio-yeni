@@ -75,7 +75,6 @@ class SaveUploadListener
             $event->uploadId = null;
         }
 
-        /** @phpstan-ignore-next-line */
         if ($model instanceof Model) {
             $upload->setUploadable($model);
         }

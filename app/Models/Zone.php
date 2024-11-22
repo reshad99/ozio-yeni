@@ -20,7 +20,7 @@ class Zone extends Model
     protected $guarded = [];
 
     /**
-     * @return HasMany
+     * @return HasMany<ZonePricing>
      */
     public function zonePricing(): HasMany
     {
@@ -28,7 +28,7 @@ class Zone extends Model
     }
 
     /**
-     * @return HasMany
+     * @return HasMany<Store>
      */
     public function stores(): HasMany
     {
@@ -36,7 +36,7 @@ class Zone extends Model
     }
 
     /**
-     * @return BelongsToMany
+     * @return BelongsToMany<Module>
      */
     public function modules(): BelongsToMany
     {
