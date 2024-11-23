@@ -17,17 +17,21 @@ class SmsBulk implements ShouldQueue
     use SerializesModels;
 
     private SmsService $smsService;
+
+    /**
+     * @var array<string, mixed>
+     */
     private array $message;
 
     /**
      * Create a new job instance.
      *
      * @param SmsService $smsService
-     * @param array $messages
+     * @param array<string, mixed> $message
      *
      * @return void
      */
-    public function __construct(SmsService $smsService, $message)
+    public function __construct(SmsService $smsService, array $message)
     {
         $this->smsService = $smsService;
         $this->message = $message;

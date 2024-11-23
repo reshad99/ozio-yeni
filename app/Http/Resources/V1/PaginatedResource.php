@@ -4,8 +4,9 @@ namespace App\Http\Resources\V1;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class PaginatedResource extends JsonResource
+class PaginatedResource extends ResourceCollection
 {
     /**
      * Transform the resource into an array.
@@ -18,12 +19,12 @@ class PaginatedResource extends JsonResource
             'success' => true,
             'data' => $this->collection,
             'meta' => [
-                'total' => $this->total(),
-                'count' => $this->count(),
-                'per_page' => $this->perPage(),
-                'current_page' => $this->currentPage(),
-                'total_pages' => $this->lastPage(),
-                'next_page_url' => $this->nextPageUrl(),
+                'total' => $this->resource->total(),
+                'count' => $this->resource->count(),
+                'per_page' => $this->resource->perPage(),
+                'current_page' => $this->resource->currentPage(),
+                'total_pages' => $this->resource->lastPage(),
+                'next_page_url' => $this->resource->nextPageUrl(),
             ],
         ];
     }

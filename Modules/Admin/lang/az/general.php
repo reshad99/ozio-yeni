@@ -198,7 +198,6 @@ return [
                 'search_department' => 'Şöbə axtar',
                 'departments' => 'Şöbələr',
                 'date' => 'Tarix',
-                'department_name' => 'Şöbə adı',
                 'department_name_is_required' => 'Şöbə adı tələb olunur',
                 'department_region_code' => 'Şöbə bölgə kodu',
                 'department_region_code_is_required' => 'Şöbə bölgə kodu tələb olunur',
@@ -331,8 +330,6 @@ return [
                     'job_number' => 'İşin nömrəsi',
                     // CRM Kodu
                     'crm_code' => 'CRM Kodu',
-                    // Abunə
-                    'subscriber' => 'Abunə',
                     // Qeyri Abuna
                     'non_subscriber' => 'Qeyri Abunə',
                     // Abunə seç
