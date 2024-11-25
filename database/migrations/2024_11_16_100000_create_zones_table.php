@@ -12,19 +12,14 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('zones', function (Blueprint $table) {
             $table->id();
             $table->enum('type', array_column(ZoneTypeEnum::cases(), 'value'));
             $table->geometry('coordinates');
             $table->enum('status', array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);
             $table->timestamps();
-            //solf delete
             $table->softDeletes();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

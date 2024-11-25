@@ -10,19 +10,14 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('zone_pricing', function (Blueprint $table) {
             $table->id();
             $table->foreignId('zone_id')->constrained()->cascadeOnDelete();
             $table->decimal('price_for_100m', 10, 2);
-            $table->foreignId('currency_id')->constrained()->cascadeOnDelete();
+            $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
             $table->timestamps();
-            //solf delete
             $table->softDeletes();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

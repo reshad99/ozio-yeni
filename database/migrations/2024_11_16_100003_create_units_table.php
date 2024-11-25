@@ -11,8 +11,6 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('units', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('unit_type_id');
@@ -22,11 +20,8 @@ return new class () extends Migration {
             $table->string('conversion');
             $table->enum('status', array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);
             $table->timestamps();
-            //solf delete
             $table->softDeletes();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

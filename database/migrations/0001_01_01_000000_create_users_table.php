@@ -10,8 +10,6 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -20,22 +18,14 @@ return new class () extends Migration {
             $table->string('remember_token');
             $table->string('country_code');
             $table->string('phone');
-            $table->string('device_id');
             $table->string('bonus_card_no');
-            $table->enum('interest', [""]);
-            $table->bigInteger('ref_code');
-            //add start date time
-
-            $table->dateTime('start_date');
-
-
+            $table->string('ref_code');
+            $table->boolean('want_notification');
             //timestamps
             $table->timestamps();
             //solf delete
             $table->softDeletes();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**
