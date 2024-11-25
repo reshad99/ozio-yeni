@@ -18,7 +18,7 @@ return new class extends Migration
             $table->bigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->dateTime('used_at')->nullable();
-            $table->morphs('assignable');
+            $table->nullableMorphs('assignable');
             $table->boolean('is_for_all')->default(false);
             $table->timestamps();
         });
