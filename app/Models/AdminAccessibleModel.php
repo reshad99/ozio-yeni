@@ -26,7 +26,7 @@ class AdminAccessibleModel extends Model
     /**
      * Get the accessible model (morph relation).
      *
-     * @return MorphTo
+     * @return MorphTo<Model, self>
      */
     public function accessible(): MorphTo
     {
