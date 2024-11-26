@@ -22,7 +22,7 @@ return new class () extends Migration {
             $table->bigInteger('module_id');
             $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
             $table->bigInteger('user_address_id');
-            $table->foreign('user_address_id')->references('id')->on('user_addresses')->onDelete('set null');
+            $table->foreign('user_address_id')->references('id')->on('user_address')->onDelete('set null');
             $table->bigInteger('used_coupon_id')->nullable();
             $table->foreign('used_coupon_id')->references('id')->on('coupons')->onDelete('set null');
             $table->bigInteger('courier_id')->nullable();

@@ -21,7 +21,6 @@ class CreateUploadsTable extends Migration
             $table->string('mime_type', '100');
             $table->string('extension', '10');
             $table->string('original_name');
-            $table->bigInteger('uploadable_id');
             $table->nullableMorphs('uploadable');
             $table->enum('type', array_column(UploadTypeEnum::cases(), 'value'))->default(UploadTypeEnum::THUMBNAIL->value);
             $table->softDeletes();

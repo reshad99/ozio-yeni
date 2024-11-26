@@ -20,20 +20,24 @@ interface IBaseRepository
      * @return self
      */
     public function orderBy($columnNumber, $sort): self;
+
     /**
      * @param int $limit
      * @return self
      */
     public function limit(int $limit): self;
+
     /**
      * @param int $offset
      * @return self
      */
     public function offset(int $offset): self;
+
     /**
      * @return int
      */
     public function count(): int;
+
     /**
      * @param int $start
      * @param int $limit
@@ -51,10 +55,11 @@ interface IBaseRepository
      * @return  Model
      */
     public function ofId(int $id);
+
     /**
      * Create a new model instance.
      *
-     * @param  Model  $model
+     * @param Model $model
      * @return  Model The created model instance.
      */
     public function create($model);
@@ -70,7 +75,7 @@ interface IBaseRepository
     /**
      * Delete a model instance.
      *
-     * @param  Model  $model The model instance to delete.
+     * @param Model $model The model instance to delete.
      * @return void
      */
     public function delete($model): void;
@@ -95,11 +100,12 @@ interface IBaseRepository
      * @return self
      */
     public function having(string $column, string $operator, string $value): self;
-    
+
     /**
      * @param array<string, mixed> $relations
      */
     public function with(array $relations): self;
+
     /**
      * Set filters for the query.
      *

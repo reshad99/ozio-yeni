@@ -24,7 +24,7 @@ return new class () extends Migration {
             $table->enum('tax_type', array_column(TaxTypeEnum::cases(), 'value'))->default(TaxTypeEnum::PERCENTAGE->value);
             $table->decimal('tax_percent');
             $table->bigInteger('unit_id');
-            $table->foreign('unit_id')->references('id')->on('store_units');
+            $table->foreign('unit_id')->references('id')->on('units');
             $table->string('rating')->default(0);
             $table->boolean('is_recommended');
             $table->boolean('is_organic');
