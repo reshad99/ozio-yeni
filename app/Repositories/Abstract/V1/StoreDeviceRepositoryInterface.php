@@ -2,6 +2,6 @@
 
 namespace App\Repositories\Abstract\V1;
 
-class StoreDeviceRepositoryInterface extends IBaseRepository
+interface StoreDeviceRepositoryInterface extends IBaseRepository
 {
 }

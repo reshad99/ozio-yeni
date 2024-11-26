@@ -2,6 +2,6 @@
 
 namespace App\Repositories\Abstract\V1;
 
-class UserNotificationRepositoryInterface extends IBaseRepository
+interface UserNotificationRepositoryInterface extends IBaseRepository
 {
 }

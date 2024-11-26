@@ -2,6 +2,6 @@
 
 namespace App\Repositories\Abstract\V1;
 
-class CourierRatingRepositoryInterface extends IBaseRepository
+interface CourierRatingRepositoryInterface extends IBaseRepository
 {
 }

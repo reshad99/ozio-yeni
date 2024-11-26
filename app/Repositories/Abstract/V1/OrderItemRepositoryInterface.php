@@ -2,6 +2,6 @@
 
 namespace App\Repositories\Abstract\V1;
 
-class OrderItemRepositoryInterface extends IBaseRepository
+interface OrderItemRepositoryInterface extends IBaseRepository
 {
 }

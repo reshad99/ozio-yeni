@@ -2,6 +2,6 @@
 
 namespace App\Repositories\Abstract\V1;
 
-class CouponRepositoryInterface extends IBaseRepository
+interface CouponRepositoryInterface extends IBaseRepository
 {
 }

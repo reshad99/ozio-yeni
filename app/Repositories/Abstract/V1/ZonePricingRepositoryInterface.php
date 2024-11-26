@@ -2,6 +2,6 @@
 
 namespace App\Repositories\Abstract\V1;
 
-class ZonePricingRepositoryInterface extends IBaseRepository
+interface ZonePricingRepositoryInterface extends IBaseRepository
 {
 }

@@ -2,6 +2,6 @@
 
 namespace App\Repositories\Abstract\V1;
 
-class CurrencyRepositoryInterface extends IBaseRepository
+interface CurrencyRepositoryInterface extends IBaseRepository
 {
 }

@@ -2,6 +2,6 @@
 
 namespace App\Repositories\Abstract\V1;
 
-class UserFavoriteStoreRepositoryInterface extends IBaseRepository
+interface UserFavoriteStoreRepositoryInterface extends IBaseRepository
 {
 }

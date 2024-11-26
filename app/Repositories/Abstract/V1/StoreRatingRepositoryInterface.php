@@ -2,6 +2,6 @@
 
 namespace App\Repositories\Abstract\V1;
 
-class StoreRatingRepositoryInterface extends IBaseRepository
+interface StoreRatingRepositoryInterface extends IBaseRepository
 {
 }

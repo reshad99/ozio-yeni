@@ -2,6 +2,6 @@
 
 namespace App\Repositories\Abstract\V1;
 
-class StoreCartItemRepositoryInterface extends IBaseRepository
+interface StoreCartItemRepositoryInterface extends IBaseRepository
 {
 }
