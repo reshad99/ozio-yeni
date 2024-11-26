@@ -14,6 +14,9 @@ class Otp extends Model
      */
     protected $guarded = [];
 
+    /**
+     * @return BelongsTo<User, self>
+     */
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

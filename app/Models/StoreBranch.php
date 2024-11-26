@@ -26,6 +26,9 @@ class StoreBranch extends Model
         return $this->hasMany(Store::class, 'branch_id', 'id');
     }
 
+    /**
+     * @return BelongsToMany<StoreProduct>
+     */
     public function storeProducts(): BelongsToMany
     {
         return $this->belongsToMany(StoreProduct::class, 'store_product_assignment_permissions', 'store_branch_id', 'store_product_id');

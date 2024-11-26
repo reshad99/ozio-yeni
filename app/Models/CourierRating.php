@@ -22,6 +22,9 @@ class CourierRating extends Model
         return $this->belongsTo(Courier::class);
     }
 
+    /**
+     * @return BelongsTo<Order, self>
+     */
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);

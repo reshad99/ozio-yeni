@@ -22,6 +22,9 @@ class UserDevice extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return BelongsTo<Store, self>
+     */
     public function store(): BelongsTo
     {
         return $this->belongsTo(Store::class);

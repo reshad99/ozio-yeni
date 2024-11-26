@@ -99,6 +99,9 @@ class Store extends Model
         return $this->belongsToMany(User::class, 'user_favorite_stores', 'store_id', 'user_id');
     }
 
+    /**
+     * @return BelongsToMany<User>
+     */
     public function cartUsers(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'carts', 'store_id', 'user_id');
