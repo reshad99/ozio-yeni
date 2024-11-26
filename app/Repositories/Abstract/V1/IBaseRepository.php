@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Abstract;
+namespace App\Repositories\Abstract\V1;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;

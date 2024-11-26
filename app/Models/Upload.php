@@ -48,7 +48,7 @@ class Upload extends Model
         'type'
     ];
 
-    /**      
+    /**
      * @return MorphTo<Model, self>
      */
     public function uploadable(): MorphTo

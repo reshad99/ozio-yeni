@@ -5,7 +5,6 @@ namespace App\Services\V1\Sms\Gateways;
 use App\Enums\LsimResponseCode;
 use App\Services\V1\Sms\SmsGateway;
 use Exception;
-use App\Services\V1\Curl\CurlService;
 use Nette\Utils\Json;
 
 class Lsim implements SmsGateway

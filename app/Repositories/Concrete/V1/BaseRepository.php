@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Concrete\V1;
 
-use App\Repositories\Abstract\IBaseRepository;
+use App\Repositories\Abstract\V1\IBaseRepository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;

@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 namespace App\Enums;
 
-enum OrderStateEnum:string
+enum OrderStateEnum: string
 {
     case PENDING = 'pending';
     case ACCEPTED = 'accepted';

@@ -2,6 +2,6 @@
 
 namespace App\Repositories\Concrete\V1;
 
-use App\Repositories\Concrete\V1\BaseRepository;
-
-class StoreProductAssignmentRepository extends BaseRepository {}
+class StoreProductAssignmentRepository extends BaseRepository
+{
+}

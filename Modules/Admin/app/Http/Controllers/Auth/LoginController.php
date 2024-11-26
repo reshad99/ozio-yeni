@@ -3,6 +3,7 @@
 namespace Modules\Admin\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Services\V1\RepositoryServices\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Modules\Admin\Http\Requests\AdminLoginRequest;
@@ -10,8 +11,10 @@ use Modules\Admin\Services\Auth\AdminLoginService;
 
 class LoginController extends Controller
 {
-    public function __construct(protected AdminLoginService $adminLoginService)
-    {
+    public function __construct(
+        private AdminLoginService $adminLoginService,
+        private UserService $userService
+    ) {
     }
 
     /**
@@ -19,6 +22,10 @@ class LoginController extends Controller
      */
     public function showLogin(): View
     {
+
+
+        dd('test');
+
         return view('admin::pages.auth.index');
     }
 

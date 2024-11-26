@@ -6,8 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
@@ -23,7 +22,7 @@ return new class extends Migration
             $table->time('start_time');
             $table->date('end_date');
             $table->time('end_time');
-            $table->enum('status',  array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);
+            $table->enum('status', array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);
             $table->boolean('active_for_first_order')->default(false);
             $table->timestamps();
             $table->softDeletes();
