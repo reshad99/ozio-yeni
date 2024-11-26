@@ -83,6 +83,20 @@ interface IBaseRepository
     public function paginate(int $perPage = 10, int $page = 1): LengthAwarePaginator;
 
     /**
+     * @param string $column
+     * @return self
+     */
+    public function groupBy(string $column): self;
+
+    /**
+     * @param string $column
+     * @param string $operator
+     * @param string $value
+     * @return self
+     */
+    public function having(string $column, string $operator, string $value): self;
+    
+    /**
      * @param array<string, mixed> $relations
      */
     public function with(array $relations): self;
@@ -93,5 +107,4 @@ interface IBaseRepository
      * @return self
      */
     public function filterBy(array $criteria): self;
-    // Other necessary methods, like findById, create, update, delete...
 }

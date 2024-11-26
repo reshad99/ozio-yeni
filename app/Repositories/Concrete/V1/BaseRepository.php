@@ -189,4 +189,18 @@ class BaseRepository implements IBaseRepository
         //log to sql
         return $this;
     }
+
+    /** {@inheritDoc} */
+    public function groupBy(string $column): self
+    {
+        $this->query->groupBy($column);
+        return $this;
+    }
+
+    /** {@inheritDoc} */
+    public function having(string $column, string $operator, string $value): self
+    {
+        $this->query->having($column, $operator, $value);
+        return $this;
+    }
 }

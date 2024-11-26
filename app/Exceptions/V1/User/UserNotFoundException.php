@@ -6,5 +6,9 @@ use Exception;
 
 class UserNotFoundException extends Exception
 {
+    /**
+     * The exception message.
+     * @var string $message
+     */
     protected $message = 'User not found';
 }

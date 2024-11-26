@@ -119,4 +119,7 @@ class UserService
         $models = $this->userRepository->paginate($perpage, $page);
         return $models;
     }
+
+    //group by
+    
 }
