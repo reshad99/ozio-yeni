@@ -87,4 +87,12 @@ class StoreProduct extends Model
     {
         return $this->belongsToMany(Cart::class, 'store_cart_items', 'store_product_id', 'cart_id');
     }
+
+    /**
+     * @return HasMany<StoreProductUpload>
+     */
+    public function storeProductUploads(): HasMany
+    {
+        return $this->hasMany(StoreProductUpload::class);
+    }
 }
