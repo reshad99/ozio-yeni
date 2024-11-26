@@ -14,6 +14,7 @@ return new class () extends Migration {
             $table->id();
             $table->foreignId('zone_id')->constrained()->cascadeOnDelete();
             $table->decimal('price_for_100m', 10, 2);
+            $table->bigInteger('currency_id');
             $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
