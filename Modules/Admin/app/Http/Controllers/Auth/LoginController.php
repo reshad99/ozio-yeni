@@ -14,18 +14,13 @@ class LoginController extends Controller
     public function __construct(
         private AdminLoginService $adminLoginService,
         private UserService $userService
-    ) {
-    }
+    ) {}
 
     /**
      * @return View
      */
     public function showLogin(): View
     {
-
-
-        dd('test');
-
         return view('admin::pages.auth.index');
     }
 
