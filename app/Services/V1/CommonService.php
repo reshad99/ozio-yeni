@@ -2,7 +2,7 @@
 
 namespace App\Services\V1;
 
-use App\Repositories\Abstract\IBaseRepository;
+use App\Repositories\Abstract\V1\IBaseRepository;
 use Exception;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Auth\Guard;
@@ -103,8 +103,8 @@ abstract class CommonService
     /**
      * @param Request $request
      * @param array $rules
-     * @throws ValidationException
      * @return void
+     * @throws ValidationException
      */
     public function validate(Request $request, array $rules): void
     {
@@ -118,7 +118,7 @@ abstract class CommonService
      * @param Exception $e
      * @return \Illuminate\Http\Response|\Illuminate\Http\JsonResponse
      */
-    public function errorResponse(Exception $e): Response | JsonResponse
+    public function errorResponse(Exception $e): Response|JsonResponse
     {
         if ($e instanceof ValidationException) {
             return response()->json(['status' => 'error', 'message' => 'Məlumatları düzgün daxil edin', 'errors' => $e->validator->errors()], 422);
