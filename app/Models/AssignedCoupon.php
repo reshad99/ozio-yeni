@@ -16,7 +16,9 @@ class AssignedCoupon extends Model
      */
     protected $guarded = [];
 
-    /** @phpstan-ignore-next-line */
+    /**      
+     * @return MorphTo<Model, self>
+     */
     public function assignable(): MorphTo
     {
         return $this->morphTo();
