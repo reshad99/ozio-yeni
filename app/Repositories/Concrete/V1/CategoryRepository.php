@@ -11,7 +11,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
      * @param Category $model
      */
     public function __construct(
-        private Category $model
+        Category $model
     ) {
         parent::__construct($model);
     }

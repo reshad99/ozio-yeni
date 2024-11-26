@@ -11,7 +11,7 @@ class CartRepository extends BaseRepository implements CartRepositoryInterface
      * @param Cart $model
      */
     public function __construct(
-        private Cart $model
+        Cart $model
     ) {
         parent::__construct($model);
     }

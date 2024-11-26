@@ -11,7 +11,7 @@ class AdminAccessibleRepository extends BaseRepository implements AdminAccessibl
      * @param AdminAccessibleModel $model
      */
     public function __construct(
-        private AdminAccessibleModel $model
+        AdminAccessibleModel $model
     ) {
         parent::__construct($model);
     }
