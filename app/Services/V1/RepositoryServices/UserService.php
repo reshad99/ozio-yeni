@@ -3,55 +3,120 @@
 namespace App\Services\V1\RepositoryServices;
 
 use App\Exceptions\V1\User\UserNotFoundException;
-use App\Repositories\Abstract\V1\IBaseRepository;
+use App\Models\User;
+use App\Repositories\Abstract\V1\UserRepositoryInterface;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserService
 {
+    /**
+     * @param UserRepositoryInterface $userRepository
+     */
     public function __construct(
-        private IBaseRepository $userRepository
+        private UserRepositoryInterface $userRepository
     ) {
         $this->userRepository = $userRepository;
     }
 
-    public function getAllUsers()
+    /**
+     * @return Collection<int, User>
+     */
+    public function getAllUsers(): Collection
     {
-        return $this->userRepository->all();
+        /**
+         * @var Collection<int, User> $models;
+         */
+        $models = $this->userRepository->all();
+        return $models;
     }
 
+    /**
+     * @param int $id
+     * @return User
+     */
     public function findOrFailUser($id)
     {
-        $user = $this->userRepository->ofId($id);
-        if (!$user) {
+        /**
+         * @var ?User $model
+         */
+        $model = $this->userRepository->ofId($id);
+        if (!$model) {
             throw new UserNotFoundException();
         }
-        return $user;
+        return $model;
     }
-    public function createUser($data)
+    /**
+     * @param User $user
+     * @return User
+     */
+    public function createUser($user): User
     {
-        return $this->userRepository->create($data);
+        /**
+         * @var User $model
+         */
+        $model = $this->userRepository->create($user);
+        return $model;
     }
-    public function updateUser($id, $data)
+    /**
+     * @param User $user
+     * @return User
+     */
+    public function updateUser($user): User
     {
-        return $this->userRepository->update($id, $data);
+        /**
+         * @var User $model
+         */
+        $model = $this->findOrFailUser($user->id);
+        return $model;
     }
-    public function deleteUser($id)
+    /**
+     * @param User $model
+     * @return void
+     */
+    public function deleteUser($model): void
     {
-        $this->userRepository->delete($id);
+        $this->userRepository->delete($model);
     }
-    public function setWith(array $with)
+    /**
+     * @param array<string,mixed> $with
+     * @return self
+     */
+    public function setWith(array $with): self
     {
         $this->userRepository->with($with);
+        return $this;
     }
-    public function setFilter(array $filter)
+    /**
+     * @param array<string,mixed> $filter
+     * @return self
+     */
+    public function setFilter(array $filter): self
     {
         $this->userRepository->filterBy($filter);
+        return $this;
     }
-    public function setOrderBy($columnNumber, $sort)
+    /**
+     * @param string $columnNumber
+     * @param string $sort
+     * @return self
+     */
+    public function setOrderBy($columnNumber, $sort): self
     {
         $this->userRepository->orderBy($columnNumber, $sort);
+        return $this;
     }
-    public function setPaginate($perpage, $page)
+    /**
+     * @param int $perpage
+     * @param int $page
+     * @return LengthAwarePaginator<User>
+     */
+    public function setPaginate($perpage, $page): LengthAwarePaginator
     {
-        $this->userRepository->paginate($perpage, $page);
+        /**
+         * @var LengthAwarePaginator<User> $models
+         */
+        $models = $this->userRepository->paginate($perpage, $page);
+        return $models;
     }
 }

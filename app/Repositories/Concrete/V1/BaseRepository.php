@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Database\Eloquent\Model;
 
 class BaseRepository implements IBaseRepository
 {
@@ -46,7 +47,7 @@ class BaseRepository implements IBaseRepository
     /**
      * @param int $start
      * @param int $limit
-     * @return Collection<int, \Illuminate\Database\Eloquent\Model>
+     * @return Collection<int, Model>
      */
     public function get(int $start, int $limit): Collection
     {

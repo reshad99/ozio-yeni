@@ -3,6 +3,7 @@
 namespace App\Repositories\Abstract\V1;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 interface IBaseRepository
@@ -36,40 +37,40 @@ interface IBaseRepository
     /**
      * @param int $start
      * @param int $limit
-     * @return Collection<int, \Illuminate\Database\Eloquent\Model>
+     * @return Collection<int, Model>
      */
     public function get(int $start, int $limit): Collection;
 
     /**
-     * @return Collection<int, \Illuminate\Database\Eloquent\Model>
+     * @return Collection<int, Model>
      */
     public function all(): Collection;
 
     /**
      * @param int $id
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return  Model
      */
     public function ofId(int $id);
     /**
      * Create a new model instance.
      *
-     * @param mixed $model The model instance to create.
-     * @return mixed The created model instance.
+     * @param  Model  $model
+     * @return  Model The created model instance.
      */
     public function create($model);
 
     /**
      * Update an existing model instance.
      *
-     * @param mixed $model The model instance to update.
-     * @return mixed The updated model instance.
+     * @param Model $model The model instance to update.
+     * @return Model The updated model instance.
      */
     public function update($model);
 
     /**
      * Delete a model instance.
      *
-     * @param mixed $model The model instance to delete.
+     * @param  Model  $model The model instance to delete.
      * @return void
      */
     public function delete($model): void;
@@ -77,7 +78,7 @@ interface IBaseRepository
 
     /**
      * @param int $perPage
-     * @return LengthAwarePaginator<\Illuminate\Database\Eloquent\Model>
+     * @return LengthAwarePaginator<Model>
      */
     public function paginate(int $perPage = 10, int $page = 1): LengthAwarePaginator;
 
