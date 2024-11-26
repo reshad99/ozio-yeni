@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class StoreProductUpload extends Model
 {
@@ -12,4 +13,12 @@ class StoreProductUpload extends Model
      * @var array<string>|bool
      */
     protected $guarded = [];
+
+    /**
+     * @return BelongsTo<StoreProduct, self>
+     */
+    public function storeProduct(): BelongsTo
+    {
+        return $this->belongsTo(StoreProduct::class);
+    }
 }
