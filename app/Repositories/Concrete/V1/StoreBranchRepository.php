@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class StoreBranchRepository extends BaseRepository
+use App\Repositories\Abstract\V1\StoreBranchRepositoryInterface;
+
+class StoreBranchRepository extends BaseRepository implements StoreBranchRepositoryInterface
 {
 }

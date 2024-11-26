@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class UserNotificationRepository extends BaseRepository
+use App\Repositories\Abstract\V1\UserNotificationRepositoryInterface;
+
+class UserNotificationRepository extends BaseRepository implements UserNotificationRepositoryInterface
 {
 }

@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class CityRepository extends BaseRepository
+use App\Repositories\Abstract\V1\CityRepositoryInterface;
+
+class CityRepository extends BaseRepository implements CityRepositoryInterface
 {
 }

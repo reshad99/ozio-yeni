@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class StoreProductTagRepository extends BaseRepository
+use App\Repositories\Abstract\V1\StoreProductTagRepositoryInterface;
+
+class StoreProductTagRepository extends BaseRepository implements StoreProductTagRepositoryInterface
 {
 }

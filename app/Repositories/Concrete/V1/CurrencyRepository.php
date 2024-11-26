@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class CurrencyRepository extends BaseRepository
+use App\Repositories\Abstract\V1\CurrencyRepositoryInterface;
+
+class CurrencyRepository extends BaseRepository implements CurrencyRepositoryInterface
 {
 }

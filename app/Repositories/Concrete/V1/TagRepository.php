@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class TagRepository extends BaseRepository
+use App\Repositories\Abstract\V1\TagRepositoryInterface;
+
+class TagRepository extends BaseRepository implements TagRepositoryInterface
 {
 }

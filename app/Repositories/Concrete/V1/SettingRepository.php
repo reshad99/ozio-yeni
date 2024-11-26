@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class SettingRepository extends BaseRepository
+use App\Repositories\Abstract\V1\SettingRepositoryInterface;
+
+class SettingRepository extends BaseRepository implements SettingRepositoryInterface
 {
 }

@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class CouponRepository extends BaseRepository
+use App\Repositories\Abstract\V1\CouponRepositoryInterface;
+
+class CouponRepository extends BaseRepository implements CouponRepositoryInterface
 {
 }

@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class UserDeviceRepository extends BaseRepository
+use App\Repositories\Abstract\V1\UserDeviceRepositoryInterface;
+
+class UserDeviceRepository extends BaseRepository implements UserDeviceRepositoryInterface
 {
 }

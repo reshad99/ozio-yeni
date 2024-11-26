@@ -2,6 +2,6 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class StoreProductAssignmentRepository extends BaseRepository
-{
-}
+use App\Repositories\Abstract\V1\StoreProductAssignmentRepositoryInterface;
+
+class StoreProductAssignmentRepository extends BaseRepository implements StoreProductAssignmentRepositoryInterface {}

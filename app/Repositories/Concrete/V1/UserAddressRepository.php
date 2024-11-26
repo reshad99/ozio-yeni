@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class UserAddressRepository extends BaseRepository
+use App\Repositories\Abstract\V1\UserAddressRepositoryInterface;
+
+class UserAddressRepository extends BaseRepository implements UserAddressRepositoryInterface
 {
 }

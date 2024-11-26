@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class ModuleRepository extends BaseRepository
+use App\Repositories\Abstract\V1\ModuleRepositoryInterface;
+
+class ModuleRepository extends BaseRepository implements ModuleRepositoryInterface
 {
 }

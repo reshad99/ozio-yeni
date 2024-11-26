@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class TipRepository extends BaseRepository
+use App\Repositories\Abstract\V1\TipRepositoryInterface;
+
+class TipRepository extends BaseRepository implements TipRepositoryInterface
 {
 }

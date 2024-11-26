@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class StoreProductBarcodeRepository extends BaseRepository
+use App\Repositories\Abstract\V1\StoreProductBarcodeRepositoryInterface;
+
+class StoreProductBarcodeRepository extends BaseRepository implements  StoreProductBarcodeRepositoryInterface
 {
 }

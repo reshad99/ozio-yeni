@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class CategoryRepository extends BaseRepository
+use App\Repositories\Abstract\V1\CategoryRepositoryInterface;
+
+class CategoryRepository extends BaseRepository implements  CategoryRepositoryInterface
 {
 }

@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class UnitRepository extends BaseRepository
+use App\Repositories\Abstract\V1\UnitRepositoryInterface;
+
+class UnitRepository extends BaseRepository implements UnitRepositoryInterface
 {
 }

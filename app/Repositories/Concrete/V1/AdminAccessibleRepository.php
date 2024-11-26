@@ -2,6 +2,17 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class AdminAccessibleRepository extends BaseRepository
+use App\Models\AdminAccessibleModel;
+use App\Repositories\Abstract\V1\AdminAccessibleRepositoryInterface;
+
+class AdminAccessibleRepository extends BaseRepository implements AdminAccessibleRepositoryInterface
 {
+    /**
+     * @param AdminAccessibleModel $model
+     */
+    public function __construct(
+        private AdminAccessibleModel $model
+    ) {
+        parent::__construct($model);
+    }
 }

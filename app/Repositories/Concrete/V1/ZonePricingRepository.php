@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class ZonePricingRepository extends BaseRepository
+use App\Repositories\Abstract\V1\ZonePricingRepositoryInterface;
+
+class ZonePricingRepository extends BaseRepository implements ZonePricingRepositoryInterface
 {
 }

@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class UploadRepository extends BaseRepository
+use App\Repositories\Abstract\V1\UploadRepositoryInterface;
+
+class UploadRepository extends BaseRepository implements UploadRepositoryInterface
 {
 }

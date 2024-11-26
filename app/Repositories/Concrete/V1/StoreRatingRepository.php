@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class StoreRatingRepository extends BaseRepository
+use App\Repositories\Abstract\V1\StoreRatingRepositoryInterface;
+
+class StoreRatingRepository extends BaseRepository implements StoreRatingRepositoryInterface
 {
 }

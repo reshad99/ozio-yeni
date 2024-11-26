@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class CourierRepository extends BaseRepository
+use App\Repositories\Abstract\V1\CourierRepositoryInterface;
+
+class CourierRepository extends BaseRepository implements CourierRepositoryInterface
 {
 }

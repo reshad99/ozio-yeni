@@ -2,6 +2,6 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class UserFavoriteStoreProductRepository extends BaseRepository
-{
-}
+use App\Repositories\Abstract\V1\UserFavoriteStoreProductRepositoryInterface;
+
+class UserFavoriteStoreProductRepository extends BaseRepository implements UserFavoriteStoreProductRepositoryInterface {}

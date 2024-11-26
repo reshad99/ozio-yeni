@@ -2,6 +2,8 @@
 
 namespace App\Repositories\Concrete\V1;
 
-class OrderItemRepository extends BaseRepository
+use App\Repositories\Abstract\V1\OrderItemRepositoryInterface;
+
+class OrderItemRepository extends BaseRepository implements OrderItemRepositoryInterface
 {
 }
