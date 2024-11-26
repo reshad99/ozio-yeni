@@ -1,0 +1,9 @@
+<?php
+
+namespace App\Enums;
+
+enum ModuleType: string
+{
+    case MARKET = 'market';
+    case RESTAURANT = 'restaurant';
+}

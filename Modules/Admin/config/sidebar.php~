@@ -1,21 +1,21 @@
 <?php
+
 return [
     'name' => 'Admin',
-    'canAny' =>['dashboard',''],
+    'canAny' => [],
     'navigation' => [
         [
             'name' => __('admin::general.menu.dashboard'),
             'url' => 'admin.dashboard',
             'icon' => 'ki-outline ki-element-11 fs-2',
-            'permission' => 'list-emergency'
+            'can' => []
         ],
         [
             'name' => __('admin::general.menu.emergency-calls'),
             'url' => 'admin.emergency-call.list',
             'icon' => 'ki-outline ki-abstract-41 fs-2',
-            'permission' => 'list-emergency'
+            'can' => []
         ],
-
         [
             'name' => __('admin::general.menu.transport'),
             'icon' => 'ki-outline ki-delivery fs-2',
@@ -23,17 +23,16 @@ return [
                 [
                     'name' => __('admin::general.menu.cars'),
                     'url' => 'admin.transport.car.list',
-                    'permission' => 'list-transport'
+                    'can' => []
                 ],
             ],
-            'permission' => 'list-transport'
+            'can' => []
         ],
         [
             'name' => __('admin::general.menu.employees'),
             'url' => 'admin.user.list',
             'icon' => 'ki-outline ki-people fs-2',
-            'permission' => 'list-user'
-
+            'can' => []
         ],
         [
             'name' => __('admin::general.menu.admin-panel'),
@@ -42,39 +41,32 @@ return [
                 [
                     'name' => __('admin::general.menu.AccidentCategoriesList'),
                     'url' => 'admin.accident.category.list',
-                    'permission' => 'list-accident'
-
+                    'can' => []
                 ],
                 [
                     'name' => __('admin::general.menu.organisationList'),
                     'url' => 'admin.organisation.list',
-                    'permission' => 'list-organisation'
-
+                    'can' => []
                 ],
                 [
                     'name' => __('admin::general.menu.RegionList'),
                     'url' => 'admin.region.list',
-                    'permission' => 'list-region'
-
+                    'can' => []
                 ],
                 [
                     'name' => __('admin::general.menu.DepartmentList'),
                     'url' => 'admin.department.list',
-                    'permission' => 'list-department'
-
+                    'can' => []
                 ],
-
                 [
                     'name' => __('admin::general.menu.Setting'),
                     'url' => 'admin.settings.list',
-                    'permission' => 'list-setting'
-
+                    'can' => []
                 ],
                 [
                     'name' => __('admin::general.menu.Roles'),
                     'url' => 'admin.role.list',
-                    'permission' => 'list-role'
-
+                    'can' => []
                 ],
                 // [
                 //     'name' => __('admin::general.menu.Permissions'),
