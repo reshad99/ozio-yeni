@@ -13,9 +13,9 @@ return new class () extends Migration {
     {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
+            $table->json('name');
             $table->bigInteger('unit_type_id');
             $table->foreign('unit_type_id')->references('id')->on('unit_types');
-            $table->json('name');
             $table->string('symbol');
             $table->string('conversion');
             $table->enum('status', array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);

@@ -24,4 +24,12 @@ class ZonePricing extends Model
     {
         return $this->belongsTo(Zone::class);
     }
+
+    /**
+     * @return BelongsTo<City, self>
+     */
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
+    }
 }

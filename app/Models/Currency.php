@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -31,5 +32,13 @@ class Currency extends Model
     public function stores(): HasMany
     {
         return $this->hasMany(Store::class);
+    }
+
+    /**
+     * @return HasMany<ZonePricing>
+     */
+    public function zonePricings(): HasMany
+    {
+        return $this->hasMany(ZonePricing::class);
     }
 }

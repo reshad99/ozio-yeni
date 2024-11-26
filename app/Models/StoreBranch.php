@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -23,5 +24,10 @@ class StoreBranch extends Model
     public function stores(): HasMany
     {
         return $this->hasMany(Store::class, 'branch_id', 'id');
+    }
+
+    public function storeProducts(): BelongsToMany
+    {
+        return $this->belongsToMany(StoreProduct::class, 'store_product_assignment_permissions', 'store_branch_id', 'store_product_id');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Kalnoy\Nestedset\NodeTrait;
@@ -34,5 +35,22 @@ class Category extends Model
     public function stores(): HasMany
     {
         return $this->hasMany(Store::class);
+    }
+
+    /**
+     * @return BelongsToMany<User>
+     */
+    public function interestedUsers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'user_interested_categories', 'category_id', 'user_id');
+    }
+
+
+    /**
+     * @return HasMany<StoreProduct>
+     */
+    public function storeProducts(): HasMany
+    {
+        return $this->hasMany(StoreProduct::class);
     }
 }

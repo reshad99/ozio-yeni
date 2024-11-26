@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Store extends Model
@@ -63,5 +65,58 @@ class Store extends Model
     public function storeBranch(): BelongsTo
     {
         return $this->belongsTo(StoreBranch::class, 'branch_id', 'id');
+    }
+
+    /**
+     * @return BelongsTo<StoreCategory, self>
+     */
+    public function storeCategory(): BelongsTo
+    {
+        return $this->belongsTo(StoreCategory::class);
+    }
+
+    /**
+     * @return HasMany<UserDevice>
+     */
+    public function devices(): HasMany
+    {
+        return $this->hasMany(UserDevice::class);
+    }
+
+    /**
+     * @return HasMany<Courier>
+     */
+    public function couriers(): HasMany
+    {
+        return $this->hasMany(Courier::class);
+    }
+
+    /**
+     * @return BelongsToMany<User>
+     */
+    public function favouriteUsers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'user_favorite_stores', 'store_id', 'user_id');
+    }
+
+    public function cartUsers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'carts', 'store_id', 'user_id');
+    }
+
+    /**
+     * @return HasMany<Order>
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * @return HasMany<StoreRating>
+     */
+    public function storeRatings(): HasMany
+    {
+        return $this->hasMany(StoreRating::class);
     }
 }

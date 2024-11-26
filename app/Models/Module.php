@@ -41,4 +41,20 @@ class Module extends Model
     {
         return $this->hasMany(Category::class);
     }
+
+    /**
+     * @return HasMany<StoreCategory>
+     */
+    public function storeCategories(): HasMany
+    {
+        return $this->hasMany(StoreCategory::class);
+    }
+
+    /**
+     * @return HasMany<Order>
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
 }

@@ -21,9 +21,7 @@ return new class () extends Migration {
             $table->string('bonus_card_no');
             $table->string('ref_code');
             $table->boolean('want_notification');
-            //timestamps
             $table->timestamps();
-            //solf delete
             $table->softDeletes();
         });
     }

@@ -22,12 +22,10 @@ return new class () extends Migration {
             $table->string('floor')->nullable();
             $table->string('road')->nullable();
             $table->string('house')->nullable();
-            $table->bigInteger('zone_id')->nullable();
-            //is selected
             $table->boolean('is_selected')->default(0);
+            $table->bigInteger('zone_id')->nullable();
             $table->foreign('zone_id')->references('id')->on('zones');
             $table->timestamps();
-            //solf delete
             $table->softDeletes();
         });
     }
