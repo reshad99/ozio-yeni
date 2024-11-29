@@ -31,9 +31,32 @@
                             <div class="fw-bold me-5">
                                 <span class="me-2" data-kt-user-table-select="selected_count"></span>Selected
                             </div>
-                            <button type="button" class="btn btn-danger" data-kt-user-table-select="delete_selected">
-                                Delete Selected
+                            <button type="button" class="btn btn-danger me-5"
+                                    data-kt-user-table-select="delete_selected">
+                                {{ __('admin::general.pages.users.list.delete_selected') }}
                             </button>
+                            <a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center"
+                               data-kt-menu-trigger="click"
+                               data-kt-menu-placement="bottom-end">{{ __('admin::general.pages.list.change_status') }}
+                                <i class="ki-duotone ki-down fs-5 ms-1"></i></a>
+                            <!--begin::Menu-->
+                            <div
+                                class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4"
+                                data-kt-menu="true">
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="apps/user-management/users/view.html"
+                                       class="menu-link px-3">{{ __('admin::general.pages.list.active') }}</a>
+                                </div>
+                                <!--end::Menu item-->
+                                <!--begin::Menu item-->
+                                <div class="menu-item px-3">
+                                    <a href="#" class="menu-link px-3"
+                                       data-kt-users-table-filter="delete_row">{{ __('admin::general.pages.list.inactive') }}</a>
+                                </div>
+                                <!--end::Menu item-->
+                            </div>
+                            <!--end::Menu-->
                         </div>
                         <!--end::Group actions-->
                         <!--begin::Modal - Adjust Balance-->
@@ -1434,71 +1457,19 @@
 @endsection
 
 @section('scripts')
-{{--    <!--begin::Vendors Javascript(used for this page only)-->--}}
-{{--    <script src="{{ asset('admin/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>--}}
-{{--    <script src="{{ asset('admin/assets/plugins/custom/vis-timeline/vis-timeline.bundle.js') }}"></script>--}}
-{{--    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>--}}
-{{--    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>--}}
-{{--    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>--}}
-{{--    <script src="https://cdn.amcharts.com/lib/5/radar.js"></script>--}}
-{{--    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>--}}
-{{--    <script src="https://cdn.amcharts.com/lib/5/map.js"></script>--}}
-{{--    <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>--}}
-{{--    <script src="https://cdn.amcharts.com/lib/5/geodata/continentsLow.js"></script>--}}
-{{--    <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>--}}
-{{--    <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>--}}
-{{--    <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>--}}
-{{--    <!--end::Vendors Javascript-->--}}
-{{--    <!--begin::Custom Javascript(used for this page only)-->--}}
-{{--    <script src="{{ asset('admin/assets/js/widgets.bundle.js') }}"></script>--}}
-{{--    <script src="{{ asset('admin/assets/js/custom/widgets.js') }}"></script>--}}
-{{--    <script src="{{ asset('admin/assets/js/custom/apps/chat/chat.js') }}"></script>--}}
-{{--    <script src="{{ asset('admin/assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>--}}
-{{--    <script src="{{ asset('admin/assets/js/custom/utilities/modals/share-earn.js') }}"></script>--}}
-{{--    <script src="{{ asset('admin/assets/js/custom/utilities/modals/offer-a-deal/type.js') }}"></script>--}}
-{{--    <script src="{{ asset('admin/assets/js/custom/utilities/modals/offer-a-deal/details.js') }}"></script>--}}
-{{--    <script src="{{ asset('admin/assets/js/custom/utilities/modals/offer-a-deal/finance.js') }}"></script>--}}
-{{--    <script src="{{ asset('admin/assets/js/custom/utilities/modals/offer-a-deal/complete.js') }}"></script>--}}
-{{--    <script src="{{ asset('admin/assets/js/custom/utilities/modals/offer-a-deal/main.js') }}"></script>--}}
-{{--    <script src="{{ asset('admin/assets/js/custom/utilities/modals/users-search.js') }}"></script>--}}
-{{--    <script src="{{ asset('admin/assets/plugins/global/plugins.bundle.js') }}"></script>--}}
+    @include('admin::pages.users.list.scripts.table')
+    @include('admin::pages.users.list.scripts.add')
 
-<script>var hostUrl = "{{asset('admin/assets/')}}";</script>
-<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-{{--    <script src="{{asset('admin/assets/plugins/global/plugins.bundle.js')}}"></script>--}}
-<script src="{{asset('admin/assets/js/scripts.bundle.js')}}"></script>
-<!--end::Global Javascript Bundle-->
-<!--begin::Vendors Javascript(used for this page only)-->
-<script src="{{asset('admin/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
-<!--end::Vendors Javascript-->
-<!--begin::Custom Javascript(used for this page only)-->
-<script src="{{asset('admin/assets/js/custom/apps/user-management/users/list/table.js')}}"></script>
-<script src="{{asset('admin/assets/js/custom/apps/user-management/users/list/export-users.js')}}"></script>
-<script src="{{asset('admin/assets/js/custom/apps/user-management/users/list/add.js')}}"></script>
-<script src="{{asset('admin/assets/js/widgets.bundle.js')}}"></script>
-<script src="{{asset('admin/assets/js/custom/widgets.js')}}"></script>
-<script src="{{asset('admin/assets/js/custom/apps/chat/chat.js')}}"></script>
-<script src="{{asset('admin/assets/js/custom/utilities/modals/upgrade-plan.js')}}"></script>
-<script src="{{asset('admin/assets/js/custom/utilities/modals/create-app.js')}}"></script>
-<script src="{{asset('admin/assets/js/custom/utilities/modals/users-search.js')}}"></script>
-@endsection
-
-
-
-
-
-@section('scripts')
+    <script>var hostUrl = "{{asset('admin/assets/')}}";</script>
+    <!--begin::Global Javascript Bundle(mandatory for all pages)-->
+{{--        <script src="{{asset('admin/assets/plugins/global/plugins.bundle.js')}}"></script>--}}
+    <script src="{{asset('admin/assets/js/scripts.bundle.js')}}"></script>
+    <!--end::Global Javascript Bundle-->
     <!--begin::Vendors Javascript(used for this page only)-->
-    <script src="{{ asset('admin/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
+    <script src="{{asset('admin/assets/plugins/custom/datatables/datatables.bundle.js')}}"></script>
     <!--end::Vendors Javascript-->
     <!--begin::Custom Javascript(used for this page only)-->
-    <script src="{{asset('admin/assets/js/custom/apps/ecommerce/catalog/categories.js')}}"></script>
-    <script src="{{ asset('admin/assets/js/widgets.bundle.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/custom/widgets.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/custom/apps/chat/chat.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/custom/utilities/modals/upgrade-plan.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/custom/utilities/modals/create-app.js') }}"></script>
-    <script src="{{ asset('admin/assets/js/custom/utilities/modals/users-search.js') }}"></script>
+{{--        <script src="{{asset('admin/assets/js/custom/apps/user-management/users/list/table.js')}}"></script>--}}
+{{--    <script src="{{asset('admin/assets/js/custom/apps/user-management/users/list/add.js')}}"></script>--}}
 
-    <script src="{{ asset('admin/assets/plugins/custom/fslightbox/fslightbox.bundle.js') }}"></script>
-    <!--end::Custom Javascript-->
+@endsection

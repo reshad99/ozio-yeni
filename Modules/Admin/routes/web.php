@@ -33,3 +33,5 @@ Route::middleware('auth:admin')->group(function () {
 });
 
 Route::resource('users', UserController::class);
+
+Route::view('asd','admin::pages.emergency-call.list.index');

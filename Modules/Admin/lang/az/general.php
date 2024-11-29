@@ -114,6 +114,12 @@ return [
                 'role_name_is_required' => 'Rol adı tələb olunur',
             ],
         ],
+        'list' => [
+            'delete_selected' => 'Seçilmişləri sil',
+            'change_status' => 'Statusu dəyiş',
+            'active' => 'Aktiv',
+            'inactive' => 'Deaktiv',
+        ],
         'transport' => [
             'car' => [
                 'list' => [
