@@ -10,6 +10,12 @@ return [
             'icon' => 'ki-outline ki-element-11 fs-2',
             'can' => []
         ],
+        [
+            'name' => __('admin::general.menu.users'),
+            'url' => 'users.index',
+            'icon' => 'ki-outline ki-people fs-2',
+            'can' => [],
+        ]
         // [
         //     'name' => __('admin::general.menu.emergency-calls'),
         //     'url' => 'admin.emergency-call.list',

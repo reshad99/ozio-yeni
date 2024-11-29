@@ -15,7 +15,7 @@ return [
     'menu' => [
         'dashboard' => 'İnformasiya paneli',
         'User management' => 'İstifadəçilər',
-        'Users' => 'İstifadəçi siyahısı',
+        'users' => 'İstifadəçi siyahısı',
         'employees' => 'İşçilər',
         'Roles' => 'Rollar',
         'Permissions' => 'İcazələr',
@@ -101,6 +101,7 @@ return [
         ],
         'roles' => [
             'list' => [
+                'role' => 'Rol',
                 'roles' => 'Rollar',
                 'add_new_role' => 'Yeni rol əlavə et',
                 'add_a_role' => 'Rol əlavə et',

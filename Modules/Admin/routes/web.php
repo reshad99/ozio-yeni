@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AdminController;
 use Modules\Admin\Http\Controllers\Auth\LoginController;
 use Modules\Admin\Http\Controllers\Auth\LogoutController;
+use Modules\Admin\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,3 +31,5 @@ Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
 Route::middleware('auth:admin')->group(function () {
     Route::view('dashboard', 'admin::pages.dashboard.index')->name('admin.dashboard');
 });
+
+Route::resource('users', UserController::class);

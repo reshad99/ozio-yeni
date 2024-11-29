@@ -204,12 +204,12 @@
     </div>
     <!--end::Content-->
 
-    @include('admin::pages.emergency-call.list.sections.add-modal')
-    @include('admin::pages.emergency-call.list.sections.edit-modal')
-    @include('admin::pages.emergency-call.list.sections.view-modal')
-    @include('admin::pages.emergency-call.list.sections.assign-modal')
-    @include('admin::pages.emergency-call.list.sections.select-address-modal')
-    @include('admin::pages.emergency-call.list.sections.select-user-modal')
+{{--    @include('admin::pages.emergency-call.list.sections.add-modal')--}}
+{{--    @include('admin::pages.emergency-call.list.sections.edit-modal')--}}
+{{--    @include('admin::pages.emergency-call.list.sections.view-modal')--}}
+{{--    @include('admin::pages.emergency-call.list.sections.assign-modal')--}}
+{{--    @include('admin::pages.emergency-call.list.sections.select-address-modal')--}}
+{{--    @include('admin::pages.emergency-call.list.sections.select-user-modal')--}}
 @endsection
 
 @section('scripts')
@@ -247,16 +247,16 @@
 
     </script>
 
-    @include('admin::pages.emergency-call.list.scripts.socketScript')
-    @include('admin::pages.emergency-call.list.scripts.filterScript')
-    @include('admin::pages.emergency-call.list.scripts.mapScript')
-    @include('admin::pages.emergency-call.list.scripts.datatable')
-    @include('admin::pages.emergency-call.list.scripts.add-modal')
-    @include('admin::pages.emergency-call.list.scripts.view-modal')
-    @include('admin::pages.emergency-call.list.scripts.assign-modal')
-    @include('admin::pages.emergency-call.list.scripts.edit-modal')
-    @include('admin::pages.emergency-call.list.scripts.select-address-modal')
-    @include('admin::pages.emergency-call.list.scripts.select-user-modal')
+{{--    @include('admin::pages.emergency-call.list.scripts.socketScript')--}}
+{{--    @include('admin::pages.emergency-call.list.scripts.filterScript')--}}
+{{--    @include('admin::pages.emergency-call.list.scripts.mapScript')--}}
+{{--    @include('admin::pages.emergency-call.list.scripts.datatable')--}}
+{{--    @include('admin::pages.emergency-call.list.scripts.add-modal')--}}
+{{--    @include('admin::pages.emergency-call.list.scripts.view-modal')--}}
+{{--    @include('admin::pages.emergency-call.list.scripts.assign-modal')--}}
+{{--    @include('admin::pages.emergency-call.list.scripts.edit-modal')--}}
+{{--    @include('admin::pages.emergency-call.list.scripts.select-address-modal')--}}
+{{--    @include('admin::pages.emergency-call.list.scripts.select-user-modal')--}}
     <script>
         const loadingEl = document.createElement("div");
         document.body.prepend(loadingEl);
@@ -299,171 +299,171 @@
             });
         }
     </script>
-    <script>
-        var AjaxLoaded = false;
-        window.LoadSelectAddressModalAjax = async function LoadSelectAddressModalAjax() {
-            console.log('LoadSelectAddressModalAjax');
-            KTApp.showPageLoading();
+{{--    <script>--}}
+{{--        var AjaxLoaded = false;--}}
+{{--        window.LoadSelectAddressModalAjax = async function LoadSelectAddressModalAjax() {--}}
+{{--            console.log('LoadSelectAddressModalAjax');--}}
+{{--            KTApp.showPageLoading();--}}
 
 
-            if (AjaxLoaded) {
-                console.log('AjaxLoaded');
-                KTApp.hidePageLoading();
-                return;
-            }
+{{--            if (AjaxLoaded) {--}}
+{{--                console.log('AjaxLoaded');--}}
+{{--                KTApp.hidePageLoading();--}}
+{{--                return;--}}
+{{--            }--}}
 
-            AjaxLoaded = true;
+{{--            AjaxLoaded = true;--}}
 
-            var cityDatas = null;
-            var matrixDatas = null;
-            var streetDatas = null;
-            //get div kt_modal_new_address
-            let modal = $('#kt_modal_new_address');
-            //select named city
-            let city = modal.find('select[name="city"]');
-            let regions = modal.find('select[name="region"]');
-            let streets = modal.find('select[name="street"]');
+{{--            var cityDatas = null;--}}
+{{--            var matrixDatas = null;--}}
+{{--            var streetDatas = null;--}}
+{{--            //get div kt_modal_new_address--}}
+{{--            let modal = $('#kt_modal_new_address');--}}
+{{--            //select named city--}}
+{{--            let city = modal.find('select[name="city"]');--}}
+{{--            let regions = modal.find('select[name="region"]');--}}
+{{--            let streets = modal.find('select[name="street"]');--}}
 
-            let promise1 = new Promise((resolve, reject) => {
-                //send ajax request to get city list
-                $.ajax({
-                    type: 'GET',
-                    url: "{{ route('shared.agis-service.cities') }}",
-                    success: function(response) {
-                        //check response
-                        if (response.Cities.length > 0) {
-                            //set city datas
-                            window.cityDatas = response.Cities;
-                            //loop city datas
-                            $.each(window.cityDatas, function(index, cityData) {
-                                //append city to select
-                                city.append('<option value="' + cityData
-                                    .Subjectid + '">' + cityData.Name + '</option>');
+{{--            let promise1 = new Promise((resolve, reject) => {--}}
+{{--                //send ajax request to get city list--}}
+{{--                $.ajax({--}}
+{{--                    type: 'GET',--}}
+{{--                    url: "{{ route('shared.agis-service.cities') }}",--}}
+{{--                    success: function(response) {--}}
+{{--                        //check response--}}
+{{--                        if (response.Cities.length > 0) {--}}
+{{--                            //set city datas--}}
+{{--                            window.cityDatas = response.Cities;--}}
+{{--                            //loop city datas--}}
+{{--                            $.each(window.cityDatas, function(index, cityData) {--}}
+{{--                                //append city to select--}}
+{{--                                city.append('<option value="' + cityData--}}
+{{--                                    .Subjectid + '">' + cityData.Name + '</option>');--}}
 
-                                //city is select element append is not working
-                                // city.append(new Option(city.Name, city.Subjectid));
-                            });
-                            resolve(null);
-                        }
-                    }
-                });
-            });
+{{--                                //city is select element append is not working--}}
+{{--                                // city.append(new Option(city.Name, city.Subjectid));--}}
+{{--                            });--}}
+{{--                            resolve(null);--}}
+{{--                        }--}}
+{{--                    }--}}
+{{--                });--}}
+{{--            });--}}
 
-            let promise2 = new Promise((resolve, reject) => {
-                //send ajax request to get regions list
-                $.ajax({
-                    type: 'GET',
-                    url: "{{ route('shared.agis-service.regions') }}",
-                    success: function(response) {
-                        //check response
-                        if (response.Regions.length > 0) {
-                            //set city datas
-                            window.matrixDatas = response.Regions;
-                            //loop city datas
-                            $.each(window.matrixDatas, function(index, region) {
-                                //append city to select
-                                regions.append('<option value="' + region
-                                    .Matrixid + '">' + region.Name + '</option>');
-                            });
-                            resolve(null);
-                        }
-                    }
-                });
-            });
+{{--            let promise2 = new Promise((resolve, reject) => {--}}
+{{--                //send ajax request to get regions list--}}
+{{--                $.ajax({--}}
+{{--                    type: 'GET',--}}
+{{--                    url: "{{ route('shared.agis-service.regions') }}",--}}
+{{--                    success: function(response) {--}}
+{{--                        //check response--}}
+{{--                        if (response.Regions.length > 0) {--}}
+{{--                            //set city datas--}}
+{{--                            window.matrixDatas = response.Regions;--}}
+{{--                            //loop city datas--}}
+{{--                            $.each(window.matrixDatas, function(index, region) {--}}
+{{--                                //append city to select--}}
+{{--                                regions.append('<option value="' + region--}}
+{{--                                    .Matrixid + '">' + region.Name + '</option>');--}}
+{{--                            });--}}
+{{--                            resolve(null);--}}
+{{--                        }--}}
+{{--                    }--}}
+{{--                });--}}
+{{--            });--}}
 
-            let promise3 = new Promise((resolve, reject) => {
-                //send ajax request to get streets list
-                $.ajax({
-                    type: 'GET',
-                    url: "{{ route('shared.agis-service.streets') }}",
-                    success: function(response) {
-                        //check response
-                        if (response.Streets.length > 0) {
-                            //set city datas
-                            window.streetDatas = response.Streets;
-                            //loop city datas
-                            $.each(window.streetDatas, function(index, street) {
-                                //append city to select
-                                streets.append('<option value="' + street
-                                    .Streetid + '">' + street.Name + '</option>');
-                            });
-                            resolve(null);
-                        }
-                    }
-                });
-            });
-            await promise1;
-            console.log('LoadSelectAddressModalAjax end');
-            await promise2;
-            console.log('LoadSelectAddressModalAjax end2');
-            await promise3;
-            console.log('LoadSelectAddressModalAjax end3');
-            //add on change to city
-            city.change(function() {
-                console.log('city change');
-                //get selected city id
-                let cityId = $(this).val();
-                regions.html('');
-                streets.html('');
+{{--            let promise3 = new Promise((resolve, reject) => {--}}
+{{--                //send ajax request to get streets list--}}
+{{--                $.ajax({--}}
+{{--                    type: 'GET',--}}
+{{--                    url: "{{ route('shared.agis-service.streets') }}",--}}
+{{--                    success: function(response) {--}}
+{{--                        //check response--}}
+{{--                        if (response.Streets.length > 0) {--}}
+{{--                            //set city datas--}}
+{{--                            window.streetDatas = response.Streets;--}}
+{{--                            //loop city datas--}}
+{{--                            $.each(window.streetDatas, function(index, street) {--}}
+{{--                                //append city to select--}}
+{{--                                streets.append('<option value="' + street--}}
+{{--                                    .Streetid + '">' + street.Name + '</option>');--}}
+{{--                            });--}}
+{{--                            resolve(null);--}}
+{{--                        }--}}
+{{--                    }--}}
+{{--                });--}}
+{{--            });--}}
+{{--            await promise1;--}}
+{{--            console.log('LoadSelectAddressModalAjax end');--}}
+{{--            await promise2;--}}
+{{--            console.log('LoadSelectAddressModalAjax end2');--}}
+{{--            await promise3;--}}
+{{--            console.log('LoadSelectAddressModalAjax end3');--}}
+{{--            //add on change to city--}}
+{{--            city.change(function() {--}}
+{{--                console.log('city change');--}}
+{{--                //get selected city id--}}
+{{--                let cityId = $(this).val();--}}
+{{--                regions.html('');--}}
+{{--                streets.html('');--}}
 
-                //filter matrix datas
-                let filteredMatrixDatas = window.matrixDatas.filter(function(matrix) {
-                    return matrix.Subjectid == cityId && matrix.Name != null;
-                });
+{{--                //filter matrix datas--}}
+{{--                let filteredMatrixDatas = window.matrixDatas.filter(function(matrix) {--}}
+{{--                    return matrix.Subjectid == cityId && matrix.Name != null;--}}
+{{--                });--}}
 
-                //loop filtered matrix datas
-                $.each(filteredMatrixDatas, function(index, matrix) {
-                    //append matrix to select
-                    regions.append('<option value="' + matrix
-                        .Matrixid + '">' + matrix.Name + '</option>');
-                });
+{{--                //loop filtered matrix datas--}}
+{{--                $.each(filteredMatrixDatas, function(index, matrix) {--}}
+{{--                    //append matrix to select--}}
+{{--                    regions.append('<option value="' + matrix--}}
+{{--                        .Matrixid + '">' + matrix.Name + '</option>');--}}
+{{--                });--}}
 
-                //filter street datas
-                let filteredStreetDatas = window.streetDatas.filter(function(street) {
-                    return street.Subjectid == cityId && street.Matrixid == regions.val();
-                });
+{{--                //filter street datas--}}
+{{--                let filteredStreetDatas = window.streetDatas.filter(function(street) {--}}
+{{--                    return street.Subjectid == cityId && street.Matrixid == regions.val();--}}
+{{--                });--}}
 
-                //remove null value
-                filteredStreetDatas = filteredStreetDatas.filter(function(street) {
-                    return street.Name != null && street.Name != '';
-                });
+{{--                //remove null value--}}
+{{--                filteredStreetDatas = filteredStreetDatas.filter(function(street) {--}}
+{{--                    return street.Name != null && street.Name != '';--}}
+{{--                });--}}
 
-                //loop filtered street datas
-                $.each(filteredStreetDatas, function(index, street) {
-                    //append matrix to select
-                    streets.append('<option value="' + street
-                        .Name + '">' + street.Name + '</option>');
-                });
-                //trigger change
-                regions.trigger('change');
-            });
+{{--                //loop filtered street datas--}}
+{{--                $.each(filteredStreetDatas, function(index, street) {--}}
+{{--                    //append matrix to select--}}
+{{--                    streets.append('<option value="' + street--}}
+{{--                        .Name + '">' + street.Name + '</option>');--}}
+{{--                });--}}
+{{--                //trigger change--}}
+{{--                regions.trigger('change');--}}
+{{--            });--}}
 
-            //add on change to region
-            regions.change(function() {
-                //get selected city id
-                let regionId = $(this).val();
-                streets.html('');
+{{--            //add on change to region--}}
+{{--            regions.change(function() {--}}
+{{--                //get selected city id--}}
+{{--                let regionId = $(this).val();--}}
+{{--                streets.html('');--}}
 
-                //filter matrix datas
-                let filteredStreetDatas = window.streetDatas.filter(function(street) {
-                    return street.Matrixid == regionId && street.Subjectid == city.val() &&
-                        street
-                        .Name != null;
-                });
+{{--                //filter matrix datas--}}
+{{--                let filteredStreetDatas = window.streetDatas.filter(function(street) {--}}
+{{--                    return street.Matrixid == regionId && street.Subjectid == city.val() &&--}}
+{{--                        street--}}
+{{--                        .Name != null;--}}
+{{--                });--}}
 
-                //loop filtered matrix datas
-                $.each(filteredStreetDatas, function(index, street) {
-                    //append matrix to select
-                    streets.append('<option value="' + street
-                        .Streetid + '">' + street.Name + '</option>');
-                });
-                //trigger change
-                streets.trigger('change');
-            });
-            city.trigger('change');
-            KTApp.hidePageLoading();
-        }
-    </script>
+{{--                //loop filtered matrix datas--}}
+{{--                $.each(filteredStreetDatas, function(index, street) {--}}
+{{--                    //append matrix to select--}}
+{{--                    streets.append('<option value="' + street--}}
+{{--                        .Streetid + '">' + street.Name + '</option>');--}}
+{{--                });--}}
+{{--                //trigger change--}}
+{{--                streets.trigger('change');--}}
+{{--            });--}}
+{{--            city.trigger('change');--}}
+{{--            KTApp.hidePageLoading();--}}
+{{--        }--}}
+{{--    </script>--}}
 @endsection
 
 @section('styles')
