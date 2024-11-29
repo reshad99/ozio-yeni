@@ -1,7 +1,6 @@
 <script>
     "use strict";
 
-
     // Class definition
     var KTUsersAddUser = function () {
         // Shared variables
