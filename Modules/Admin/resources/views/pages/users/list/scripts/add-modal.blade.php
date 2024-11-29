@@ -1,4 +1,5 @@
 <script>
+
     $(document).ready(function() {
         document.querySelector('[data-bs-target="#kt_modal_new_target"]').addEventListener('click',
             async function() {

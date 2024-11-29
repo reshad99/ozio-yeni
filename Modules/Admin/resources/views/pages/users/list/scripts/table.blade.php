@@ -1,6 +1,7 @@
 <script>
     "use strict";
 
+
     var KTUsersList = function () {
         // Define shared variables
         var table = document.getElementById('kt_table_users');

@@ -18,6 +18,7 @@
                     </i>
                 </div>
                 <!--end::Close-->
+
             </div>
             <!--end::Modal header-->
             <!--begin::Modal body-->

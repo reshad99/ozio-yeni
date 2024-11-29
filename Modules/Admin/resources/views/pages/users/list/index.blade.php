@@ -1458,6 +1458,7 @@
 
 @section('scripts')
     @include('admin::pages.users.list.scripts.table')
+
     @include('admin::pages.users.list.scripts.add')
 
     <script>var hostUrl = "{{asset('admin/assets/')}}";</script>
