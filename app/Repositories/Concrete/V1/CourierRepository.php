@@ -7,7 +7,6 @@ use App\Repositories\Abstract\V1\CourierRepositoryInterface;
 
 class CourierRepository extends BaseRepository implements CourierRepositoryInterface
 {
-
     /**
      * @param Courier $model
      */

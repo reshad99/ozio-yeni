@@ -7,7 +7,6 @@ use App\Repositories\Abstract\V1\CityRepositoryInterface;
 
 class CityRepository extends BaseRepository implements CityRepositoryInterface
 {
-
     /**
      * @param City $model
      */

@@ -7,7 +7,6 @@ use App\Repositories\Abstract\V1\CouponRepositoryInterface;
 
 class CouponRepository extends BaseRepository implements CouponRepositoryInterface
 {
-
     /**
      * @param Coupon $model
      */

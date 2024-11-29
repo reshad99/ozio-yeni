@@ -11,7 +11,7 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
      * @param Admin $model
      */
     public function __construct(
-         Admin $model
+        Admin $model
     ) {
         parent::__construct($model);
     }

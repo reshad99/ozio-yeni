@@ -11,7 +11,7 @@ class AssignedCouponRepository extends BaseRepository implements AssignedCouponR
      * @param AssignedCoupon $model
      */
     public function __construct(
-         AssignedCoupon $model
+        AssignedCoupon $model
     ) {
         parent::__construct($model);
     }

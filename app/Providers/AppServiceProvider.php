@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bind repository interfaces to their concrete implementations.
-     * 
+     *
      * @return void
      */
     private function bindRepositoryInterfaces()
