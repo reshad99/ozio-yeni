@@ -25,7 +25,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function yajraDatatableOrderBy(Request $request): void
     {
         $order = $request->order[0]; // order parametersindeki ilk elemanı alır
-        $columns = ['id', 'name', 'email', 'phone', 'bonus_card_no'];
+        $columns = ['id', 'name', 'email', 'phone', 'bonus_card_no','created_at'];
         $column = $columns[$order['column']];
         $direction = $order['dir'];
         $this->query->orderBy($column, $direction);
