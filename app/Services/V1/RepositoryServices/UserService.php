@@ -122,9 +122,9 @@ class UserService
         return $models;
     }
 
-    //group by 
+    //group by
     /**
-     * 
+     *
      * @param string $column
      * @return self
      */
@@ -135,7 +135,7 @@ class UserService
     }
     //having
     /**
-     * 
+     *
      * @param string $column
      * @param string $operator
      * @param string $value
@@ -148,7 +148,7 @@ class UserService
     }
     //where
     /**
-     * 
+     *
      * @param string $column
      * @param string $operator
      * @param string $value
@@ -161,7 +161,7 @@ class UserService
     }
     //orWhere
     /**
-     * 
+     *
      * @param string $column
      * @param string $operator
      * @param string $value
@@ -173,7 +173,7 @@ class UserService
         return $this;
     }
     /**
-     * 
+     *
      * @param string $column
      * @param array<string> $value
      * @return self
@@ -184,7 +184,7 @@ class UserService
         return $this;
     }
     /**
-     * 
+     *
      * @param string $column
      * @param array<string> $value
      * @return self

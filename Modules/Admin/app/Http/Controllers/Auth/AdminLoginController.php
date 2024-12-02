@@ -14,7 +14,8 @@ class AdminLoginController extends Controller
     public function __construct(
         private AdminLoginService $adminLoginService,
         private UserService $userService
-    ) {}
+    ) {
+    }
 
     /**
      * @return View

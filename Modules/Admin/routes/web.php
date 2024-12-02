@@ -34,4 +34,4 @@ Route::middleware('auth:admin')->group(function () {
 
 Route::resource('users', AdminUserController::class);
 
-Route::view('asd','admin::pages.emergency-call.list.index');
+Route::view('asd', 'admin::pages.emergency-call.list.index');

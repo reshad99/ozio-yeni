@@ -142,7 +142,7 @@ interface IBaseRepository
 
 
     /**
-     * 
+     *
      * @param string $column
      * @param array<string> $value
      * @return self

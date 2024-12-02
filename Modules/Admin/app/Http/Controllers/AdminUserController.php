@@ -13,7 +13,9 @@ class AdminUserController extends Controller
     /**
      * @param UserService $userService
      */
-    public function __construct(protected UserService $userService) {}
+    public function __construct(protected UserService $userService)
+    {
+    }
 
     /**
      * Display a listing of the resource.
@@ -23,7 +25,7 @@ class AdminUserController extends Controller
     {
         return view('admin::pages.users.list.index');
     }
-    
+
 
     /**
      * Display a listing of the resource.

@@ -232,5 +232,5 @@ class BaseRepository implements IBaseRepository
         $this->query->whereNotIn($column, $value);
         return $this;
     }
-    
+
 }
