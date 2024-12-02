@@ -343,11 +343,13 @@
     <!--end::Content-->
 
     @include('admin::pages.users.list.sections.add-modal')
+    @include('admin::pages.users.list.sections.edit-modal')
 @endsection
 
 @section('scripts')
     @include('admin::pages.users.list.scripts.table')
-    @include('admin::pages.users.list.scripts.add')
+    @include('admin::pages.users.list.scripts.add-modal')
+    @include('admin::pages.users.list.scripts.edit-modal')
     @include('admin::pages.users.list.scripts.filterScript')
 
     <script>

@@ -1,17 +1,18 @@
-<!--begin::Modal - Add task-->
-<div class="modal fade" id="kt_modal_add_user" tabindex="-1" aria-hidden="true">
+<!--begin::Modal - New Target-->
+<div class="modal fade" id="kt_modal_new2_target" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <!--begin::Modal content-->
         <div class="modal-content">
             <!--begin::Modal header-->
-            <div class="modal-header" id="kt_modal_add_user_header">
-                <!--begin::Modal title-->
-                <h2 class="fw-bold">{{__('admin::general.pages.users.list.add_new_user')}}</h2>
-                <!--end::Modal title-->
+            <div class="modal-header">
+                <!--begin::Title-->
+                <h2 class="fw-bold">{{__('admin::general.pages.users.list.edit_user')}}</h2>
+                <!-- Title added here -->
+                <!--end::Title-->
+
                 <!--begin::Close-->
-                <div class="btn btn-icon btn-sm btn-active-icon-primary"
-                     data-kt-users-modal-action="close">
+                <div class="btn btn-icon btn-sm btn-active-icon-primary" id="kt_modal_new2_target_close">
                     <i class="ki-duotone ki-cross fs-1">
                         <span class="path1"></span>
                         <span class="path2"></span>
@@ -19,12 +20,12 @@
                 </div>
                 <!--end::Close-->
             </div>
-            <!--end::Modal header-->
+            <!--begin::Modal header-->
             <!--begin::Modal body-->
             <div class="modal-body px-5 my-7">
-                <!--begin::Form-->
-                <form id="kt_modal_add_user_form" class="form" action="#">
-                    <!--begin::Scroll-->
+                <!--begin:Form-->
+                <form id="kt_modal_new2_target_form" class="form" action="">
+                    <input type="hidden" name="edit_id" value="">
                     <div class="d-flex flex-column scroll-y px-5 px-lg-10"
                          id="kt_modal_add_user_scroll" data-kt-scroll="true"
                          data-kt-scroll-activate="true" data-kt-scroll-max-height="auto"
@@ -251,23 +252,25 @@
                         </div>
                         <!--end::Input group-->
                     </div>
-                    <!--end::Scroll-->
+                    <div class="col-12 col-lg-4">
+
+                    </div>
+
                     <!--begin::Actions-->
-                    <div class="text-center pt-10">
-                        <button type="submit" class="btn btn-primary"
-                                data-kt-users-modal-action="submit">
-                            <span class="indicator-label">{{__('admin::general.shared.save')}}</span>
-                            <span class="indicator-progress">{{__('admin::general.shared.please_wait')}}
-																			<span
-                                                                                class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    <div class="text-center mt-5">
+                        <button type="button" id="kt_modal_new2_target_submit" class="btn btn-primary">
+                            <span
+                                class="indicator-label">{{ __('admin::general.shared.save') }}</span>
+                            <span
+                                class="indicator-progress">{{ __('admin::general.shared.please_wait') }}...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                         </button>
-                        <button type="reset" class="btn btn-light me-3"
-                                data-kt-users-modal-action="cancel">{{__('admin::general.shared.discard')}}</button>
-                        </button>
+                        <button type="reset" id="kt_modal_new2_target_cancel"
+                                class="btn btn-light me-3">{{ __('admin::general.shared.cancel') }}</button>
                     </div>
                     <!--end::Actions-->
                 </form>
-                <!--end::Form-->
+                <!--end:Form-->
             </div>
             <!--end::Modal body-->
         </div>
@@ -275,4 +278,4 @@
     </div>
     <!--end::Modal dialog-->
 </div>
-<!--end::Modal - Add task-->
+<!--end::Modal - New Target-->
