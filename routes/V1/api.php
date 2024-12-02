@@ -2,5 +2,5 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(middleware: 'guest')->group(callback: function (): void {
+Route::middleware(middleware: 'guest:api')->group(callback: function (): void {
 });
