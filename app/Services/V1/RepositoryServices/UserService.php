@@ -120,6 +120,76 @@ class UserService
         return $models;
     }
 
-    //group by
+    //group by 
+    /**
+     * 
+     * @param string $column
+     * @return self
+     */
+    public function setGroupBy($column): self
+    {
+        $this->userRepository->groupBy($column);
+        return $this;
+    }
+    //having
+    /**
+     * 
+     * @param string $column
+     * @param string $operator
+     * @param string $value
+     * @return self
+     */
+    public function setHaving($column, $operator, $value): self
+    {
+        $this->userRepository->having($column, $operator, $value);
+        return $this;
+    }
+    //where
+    /**
+     * 
+     * @param string $column
+     * @param string $operator
+     * @param string $value
+     * @return self
+     */
+    public function setWhere($column, $operator, $value): self
+    {
+        $this->userRepository->where($column, $operator, $value);
+        return $this;
+    }
+    //orWhere
+    /**
+     * 
+     * @param string $column
+     * @param string $operator
+     * @param string $value
+     * @return self
+     */
+    public function setOrWhere($column, $operator, $value): self
+    {
+        $this->userRepository->orWhere($column, $operator, $value);
+        return $this;
+    }
+    //whereIn
+    /**
+     * 
+     * @param string $column
+     * @param array $value
+     * @return self
+     */
+
+    public function setWhereIn($column, $value): self
+    {
+        $this->userRepository->whereIn($column, $value);
+        return $this;
+    }
+
+    public function yajraDatatableExport($request)
+    {
+      
+    }
+
+    
+
 
 }

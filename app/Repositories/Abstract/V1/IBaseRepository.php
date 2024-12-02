@@ -141,4 +141,16 @@ interface IBaseRepository
      */
 
     public function whereIn(string $column, array $value): self;
+
+
+    //where in not
+    /**
+     * 
+     * @param string $column
+     * @param array $value
+     * @return self
+     */
+    public function whereNotIn(string $column, array $value): self;
+    
+
 }

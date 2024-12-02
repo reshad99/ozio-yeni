@@ -225,4 +225,12 @@ class BaseRepository implements IBaseRepository
         $this->query->whereIn($column, $value);
         return $this;
     }
+
+    /** {@inheritDoc} */
+    public function whereNotIn(string $column, array $value): self
+    {
+        $this->query->whereNotIn($column, $value);
+        return $this;
+    }
+    
 }
