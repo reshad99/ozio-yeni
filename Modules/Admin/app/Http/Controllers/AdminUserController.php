@@ -13,9 +13,7 @@ class AdminUserController extends Controller
     /**
      * @param UserService $userService
      */
-    public function __construct(protected UserService $userService)
-    {
-    }
+    public function __construct(protected UserService $userService) {}
 
     /**
      * Display a listing of the resource.
@@ -32,7 +30,7 @@ class AdminUserController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function userDatatable(Request $request)
+    public function datatable(Request $request)
     {
         return $this->userService->yajraDatatableExport($request);
     }
