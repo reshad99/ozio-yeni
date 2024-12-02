@@ -163,6 +163,7 @@ return [
                 'add_new_user' => 'İstifadəçi əlavə et',
                 'added_new_user' => 'Yeni istifadəçi əlavə edildi',
                 'add_user' => 'İstifadəçi əlavə et',
+                'edit_user' => 'İstifadəçini dəyiş',
                 'selected' => 'Seçilmiş',
                 'delete_selected' => 'Seçilmişləri sil',
                 'select_roles' => 'Rolları seçin',
