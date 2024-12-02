@@ -153,4 +153,16 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany(Otp::class);
     }
+
+    //SCOPES
+    /**
+     * @param Builder $query
+     * @param string $name
+     * @return Builder
+     */
+    public function scopeName($query, $name)
+    {
+        if (isset($name)) return $query->where('name', 'like', '%' . $name . '%');
+        return $query;
+    }
 }
