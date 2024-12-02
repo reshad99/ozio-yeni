@@ -17,7 +17,13 @@ function getCleanNumber($number): string
 }
 
 if (!function_exists('isActiveParent')) {
-    function isActiveParent($children, $output = 'here show')
+    /**
+     * Check if the current route is active
+     * @param array<string,mixed> $children
+     * @param string $output
+     * @return string
+     */
+    function isActiveParent($children, $output = 'here show'): string
     {
         foreach ($children as $child) {
             if (Route::currentRouteName() == $child['url']) {

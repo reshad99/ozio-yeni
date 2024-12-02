@@ -9,15 +9,18 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @template TModel of \Illuminate\Database\Eloquent\Model
+ */
 class BaseRepository implements IBaseRepository
 {
     /**
-     * @var Builder<\Illuminate\Database\Eloquent\Model>
+     * @var Builder<TModel>
      */
     protected Builder $query;
 
     /**
-     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param  TModel $model
      */
     public function __construct(
         private $model
@@ -232,5 +235,4 @@ class BaseRepository implements IBaseRepository
         $this->query->whereNotIn($column, $value);
         return $this;
     }
-    
 }
