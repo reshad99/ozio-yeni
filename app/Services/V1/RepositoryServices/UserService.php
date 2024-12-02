@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Repositories\Abstract\V1\UserRepositoryInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 class UserService
 {
@@ -184,12 +185,8 @@ class UserService
         return $this;
     }
 
-    public function yajraDatatableExport($request)
+    public function yajraDatatableExport(Request $request)
     {
-      
+        return  $this->userRepository->yajraDatatableExport($request);
     }
-
-    
-
-
 }
