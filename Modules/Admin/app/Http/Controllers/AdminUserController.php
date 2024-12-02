@@ -7,7 +7,7 @@ use App\Services\V1\RepositoryServices\UserService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class UserController extends Controller
+class AdminUserController extends Controller
 {
     /**
      * @param UserService $userService
@@ -21,5 +21,16 @@ class UserController extends Controller
     public function index()
     {
         return view('admin::pages.users.list.index');
+    }
+    
+
+    /**
+     * Display a listing of the resource.
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function userDatatable(Request $request)
+    {
+        return $this->userService->yajraDatatableExport($request);
     }
 }

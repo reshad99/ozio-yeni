@@ -23,7 +23,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function yajraDatatableOrderBy(Request $request): void
     {
         $order = $request->order[0]; // order parametersindeki ilk elemanı alır
-        $columns = ['id']; // Define columns
+        $columns = ['id', 'name', 'email', 'phone', 'bonus_card_no'];
         $column = $columns[$order['column']];
         $direction = $order['dir'];
         $this->query->orderBy($column, $direction);
@@ -31,7 +31,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     /** {@inheritDoc} */
     public function yajraDatatableSearch($request): void
     {
-        $this->query->name($request['name']);
+        /**
+         * @var Builder<User> $query
+         */
+        $query = $this->query;
+        $query->name($request['name']);
     }
     /** {@inheritDoc} */
     public function yajraDatatableExport(Request $request): JsonResponse
@@ -45,6 +49,18 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
         $data = DataTables::of($this->query)
             ->addIndexColumn()
+            ->addColumn('name', function ($row) {
+                return $row->name;
+            })
+            ->addColumn('email', function ($row) {
+                return $row->email;
+            })
+            ->addColumn('phone', function ($row) {
+                return $row->phone;
+            })
+            ->addColumn('bonus_card_no', function ($row) {
+                return $row->bonus_card_no;
+            })
             ->make(true);
         return $data;
     }
