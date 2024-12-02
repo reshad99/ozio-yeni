@@ -10,7 +10,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
-
+use Illuminate\Database\Eloquent\Builder;
+/**
+ * @method Builder|static name()
+ * @method static Builder|static query()
+ */
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
@@ -154,15 +158,18 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Otp::class);
     }
 
-    //SCOPES
     /**
-     * @param Builder $query
-     * @param string $name
-     * @return Builder
+     * Scope a query to filter users by name.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder<User> $query
+     * @param string|null $name
+     * @return \Illuminate\Database\Eloquent\Builder<User>
      */
     public function scopeName($query, $name)
     {
-        if (isset($name)) return $query->where('name', 'like', '%' . $name . '%');
+        if (!empty($name)) {
+            return $query->where('name', 'like', '%' . $name . '%');
+        }
         return $query;
     }
 }
