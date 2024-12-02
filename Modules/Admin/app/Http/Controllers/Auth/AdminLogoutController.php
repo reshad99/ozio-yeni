@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Modules\Admin\Services\Auth\AdminLogoutService;
 
-class LogoutController extends Controller
+class AdminLogoutController extends Controller
 {
     public function __construct(protected AdminLogoutService $adminLogoutService)
     {

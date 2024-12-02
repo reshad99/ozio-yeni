@@ -9,7 +9,7 @@ use Illuminate\View\View;
 use Modules\Admin\Http\Requests\AdminLoginRequest;
 use Modules\Admin\Services\Auth\AdminLoginService;
 
-class LoginController extends Controller
+class AdminLoginController extends Controller
 {
     public function __construct(
         private AdminLoginService $adminLoginService,
