@@ -162,14 +162,75 @@ class User extends Authenticatable implements JWTSubject
     /**
      * Scope a query to filter users by name.
      *
-     * @param \Illuminate\Database\Eloquent\Builder<User> $query
+     * @param Builder<User> $query
      * @param string|null $name
-     * @return \Illuminate\Database\Eloquent\Builder<User>
+     * @return Builder<User>
      */
     public function scopeName($query, $name)
     {
-        if (!empty($name)) {
+        if (isset($name)) {
             return $query->where('name', 'like', '%' . $name . '%');
+        }
+        return $query;
+    }
+
+    /**
+     * Scope a query to filter users by name.
+     *
+     * @param Builder<User> $query
+     * @param string|null $email
+     * @return Builder<User>
+     */
+    public function scopeEmail($query, $email)
+    {
+        if (!empty($email)) {
+            return $query->where('email', 'like', '%' . $email . '%');
+        }
+        return $query;
+    }
+
+    /**
+     * Scope a query to filter users by name.
+     *
+     * @param Builder<User> $query
+     * @param string|null $phone
+     * @return Builder<User>
+     */
+    public function scopePhone($query, $phone)
+    {
+        if (!empty($phone)) {
+            return $query->where('phone', 'like', '%' . $phone . '%');
+        }
+        return $query;
+    }
+
+    /**
+     * Scope a query to filter users by name.
+     *
+     * @param Builder<User> $query
+     * @param string|null $bonus_card_no
+     * @return Builder<User>
+     */
+    public function scopeBonusCardNo($query, $bonus_card_no)
+    {
+        if (!empty($bonus_card_no)) {
+            return $query->where('bonus_card_no', 'like', '%' . $bonus_card_no . '%');
+        }
+        return $query;
+    }
+
+    /**
+     * Scope a query to filter users by name.
+     *
+     * @param Builder<User> $query
+     * @param string|null $startDate
+     * @param string|null $endDate
+     * @return Builder<User>
+     */
+    public function scopeCreatedAtBetween($query, $startDate, $endDate)
+    {
+        if (!empty($startDate) && !empty($endDate)) {
+            return $query->whereBetween('created_at', [$startDate, $endDate]);
         }
         return $query;
     }
