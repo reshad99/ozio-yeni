@@ -16,9 +16,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
      */
     public function __construct(
         User $model
-    ) {
+    )
+    {
         parent::__construct($model);
     }
+
     /** {@inheritDoc} */
     public function yajraDatatableOrderBy(Request $request): void
     {
@@ -28,6 +30,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         $direction = $order['dir'];
         $this->query->orderBy($column, $direction);
     }
+
     /** {@inheritDoc} */
     public function yajraDatatableSearch($request): void
     {
@@ -35,8 +38,13 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
          * @var Builder<User> $query
          */
         $query = $this->query;
-        $query->name($request['name']);
+        $query->name($request['name'])
+            ->email($request['email'])
+            ->phone($request['phone'])
+            ->bonusCardNo($request['bonus_card_no'])
+            ->createdAtBetween($request['startDate'], $request['endDate']);
     }
+
     /** {@inheritDoc} */
     public function yajraDatatableExport(Request $request): JsonResponse
     {
@@ -60,6 +68,9 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             })
             ->addColumn('bonus_card_no', function ($row) {
                 return $row->bonus_card_no;
+            })
+            ->addColumn('created_at', function ($row) {
+                return $row->created_at;
             })
             ->make(true);
         return $data;
