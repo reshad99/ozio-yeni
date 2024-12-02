@@ -203,4 +203,26 @@ class BaseRepository implements IBaseRepository
         $this->query->having($column, $operator, $value);
         return $this;
     }
+
+    /** {@inheritDoc} */
+    public function where(string $column, string $operator, string $value): self
+    {
+        $this->query->where($column, $operator, $value);
+        return $this;
+    }
+
+    /** {@inheritDoc} */
+    public function orWhere(string $column, string $operator, string $value): self
+    {
+        $this->query->orWhere($column, $operator, $value);
+
+        return $this;
+    }
+
+    /** {@inheritDoc} */
+    public function whereIn(string $column, array $value): self
+    {
+        $this->query->whereIn($column, $value);
+        return $this;
+    }
 }

@@ -113,4 +113,32 @@ interface IBaseRepository
      * @return self
      */
     public function filterBy(array $criteria): self;
+
+    //orWhere
+    //where
+
+    /**
+     * @param string $column
+     * @param string $operator
+     * @param string $value
+     * @return self
+     */
+    public function where(string $column, string $operator, string $value): self;
+
+    /**
+     * @param string $column
+     * @param string $operator
+     * @param string $value
+     * @return self
+     */
+    public function orWhere(string $column, string $operator, string $value): self;
+
+    /**
+     * @param string $column
+     * @param string $operator
+     * @param string $value
+     * @return self
+     */
+
+    public function whereIn(string $column, array $value): self;
 }
