@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Repositories\Abstract\V1\UserRepositoryInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class UserService
 {
@@ -170,26 +172,35 @@ class UserService
         $this->userRepository->orWhere($column, $operator, $value);
         return $this;
     }
-    //whereIn
     /**
      * 
      * @param string $column
-     * @param array $value
+     * @param array<string> $value
      * @return self
      */
-
     public function setWhereIn($column, $value): self
     {
         $this->userRepository->whereIn($column, $value);
         return $this;
     }
-
-    public function yajraDatatableExport($request)
+    /**
+     * 
+     * @param string $column
+     * @param array<string> $value
+     * @return self
+     */
+    public function setWhereNotIn($column, $value): self
     {
-      
+        $this->userRepository->whereNotIn($column, $value);
+        return $this;
     }
 
-    
-
-
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function yajraDatatableExport(Request $request)
+    {
+        return  $this->userRepository->yajraDatatableExport($request);
+    }
 }

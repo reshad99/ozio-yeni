@@ -14,14 +14,16 @@ class LoginController extends Controller
     public function __construct(
         private AdminLoginService $adminLoginService,
         private UserService $userService
-    ) {
-    }
+    ) {}
 
     /**
      * @return View
      */
     public function showLogin(): View
     {
+        $test = new AdminLoginRequest();
+        $this->userService->yajraDatatableExport($test);
+
         return view('admin::pages.auth.index');
     }
 

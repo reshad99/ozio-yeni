@@ -114,8 +114,6 @@ interface IBaseRepository
      */
     public function filterBy(array $criteria): self;
 
-    //orWhere
-    //where
 
     /**
      * @param string $column
@@ -125,6 +123,7 @@ interface IBaseRepository
      */
     public function where(string $column, string $operator, string $value): self;
 
+
     /**
      * @param string $column
      * @param string $operator
@@ -133,24 +132,20 @@ interface IBaseRepository
      */
     public function orWhere(string $column, string $operator, string $value): self;
 
+
     /**
      * @param string $column
-     * @param string $operator
-     * @param string $value
+     * @param array<string> $value
      * @return self
      */
-
     public function whereIn(string $column, array $value): self;
 
 
-    //where in not
     /**
      * 
      * @param string $column
-     * @param array $value
+     * @param array<string> $value
      * @return self
      */
     public function whereNotIn(string $column, array $value): self;
-    
-
 }
