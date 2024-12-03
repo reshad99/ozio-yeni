@@ -55,8 +55,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         }
 
         $data = DataTables::of($this->query)
-            ->addIndexColumn()
-            ->addIndexColumn()
+            ->addColumn('recordId', function ($row) {
+                return $row->id;
+            })
+            ->addColumn('id', function ($row) {
+                return $row->id;
+            })
             ->addColumn('name', function ($row) {
                 return $row->name;
             })
