@@ -18,7 +18,6 @@
             <div class="row">
                 <div class="col-10">
                     <div class="row">
-
                         <input type="hidden" class="form-control" id="filter_date_start"
                                placeholder="{{ __('admin::general.filters.start_date') }}">
                         <input type="hidden" class="form-control" id="filter_date_end"

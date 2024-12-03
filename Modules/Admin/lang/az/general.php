@@ -202,5 +202,4 @@ return [
         'bonus_card_no' => 'Bonus kart nömrəsi',
         'created_at_range' => 'Yaradılma tarixi aralığı',
     ],
-
 ];
