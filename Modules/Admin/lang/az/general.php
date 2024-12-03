@@ -66,7 +66,8 @@ return [
         ],
         'users' => [
             'list' => [
-                'table'=>[
+                'table' => [
+                    'id' => 'ID',
                     'name' => 'İstifadəçi adı',
                     'email' => 'E-poçt',
                     'phone' => 'Telefon',
