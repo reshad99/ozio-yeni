@@ -17,9 +17,9 @@ use Modules\Admin\Http\Controllers\Auth\AdminLogoutController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('admin', AdminController::class)->names('admin');
-});
+// Route::group([], function () {
+//     Route::resource('admin', AdminController::class)->names('admin');
+// });
 
 Route::middleware('guest:admin')->group(function () {
     Route::get('login', [AdminLoginController::class, 'showLogin'])->name('login');
@@ -35,10 +35,10 @@ Route::middleware('auth:admin')->group(function () {
 // Route::resource('users', AdminUserController::class);
 
 //route group for admin '
-Route::group(['prefix' => 'admin', 'name' => 'admin.', 'middleware' => 'auth:admin'], function () {
+Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
     //route group for admin users
     //admin.users
-    Route::group(['prefix' => 'users', 'name' => 'users.'], function () {
+    Route::prefix('users')->name('users.')->group(function () {
         Route::get('/', [AdminUserController::class, 'index'])->name('index');
         Route::get('create', [AdminUserController::class, 'create'])->name('create');
         Route::post('store', [AdminUserController::class, 'store'])->name('store');
@@ -49,8 +49,8 @@ Route::group(['prefix' => 'admin', 'name' => 'admin.', 'middleware' => 'auth:adm
 
 
     //admin.ajax
-    Route::group(['prefix' => 'ajax', 'name' => 'ajax.'], function () {
-        Route::group(['prefix' => 'users', 'name' => 'users.'], function () {
+    Route::prefix('ajax')->name('ajax.')->group(function () {
+        Route::prefix('users')->name('users.')->group(function () {
             Route::get('datatable', [AdminUserController::class, 'datatable'])->name('datatable');
         });
     });

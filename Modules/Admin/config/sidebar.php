@@ -12,7 +12,7 @@ return [
         ],
         [
             'name' => __('admin::general.menu.users'),
-            'url' => 'users.index',
+            'url' => 'admin.users.index',
             'icon' => 'ki-outline ki-people fs-2',
             'can' => [],
         ]
