@@ -71,6 +71,7 @@ return [
                     'name' => 'İstifadəçi adı',
                     'email' => 'E-poçt',
                     'phone' => 'Telefon',
+                    'password' => 'Şifrə',
                     'bonus_card_no' => 'Bonus kart nömrəsi',
                     'created_at' => 'Yaradılma tarixi',
                     'actions' => 'Əməliyyatlar',
@@ -203,5 +204,4 @@ return [
         'bonus_card_no' => 'Bonus kart nömrəsi',
         'created_at_range' => 'Yaradılma tarixi aralığı',
     ],
-    
 ];
