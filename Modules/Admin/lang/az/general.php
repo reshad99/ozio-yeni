@@ -66,7 +66,7 @@ return [
         ],
         'users' => [
             'list' => [
-                'table'=>[
+                'table' => [
                     'name' => 'İstifadəçi adı',
                     'email' => 'E-poçt',
                     'phone' => 'Telefon',
@@ -189,5 +189,17 @@ return [
     ],
     'auth' => [
         'failed' => 'Giriş məlumatları yanlışdır.',
+    ],
+    'filters' => [
+        'title' => 'Filtrlar',
+        'reset' => 'Sıfırla',
+        'search' => 'Axtar',
+        'start_date' => 'Başlama tarixi',
+        'end_date' => 'Bitmə tarixi',
+        'username' => 'İstifadəçi adı',
+        'email' => 'E-poçt',
+        'phone_number' => 'Telefon',
+        'bonus_card_no' => 'Bonus kart nömrəsi',
+        'created_at_range' => 'Yaradılma tarixi aralığı',
     ]
 ];
