@@ -9,7 +9,7 @@
                 <i class="ki-duotone ki-arrow-right fs-4"><span class="path1"></span><span
                         class="path2"></span></i>
             </span>
-            <h3 class="fs-4 fw-semibold mb-0 ms-4">{{ __('admin::general.filters.title') }}</h3>
+            <h3 class="fs-5 fw-semibold mb-0 ms-4">{{ __('admin::general.filters.title') }}</h3>
         </div>
         <!--end::Header-->
         <!--begin::Body-->

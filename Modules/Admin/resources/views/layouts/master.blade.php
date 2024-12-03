@@ -41,7 +41,7 @@
         }
 
         * {
-            font-size: 1.2rem !important;
+            font-size: 1rem !important;
         }
 
         input.form-control[readonly] {
@@ -425,7 +425,7 @@
 </script>
 
 {{-- //TRANSLATES --}}
-<script> 
+<script>
     var StatusTranslates = {
         'OPEN': "{{ __('admin::general.shared.status.OPEN') }}",
         'DISPATCHED': "{{ __('admin::general.shared.status.DISPATCHED') }}",

@@ -16,7 +16,8 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
      */
     public function __construct(
         User $model
-    ) {
+    )
+    {
         parent::__construct($model);
     }
 
@@ -24,7 +25,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function yajraDatatableOrderBy(Request $request): void
     {
         $order = $request->order[0]; // order parametersindeki ilk elemanı alır
-        $columns = ['id', 'name', 'email', 'phone', 'bonus_card_no', 'created_at'];
+        $columns = ['id', 'id', 'name', 'email', 'phone', 'bonus_card_no', 'created_at'];
         $column = $columns[$order['column']];
         $direction = $order['dir'];
         $this->query->orderBy($column, $direction);
