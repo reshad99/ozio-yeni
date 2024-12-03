@@ -12,7 +12,6 @@
             <h3 class="fs-4 fw-semibold mb-0 ms-4">{{ __('admin::general.filters.title') }}</h3>
         </div>
         <!--end::Header-->
-
         <!--begin::Body-->
         <div id="kt_accordion_2_item_1" class="fs-6 collapse my-2" data-bs-parent="#kt_accordion_2">
             <div class="row">
