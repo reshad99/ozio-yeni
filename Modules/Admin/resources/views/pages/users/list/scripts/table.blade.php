@@ -27,7 +27,7 @@
                 ajax: function(data, callback, settings) {
 
                     $.ajax({
-                        url: "{{ route('admin.ajax.user.datatable') }}", // AJAX isteğinin yapılacağı URL
+                        url: "{{ route('admin.ajax.users.datatable') }}", // AJAX isteğinin yapılacağı URL
                         data: data,
                         success: function(response) {
                             callback(
@@ -42,8 +42,13 @@
                     });
                 },
                 columns: [{
+                        data: 'recordId',
+                        orderable: false,
+                        searchable: false,
+                    },
+                    {
                         data: 'id',
-                        orderable: true,
+                        orderable: false,
                         searchable: false,
                     },
                     {
@@ -92,7 +97,7 @@
 
                 ],
                 order: [
-                    [0, 'desc']
+                    [1, 'desc']
                 ],
                 columnDefs: [{
                         targets: 0,

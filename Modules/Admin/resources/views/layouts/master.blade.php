@@ -236,16 +236,16 @@
                         },
                         "select": {
                             "cells": {
-                                "1": "1 hücrə seçildi",
-                                "_": "%d hücrə seçildi"
+                                "1": " 1 hücrə seçildi",
+                                "_": " %d hücrə seçildi"
                             },
                             "columns": {
-                                "1": "1 sütun seçildi",
-                                "_": "%d sütun seçildi"
+                                "1": " 1 sütun seçildi",
+                                "_": " %d sütun seçildi"
                             },
                             "rows": {
-                                "1": "1 qeyd seçildi",
-                                "_": "%d qeyd seçildi"
+                                "1": " 1 qeyd seçildi",
+                                "_": " %d qeyd seçildi"
                             }
                         },
                         "thousands": ".",
@@ -425,7 +425,7 @@
 </script>
 
 {{-- //TRANSLATES --}}
-<script> <!--end::Menu-->
+<script> 
     var StatusTranslates = {
         'OPEN': "{{ __('admin::general.shared.status.OPEN') }}",
         'DISPATCHED': "{{ __('admin::general.shared.status.DISPATCHED') }}",
