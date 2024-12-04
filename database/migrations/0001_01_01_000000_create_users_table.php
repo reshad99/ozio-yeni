@@ -18,8 +18,8 @@ return new class () extends Migration {
             $table->string('remember_token');
             $table->string('country_code');
             $table->string('phone');
-            $table->string('bonus_card_no');
-            $table->string('ref_code');
+            $table->string('bonus_card_no')->nullable();
+            $table->string('ref_code')->nullable();
             $table->boolean('want_notification');
             $table->timestamps();
             $table->softDeletes();

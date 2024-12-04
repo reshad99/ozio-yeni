@@ -144,4 +144,9 @@
     KTUtil.onDOMContentLoaded(function () {
         KTUsersAddUser.init();
     });
+
+    const input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+        loadUtilsOnInit: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.8.2/build/js/utils.js",
+    });
 </script>
