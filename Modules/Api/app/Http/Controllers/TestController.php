@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\V1;
+namespace Modules\Api\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Services\V1\Api\TestService;
@@ -15,8 +15,8 @@ class TestController extends Controller
         $this->testService = $testService;
     }
 
-    public function test(): void
+    public function test(): bool
     {
-        $this->testService->test();
+        return $this->testService->test();
     }
 }
