@@ -18,6 +18,7 @@ class StoreAdminRequest extends FormRequest
             'name' => ['required', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u'],
             'email' => ['required', 'email', Rule::unique('users', 'email')->whereNull('deleted_at')],
             'password' => ['required', 'max:25', Password::min(8)->max(25)->numbers()->mixedCase()],
+            'phone' => ['required', 'numeric', 'max:25', Rule::unique('users', 'phone')->whereNull('deleted_at')],
         ];
     }
 
