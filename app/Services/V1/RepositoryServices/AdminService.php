@@ -9,6 +9,9 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Modules\Admin\Http\Requests\Admin\StoreAdminRequest;
+use Modules\Admin\Http\Requests\Admin\UpdateAdminRequest;
 
 class AdminService
 {
@@ -36,6 +39,7 @@ class AdminService
     /**
      * @param int $id
      * @return Admin
+     * @throws AdminNotFoundException
      */
     public function findOrFailAdmin($id)
     {
@@ -49,27 +53,43 @@ class AdminService
         return $model;
     }
     /**
-     * @param Admin $Admin
+     * @param StoreAdminRequest $adminRequest
      * @return Admin
      */
-    public function createAdmin($Admin): Admin
+    public function createAdmin($adminRequest): Admin
     {
+        $admin = new Admin();
+        $admin->name = $adminRequest['name'];
+        $admin->email = $adminRequest['email'];
+        $admin->phone = $adminRequest['phone'];
+        $admin->password = Auth::hash($adminRequest['password']);
+
         /**
          * @var Admin $model
          */
-        $model = $this->adminRepository->create($Admin);
+        $model = $this->adminRepository->create($admin);
         return $model;
     }
     /**
-     * @param Admin $Admin
+     * @param UpdateAdminRequest $admin
      * @return Admin
+     * @throws AdminNotFoundException
      */
-    public function updateAdmin($Admin): Admin
+    public function updateAdmin($adminUpdateRequest): Admin
     {
+
+        $id = $adminUpdateRequest['id'];
         /**
-         * @var Admin $model
+         * @var Admin $model|null
          */
-        $model = $this->findOrFailAdmin($Admin->id);
+        $model = $this->findOrFailAdmin($id);
+
+        $model->name = $adminUpdateRequest['name'];
+        $model->email = $adminUpdateRequest['email'];
+        $model->phone = $adminUpdateRequest['phone'];
+        $model->password = Auth::hash($adminUpdateRequest['password']);
+
+        $this->adminRepository->update($model);
         return $model;
     }
     /**

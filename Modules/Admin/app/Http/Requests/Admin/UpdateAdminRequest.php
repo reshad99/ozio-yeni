@@ -18,8 +18,8 @@ class UpdateAdminRequest extends FormRequest
             'name' => ['required', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u'],
             'password' => ['nullable', 'max:25', Password::min(8)->max(25)->numbers()->mixedCase()],
             //@todo maybe ignore will not work
-            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($this->admin, 'id')->whereNull('deleted_at')],
-            'phone' => ['required', 'numeric', 'max:25', Rule::unique('users', 'phone')->ignore($this->admin, 'id')->whereNull('deleted_at')],
+            'email' => ['required', 'email', Rule::unique('admins', 'email')->ignore($this->admin, 'id')->whereNull('deleted_at')],
+            'phone' => ['required', 'numeric', 'max:25', Rule::unique('admins', 'phone')->ignore($this->admin, 'id')->whereNull('deleted_at')],
         ];
     }
 
