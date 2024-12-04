@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AdminController;
 use Modules\Admin\Http\Controllers\AdminUserController;
@@ -40,12 +39,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     //route group for admin users
     //admin.users
     Route::prefix('users')->name('users.')->group(function () {
-        Route::middleware('row-perm:list-user,' . User::class)->get('/', [AdminUserController::class, 'index'])->name('index');
-        Route::middleware('row-perm:create-user,' . User::class)->get('create', [AdminUserController::class, 'create'])->name('create');
-        Route::middleware('row-perm:create-user,' . User::class)->post('store', [AdminUserController::class, 'store'])->name('store');
-        Route::middleware('row-perm:edit-user,' . User::class)->get('edit/{id}', [AdminUserController::class, 'edit'])->name('edit');
-        Route::middleware('row-perm:edit-user,' . User::class)->post('update/{id}', [AdminUserController::class, 'update'])->name('update');
-        Route::middleware('row-perm:delete-user,' . User::class)->get('delete/{id}', [AdminUserController::class, 'destroy'])->name('delete');
+        Route::get('/', [AdminUserController::class, 'index'])->name('index');
+        Route::get('create', [AdminUserController::class, 'create'])->name('create');
+        Route::post('store', [AdminUserController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [AdminUserController::class, 'edit'])->name('edit');
+        Route::post('update/{id}', [AdminUserController::class, 'update'])->name('update');
+        Route::get('delete/{id}', [AdminUserController::class, 'destroy'])->name('delete');
     });
 
 

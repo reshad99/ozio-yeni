@@ -360,11 +360,7 @@
                 KTApp.hidePageLoading();
             }
         }
-        //get all readonly inputs add cursor:alias;
-        var inputs = document.querySelectorAll('input[readonly]');
-        for (var i = 0; i < inputs.length; i++) {
-            inputs[i].style.cursor = 'unset';
-        }
+        
         var elements = Array.prototype.slice.call(document.querySelectorAll("[data-bs-stacked-modal]"));
 
         if (elements && elements.length > 0) {
