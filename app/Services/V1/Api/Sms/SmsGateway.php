@@ -4,11 +4,10 @@ namespace App\Services\V1\Sms;
 
 interface SmsGateway
 {
-    /**
-     * @return array<string, mixed>
-     */
-    public function sendSms(string $receiver, string $content): array;
+    public function sendSms(string $message, string $receiver): bool;
     public function getResponse(): mixed;
+    public function setReceiver(string $receiver): void;
+    public function setContent(string $content): void;
     public function getReceiver(): string;
     public function getContent(): string;
 }

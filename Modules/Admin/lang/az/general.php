@@ -15,7 +15,7 @@ return [
     'menu' => [
         'dashboard' => 'İnformasiya paneli',
         'User management' => 'İstifadəçilər',
-        'Users' => 'İstifadəçi siyahısı',
+        'users' => 'İstifadəçi siyahısı',
         'employees' => 'İşçilər',
         'Roles' => 'Rollar',
         'Permissions' => 'İcazələr',
@@ -101,6 +101,7 @@ return [
         ],
         'roles' => [
             'list' => [
+                'role' => 'Rol',
                 'roles' => 'Rollar',
                 'add_new_role' => 'Yeni rol əlavə et',
                 'add_a_role' => 'Rol əlavə et',
@@ -112,6 +113,12 @@ return [
                 'enter_a_role_name' => 'Rol adını daxil edin',
                 'role_name_is_required' => 'Rol adı tələb olunur',
             ],
+        ],
+        'list' => [
+            'delete_selected' => 'Seçilmişləri sil',
+            'change_status' => 'Statusu dəyiş',
+            'active' => 'Aktiv',
+            'inactive' => 'Deaktiv',
         ],
         'transport' => [
             'car' => [
@@ -156,6 +163,7 @@ return [
                 'add_new_user' => 'İstifadəçi əlavə et',
                 'added_new_user' => 'Yeni istifadəçi əlavə edildi',
                 'add_user' => 'İstifadəçi əlavə et',
+                'edit_user' => 'İstifadəçini dəyiş',
                 'selected' => 'Seçilmiş',
                 'delete_selected' => 'Seçilmişləri sil',
                 'select_roles' => 'Rolları seçin',
@@ -198,7 +206,6 @@ return [
                 'search_department' => 'Şöbə axtar',
                 'departments' => 'Şöbələr',
                 'date' => 'Tarix',
-                'department_name' => 'Şöbə adı',
                 'department_name_is_required' => 'Şöbə adı tələb olunur',
                 'department_region_code' => 'Şöbə bölgə kodu',
                 'department_region_code_is_required' => 'Şöbə bölgə kodu tələb olunur',
@@ -331,8 +338,6 @@ return [
                     'job_number' => 'İşin nömrəsi',
                     // CRM Kodu
                     'crm_code' => 'CRM Kodu',
-                    // Abunə
-                    'subscriber' => 'Abunə',
                     // Qeyri Abuna
                     'non_subscriber' => 'Qeyri Abunə',
                     // Abunə seç

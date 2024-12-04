@@ -10,19 +10,14 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('tips', function (Blueprint $table) {
             $table->id();
             $table->smallInteger('value');
             $table->bigInteger('currency_id');
             $table->foreign('currency_id')->references('id')->on('currencies');
             $table->timestamps();
-            //solf delete
             $table->softDeletes();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

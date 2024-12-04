@@ -11,8 +11,6 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('currencies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -20,11 +18,8 @@ return new class () extends Migration {
             $table->string('symbol');
             $table->enum('status', array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);
             $table->timestamps();
-            //solf delete
             $table->softDeletes();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

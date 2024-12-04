@@ -16,7 +16,6 @@ return new class () extends Migration {
             $table->json('name');
             $table->enum('status', array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);
             $table->timestamps();
-            //solf delete
             $table->softDeletes();
         });
     }

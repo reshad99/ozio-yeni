@@ -5,7 +5,8 @@ namespace App\Services\V1\Sms\Gateways;
 use App\Enums\LsimResponseCode;
 use App\Services\V1\Sms\SmsGateway;
 use Exception;
-use App\Services\V1\Curl\CurlService;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Nette\Utils\Json;
 
 class Lsim implements SmsGateway
@@ -21,14 +22,20 @@ class Lsim implements SmsGateway
      * @var array<string, mixed>
      */
     private array $headers;
-    private string $body;
+
+    /**
+     * @var array<string, mixed>
+     */
+    private array $body;
 
     private mixed $response;
+    private string $sender;
 
     public function __construct()
     {
         $this->user = config(key: 'services.lsim.user');
         $this->password = config(key: 'services.lsim.password');
+        $this->sender = config(key: 'services.lsim.sender');
 
         $this->setHost();
         $this->setRequestHeaders();
@@ -42,75 +49,51 @@ class Lsim implements SmsGateway
     private function setRequestHeaders(): void
     {
         $this->headers = [
-            'Content-Type' => 'application/xml'
+            'Content-Type' => 'application/json'
         ];
     }
 
-    private function setRequestBody(int $controlId = null): void
+    private function setRequestBody(string $message): void
     {
-        $controlId = $controlId == null ? time() : $controlId;
-        $this->body = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-            <request>
-                <head>
-                    <operation>submit</operation>
-                    <login>' . $this->user . '</login>
-                    <password>' . $this->password . '</password>
-                    <controlid>' . $controlId . '</controlid>
-                    <title>' . $this->user . '</title>
-                    <scheduled>NOW</scheduled>
-                    <isbulk>false</isbulk>
-                </head>
-                <body>
-                    <msisdn>' . $this->receiver . '</msisdn>
-                    <message>' . $this->content . '</message>
-                </body>
-            </request>';
+        $key_data = md5(md5($this->password) . $this->user . $message . $this->getReceiver() . $this->sender);
+        $scheduledData = "NOW";
+        $unicodeData = "false";
+        $this->body = [
+            'login' => config('services.lsim.user'),
+            'key' => $key_data,
+            'msisdn' => $this->getReceiver(),
+            'text' => $message,
+            'sender' => $this->sender,
+            'scheduled' => $scheduledData,
+            'unicode' => $unicodeData
+        ];;
     }
 
-    /**
-     *
-     * @return array{
-     *     status: bool,
-     *     message: string,
-     *     response?: mixed
-     * }
-     */
+    public function setContent(string $content): void
+    {
+        $this->content = $content;
+    }
 
-    public function sendSms(string $receiver, string $content, int $controlId = null): array
+    public function setReceiver(string $receiver): void
     {
         $this->receiver = $receiver;
-        $this->content = $content;
-
-        $this->setRequestBody($controlId);
-
-        $client = new \GuzzleHttp\Client();
-        $request = new \GuzzleHttp\Psr7\Request(
-            'POST',
-            $this->url,
-            $this->headers,
-            $this->body
-        );
-
-        try {
-            $this->response = $this->parseResponse($client->sendAsync($request)->wait());
-            $isSent = $this->validateResponse($this->response);
-        } catch (Exception $e) {
-            $isSent = false;
-            $message = $e->getMessage();
-        }
-
-        return [
-            'status' => $isSent,
-            'message' => $message ?? '',
-            'response' => $this->response ?? ''
-        ];
     }
 
-    private function parseResponse(mixed $response): mixed
+    public function sendSms(string $message, string $receiver): bool
     {
-        $response = simplexml_load_string($response->getBody(), 'SimpleXMLElement', LIBXML_NOCDATA);
-        return Json::decode(Json::encode($response), true);
+        $this->setReceiver($receiver);
+        $this->setRequestBody($message);
+        $htppCall = Http::post($this->url, $this->body);
+        if (isset($htppCall->json()["successMessage"])) {
+            return true;
+        } else {
+            Log::channel('sms')->info("sms error");
+            Log::channel('sms')->info("requestBody: " . json_encode($this->body));
+            Log::channel('sms')->info("responseBody: " . json_encode($htppCall->json()));
+            return false;
+        }
     }
+
 
     public function validateResponse(mixed $response): bool
     {

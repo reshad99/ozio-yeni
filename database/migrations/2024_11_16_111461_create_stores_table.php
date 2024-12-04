@@ -11,19 +11,17 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('stores', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('module_id');
-            $table->foreign('module_id')->references('id')->on('modules');
+            $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
             $table->string('name');
             $table->string('store_code');
             $table->bigInteger('currency_id');
-            $table->foreign('currency_id')->references('id')->on('currencies');
+            $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('set null');
             $table->string('phone');
             $table->bigInteger('city_id');
-            $table->foreign('city_id')->references('id')->on('cities');
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('set null');
             $table->string('email')->nullable();
             $table->string('password')->nullable();
             $table->string('device_id')->nullable();
@@ -31,25 +29,19 @@ return new class () extends Migration {
             $table->string('lng');
             $table->enum('status', array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);
             $table->string('rating')->default('0');
-            $table->bigInteger('category_id')->nullable();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->bigInteger('store_category_id')->nullable();
+            $table->foreign('store_category_id')->references('id')->on('categories')->onDelete('set null');
             $table->smallInteger('have_vegan')->default(0);
             $table->smallInteger('have_not_vegan')->default(0);
             $table->time('open_time');
             $table->time('close_time');
             $table->bigInteger('zone_id');
-            $table->foreign('zone_id')->references('id')->on('zones');
-
-            //branch id
+            $table->foreign('zone_id')->references('id')->on('zones')->onDelete('set null');
             $table->bigInteger('branch_id')->nullable();
-            $table->foreign('branch_id')->references('id')->on('store_branches');
-
+            $table->foreign('branch_id')->references('id')->on('store_branches')->onDelete('cascade');
             $table->timestamps();
-            //solf delete
             $table->softDeletes();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

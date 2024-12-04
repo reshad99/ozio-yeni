@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\StatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -10,25 +11,18 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->json('name');
-            $table->enum('status', [""]);
+            $table->enum('status', array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);
             $table->smallInteger('featured');
             $table->smallInteger('priorty');
             $table->bigInteger('module_id');
-            $table->foreign('module_id')->references('id')->on('modules');
-            $table->integer('left');
-            $table->integer('right');
-            $table->integer('depth')->default(0);
+            $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
             $table->nestedSet();
             $table->timestamps();
             $table->softDeletes();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

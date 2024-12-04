@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\AdminController;
-use Modules\Admin\Http\Controllers\Auth\LoginController;
-use Modules\Admin\Http\Controllers\Auth\LogoutController;
+use Modules\Admin\Http\Controllers\AdminUserController;
+use Modules\Admin\Http\Controllers\Auth\AdminLoginController;
+use Modules\Admin\Http\Controllers\Auth\AdminLogoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +22,16 @@ Route::group([], function () {
 });
 
 Route::middleware('guest:admin')->group(function () {
-    Route::get('login', [LoginController::class, 'showLogin'])->name('login');
-    Route::post('authenticate', [LoginController::class, 'authenticate'])->name('admin.authenticate');
+    Route::get('login', [AdminLoginController::class, 'showLogin'])->name('login');
+    Route::post('authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
 });
 
-Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
+Route::post('logout', [AdminLogoutController::class, 'logout'])->name('logout');
 
 Route::middleware('auth:admin')->group(function () {
     Route::view('dashboard', 'admin::pages.dashboard.index')->name('admin.dashboard');
 });
+
+Route::resource('users', AdminUserController::class);
+
+Route::view('asd', 'admin::pages.emergency-call.list.index');

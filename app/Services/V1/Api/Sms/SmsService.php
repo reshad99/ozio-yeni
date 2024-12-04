@@ -39,7 +39,7 @@ class SmsService
      * Then, after successfully sending the sms it inserts a new row to sms_logs table
      *
      * @param string|int $receiver
-     * @param SmsText $sms
+     * @param string $sms
      * @param array<string, mixed> $variables
      * @return boolean
      *
@@ -47,20 +47,14 @@ class SmsService
      * $gateway = new Lsim();
      * $isSent = (new SmsService($gateway))->send($receiver, $content);
      */
-    public function execute(string|int $receiver, SmsText $sms, array $variables = []): bool
+    public function execute(string|int $receiver, string $sms, array $variables = []): bool
     {
-        $smsText = $sms->getText();
-
         // Evaluate the variables in the sms
-        self::evaluateSmsText($smsText, $variables);
-
+        self::evaluateSmsText($sms, $variables);
         $receiver = getCleanNumber($receiver);
-
-        $result = $this->gateway->sendSms($receiver, $smsText);
-        $this->log($result);
+        $result = $this->gateway->sendSms($sms, $receiver);
         $this->storeSmsLog(compact('sms', 'variables', 'result', 'receiver'));
-
-        return $result['status'];
+        return $result;
     }
 
     /**
@@ -68,47 +62,16 @@ class SmsService
      * Method adds the process to queue
      *
      * @param string|int $receiver
-     * @param SmsText $sms Either raw sms text or id from sms_texts table
+     * @param SmsText $sms
      * @param array<string, mixed> $variables
      * @return boolean
      *
-     * Example usage:
-     * $gateway = new Lsim();
-     * $isSent = (new SmsService($gateway))->send($receiver, $content);
      */
     public function send(string|int $receiver, SmsText $sms, array $variables = []): bool
     {
         $receiver = getCleanNumber($receiver);
-        SmsBulk::dispatch(new SmsService($this->gateway), compact('receiver', 'sms', 'variables'));
-        return true;
-    }
-
-    /**
-     * Send multiple smses in a row (using Laravel jobs)
-     *
-     * @param array<string, mixed> $messages
-     * $messages = [
-     *   [
-     *     'receiver'=>'994551112233',
-     *     'sms'=>'The message to the @{customer}',
-     *     'variables'=>[
-     *       'customer'=>'Turgay Ali'
-     *     ]
-     *   ],
-     * ]
-     * @return bool
-     *
-     * Example usage:
-     * $gateway = new Lsim();
-     * $isSent = (new SmsService($gateway))->sendBulk($messages);
-     */
-    public function sendBulk(array $messages)
-    {
-        $time = time() . rand(10, 99);
-        foreach ($messages as $message) {
-            $message['controlid'] = $time++;
-            SmsBulk::dispatch((new SmsService($this->gateway)), $message);
-        }
+        $smsText = $sms->getText();
+        SmsBulk::dispatch(new SmsService($this->gateway), compact('receiver', 'smsText', 'variables'));
         return true;
     }
 
@@ -133,7 +96,7 @@ class SmsService
         $insert['api_response'] = Json::encode($data['result']);
         $insert['status'] = $data['result']['status'] ? 1 : 2;
 
-        is_numeric($data['sms']) ? $insert['sms_text_id'] = $data['sms'] : $insert['sms_raw_text'] = $data['sms'];
+        $insert['sms_raw_text'] = $data['sms'];
         SmsLog::create($insert);
     }
 
@@ -176,31 +139,5 @@ class SmsService
             $content = str_replace($varKey, $value, $content);
         }
         return $content;
-    }
-
-    /**
-     * Log the sent sms
-     *
-     * @param array<string, mixed> $result
-     * @return void
-     */
-    private function log($result)
-    {
-        $logMessage = 'Send SMS, receiver: '
-            . Json::encode($this->gateway->getReceiver())
-            . ' content: '
-            . Json::encode($this->gateway->getContent());
-
-        if ($result['status']) {
-            Log::channel('sms')
-                ->notice($logMessage);
-        } else {
-            Log::channel('sms')
-                ->warning(
-                    $logMessage
-                        . '. Exception message : '
-                        . $result['message']
-                );
-        }
     }
 }

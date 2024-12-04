@@ -2,7 +2,10 @@
 
 namespace App\Services\V1\Api;
 
+use App\Enums\SmsText;
 use App\Services\V1\CommonService;
+use App\Services\V1\Sms\Gateways\Lsim;
+use App\Services\V1\Sms\SmsService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -20,10 +23,9 @@ class TestService extends CommonService
     public function test()
     {
         try {
-            /*
-            * This is a test function
-            */
-            return response(['status' => 'success', 'data' => Auth::user()], 200);
+            $smsService = new SmsService(gateway: new Lsim());
+            $smsService->send(receiver: '994516783741', sms: SmsText::OTP, variables: ['otp' => 3215]);
+
         } catch (\Exception $e) {
             return $this->errorResponse($e);
         }

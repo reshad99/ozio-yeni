@@ -1,7 +1,6 @@
 <!--begin::Header-->
 @php
-    use Illuminate\Support\Facades\Auth;
-    $user = Auth::user();
+    $admin = auth()->guard('admin')->user();
 @endphp
 
 <div id="kt_app_header" class="app-header " data-kt-sticky="true" data-kt-sticky-activate="{default: true, lg: true}"
@@ -39,34 +38,34 @@
                 class="page-title d-flex flex-column justify-content-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
                 <h1 class="page-heading d-flex text-gray-900 fw-bold fs-3 flex-column justify-content-center my-0">
-{{--                    {{ $page->title }}--}}
+                    {{--                    {{ $page->title }} --}}
                 </h1>
                 <!--end::Title-->
 
 
                 <!--begin::Breadcrumb-->
                 <ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
-{{--                    @foreach ($page->breadcrumbs as $key => $breadcrumb)--}}
-{{--                        <!--begin::Item-->--}}
-{{--                        @if ($breadcrumb['url'])--}}
-{{--                            <li class="breadcrumb-item text-muted">--}}
-{{--                                <a href="{{ $breadcrumb['url'] }}" class="text-muted text-hover-primary">--}}
-{{--                                    {{ $breadcrumb['title'] }} </a>--}}
-{{--                            </li>--}}
-{{--                        @else--}}
-{{--                            <li class="breadcrumb-item text-muted">--}}
-{{--                                {{ $breadcrumb['title'] }}--}}
-{{--                            </li>--}}
-{{--                        @endif--}}
-{{--                        <!--end::Item-->--}}
-{{--                        @if ($key != count($page->breadcrumbs) - 1)--}}
-{{--                            <!--begin::Item-->--}}
-{{--                            <li class="breadcrumb-item">--}}
-{{--                                <span class="bullet bg-gray-500 w-5px h-2px"></span>--}}
-{{--                            </li>--}}
-{{--                            <!--end::Item-->--}}
-{{--                        @endif--}}
-{{--                    @endforeach--}}
+                    {{--                    @foreach ($page->breadcrumbs as $key => $breadcrumb) --}}
+                    {{--                        <!--begin::Item--> --}}
+                    {{--                        @if ($breadcrumb['url']) --}}
+                    {{--                            <li class="breadcrumb-item text-muted"> --}}
+                    {{--                                <a href="{{ $breadcrumb['url'] }}" class="text-muted text-hover-primary"> --}}
+                    {{--                                    {{ $breadcrumb['title'] }} </a> --}}
+                    {{--                            </li> --}}
+                    {{--                        @else --}}
+                    {{--                            <li class="breadcrumb-item text-muted"> --}}
+                    {{--                                {{ $breadcrumb['title'] }} --}}
+                    {{--                            </li> --}}
+                    {{--                        @endif --}}
+                    {{--                        <!--end::Item--> --}}
+                    {{--                        @if ($key != count($page->breadcrumbs) - 1) --}}
+                    {{--                            <!--begin::Item--> --}}
+                    {{--                            <li class="breadcrumb-item"> --}}
+                    {{--                                <span class="bullet bg-gray-500 w-5px h-2px"></span> --}}
+                    {{--                            </li> --}}
+                    {{--                            <!--end::Item--> --}}
+                    {{--                        @endif --}}
+                    {{--                    @endforeach --}}
                 </ul>
                 <!--end::Breadcrumb-->
             </div>
@@ -1906,11 +1905,11 @@
                                 <!--begin::Username-->
                                 <div class="d-flex flex-column">
                                     <div class="fw-bold d-flex align-items-center fs-5">
-{{--                                    {{$user->getFirstName().' '.$user->getLastName()}}--}}
+                                        {{ $admin->name }}
                                     </div>
 
                                     <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">
-{{--                                       {{$user->getEmail()}} </a>--}}
+                                        {{ $admin->email }} </a>
                                 </div>
                                 <!--end::Username-->
                             </div>

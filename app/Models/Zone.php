@@ -21,7 +21,7 @@ class Zone extends Model
     /**
      * @return HasMany<ZonePricing>
      */
-    public function zonePricing(): HasMany
+    public function zonePricings(): HasMany
     {
         return $this->hasMany(ZonePricing::class);
     }
@@ -40,5 +40,13 @@ class Zone extends Model
     public function modules(): BelongsToMany
     {
         return $this->belongsToMany(Module::class, 'modules_zones', 'zone_id', 'module_id');
+    }
+
+    /**
+     * @return HasMany<UserAddress>
+     */
+    public function user_addresses(): HasMany
+    {
+        return $this->hasMany(UserAddress::class);
     }
 }

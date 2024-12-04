@@ -32,4 +32,12 @@ class Currency extends Model
     {
         return $this->hasMany(Store::class);
     }
+
+    /**
+     * @return HasMany<ZonePricing>
+     */
+    public function zonePricings(): HasMany
+    {
+        return $this->hasMany(ZonePricing::class);
+    }
 }

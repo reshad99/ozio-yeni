@@ -17,17 +17,21 @@ class SmsBulk implements ShouldQueue
     use SerializesModels;
 
     private SmsService $smsService;
+
+    /**
+     * @var array<string, mixed>
+     */
     private array $message;
 
     /**
      * Create a new job instance.
      *
      * @param SmsService $smsService
-     * @param array $messages
+     * @param array<string, mixed> $message
      *
      * @return void
      */
-    public function __construct(SmsService $smsService, $message)
+    public function __construct(SmsService $smsService, array $message)
     {
         $this->smsService = $smsService;
         $this->message = $message;
@@ -38,12 +42,12 @@ class SmsBulk implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $this->smsService->execute(
-            $this->message['receiver'],
-            $this->message['sms'],
-            $this->message['variables']
+            receiver: $this->message['receiver'],
+            sms: $this->message['smsText'],
+            variables: $this->message['variables']
         );
     }
 }

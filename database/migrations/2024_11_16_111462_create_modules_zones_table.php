@@ -10,20 +10,15 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::disableForeignKeyConstraints();
-
         Schema::create('modules_zones', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('module_id');
-            $table->foreign('module_id')->references('id')->on('modules');
+            $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
             $table->bigInteger('zone_id');
-            $table->foreign('zone_id')->references('id')->on('zones');
+            $table->foreign('zone_id')->references('id')->on('zones')->onDelete('cascade');
             $table->timestamps();
-            //solf delete
             $table->softDeletes();
         });
-
-        Schema::enableForeignKeyConstraints();
     }
 
     /**

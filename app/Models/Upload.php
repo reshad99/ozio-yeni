@@ -48,7 +48,9 @@ class Upload extends Model
         'type'
     ];
 
-    /** @phpstan-ignore-next-line */
+    /**
+     * @return MorphTo<Model, self>
+     */
     public function uploadable(): MorphTo
     {
         return $this->morphTo();
