@@ -27,6 +27,18 @@
     {{-- meta[name="csrf-token"] --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!--begin::Vendor Stylesheets(used for this page only)-->
+    <style>
+        .select2-dropdown.select2-dropdown--below {
+            z-index: 999999999 !important;
+        }
+
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+        }
+    </style>
     @yield('styles')
     <!--end::Vendor Stylesheets-->
     <!--begin::Global Stylesheets Bundle(mandatory for all pages)-->
@@ -315,6 +327,12 @@
     <script src="{{ asset('admin/assets/js/scripts.bundle.js') }}"></script>
     <!--end::Global Javascript Bundle-->
     <script>
+        //get all readonly inputs add cursor:alias;
+        var inputs = document.querySelectorAll('input[readonly]');
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].style.cursor = 'unset';
+        }
+        
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -457,10 +475,10 @@
             'Organisation Manager': "{{ __('admin::general.shared.roles.ORGANISATION_MANAGER') }}",
             'Region Manager': "{{ __('admin::general.shared.roles.REGION_MANAGER') }}",
 
-    };
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
-
+        };
+    </script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@24.8.2/build/js/intlTelInput.min.js"></script>
     @yield('scripts')
     <!--end::Javascript-->
 </body>
