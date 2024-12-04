@@ -17,3 +17,5 @@ use Modules\Api\Http\Controllers\ApiController;
 Route::group([], function () {
     Route::resource('api', ApiController::class)->names('api');
 });
+
+

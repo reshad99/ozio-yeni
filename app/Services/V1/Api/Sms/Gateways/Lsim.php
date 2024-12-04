@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Services\V1\Sms\Gateways;
+namespace App\Services\V1\Api\Sms\Gateways;
 
 use App\Enums\LsimResponseCode;
-use App\Services\V1\Sms\SmsGateway;
+use App\Services\V1\Api\Sms\SmsGateway;
 use Exception;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;

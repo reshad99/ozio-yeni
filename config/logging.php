@@ -77,7 +77,7 @@ return [
         'sms' => [
             'driver' => 'daily',
             'path' => storage_path('logs/sms.log'),
-            'level' => env('LOG_LEVEL', 'critical'),
+            'level' => env('LOG_LEVEL', 'debug'),
             'days' => env('LOG_DAILY_DAYS', 14),
             'replace_placeholders' => true,
         ],

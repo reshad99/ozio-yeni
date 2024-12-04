@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Services\V1\Sms;
+namespace App\Services\V1\Api\Sms;
 
 use App\Enums\SmsText;
 use App\Jobs\SmsBulk;
 use App\Models\SmsLog;
+use App\Services\V1\Api\Sms\SmsGateway;
 use Illuminate\Support\Facades\Log;
 use Nette\Utils\Json;
 
@@ -53,7 +54,7 @@ class SmsService
         self::evaluateSmsText($sms, $variables);
         $receiver = getCleanNumber($receiver);
         $result = $this->gateway->sendSms($sms, $receiver);
-        $this->storeSmsLog(compact('sms', 'variables', 'result', 'receiver'));
+        // $this->storeSmsLog(compact('sms', 'variables', 'result', 'receiver'));
         return $result;
     }
 
@@ -75,30 +76,30 @@ class SmsService
         return true;
     }
 
-    /**
-     * Store sms log
-     *
-     * @param array<string, mixed> $data
-     * @return void
-     */
-    private function storeSmsLog(array $data)
-    {
-        $insert['class'] = self::getCallingClass();
-        $insert['destination_number'] = $data['receiver'];
-        $insert['variables'] = Json::encode($data['variables']);
+    // /**
+    //  * Store sms log
+    //  *
+    //  * @param array<string, mixed> $data
+    //  * @return void
+    //  */
+    // private function storeSmsLog(array $data)
+    // {
+    //     $insert['class'] = self::getCallingClass();
+    //     $insert['destination_number'] = $data['receiver'];
+    //     $insert['variables'] = Json::encode($data['variables']);
 
-        $request = request();
-        $insert['trigger_request'] = Json::encode([
-            'url' => $request->url(),
-            'headers' => $request->headers->all(),
-            'body' => $request->all()
-        ]);
-        $insert['api_response'] = Json::encode($data['result']);
-        $insert['status'] = $data['result']['status'] ? 1 : 2;
+    //     $request = request();
+    //     $insert['trigger_request'] = Json::encode([
+    //         'url' => $request->url(),
+    //         'headers' => $request->headers->all(),
+    //         'body' => $request->all()
+    //     ]);
+    //     $insert['api_response'] = Json::encode($data['result']);
+    //     $insert['status'] = $data['result']['status'] ? 1 : 2;
 
-        $insert['sms_raw_text'] = $data['sms'];
-        SmsLog::create($insert);
-    }
+    //     $insert['sms_raw_text'] = $data['sms'];
+    //     SmsLog::create($insert);
+    // }
 
     /**
      * Determine which class awokes this

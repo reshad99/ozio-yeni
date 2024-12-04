@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\V1\TestController;
 use Illuminate\Support\Facades\Route;
+use Modules\Api\Http\Controllers\TestController;
 
 Route::get('test', [TestController::class, 'test']);
