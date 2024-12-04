@@ -14,7 +14,8 @@ return new class () extends Migration {
             $table->id();
             $table->bigInteger('admin_id');
             $table->foreign('admin_id')->references('id')->on('admins')->onDelete('cascade');
-            $table->nullableMorphs('accessible');
+            $table->string('accessible_type');
+            $table->json('accessible_id');
             $table->timestamps();
         });
     }

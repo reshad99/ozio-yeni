@@ -13,7 +13,9 @@ class AdminUserController extends Controller
     /**
      * @param UserService $userService
      */
-    public function __construct(protected UserService $userService) {}
+    public function __construct(protected UserService $userService)
+    {
+    }
 
     /**
      * Display a listing of the resource.

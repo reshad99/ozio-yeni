@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasPermissionV2;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -12,6 +13,7 @@ class Admin extends Authenticatable
     use Notifiable;
     use SoftDeletes;
     use HasRoles;
+    use HasPermissionV2;
 
     /**
      * The attributes that aren't mass assignable.
@@ -19,4 +21,17 @@ class Admin extends Authenticatable
      * @var array<string>|bool
      */
     protected $guarded = [];
+
+    /**
+     * @param string $class
+     * @param int $id
+     * @return bool
+     */
+    public function canPermission($class, $id): bool
+    {
+        return AdminAccessibleModel::where('admin_id', $this->id)
+            ->where('accessible_type', $class)
+            ->whereJsonContains('accessible_id', $id)
+            ->exists();
+    }
 }

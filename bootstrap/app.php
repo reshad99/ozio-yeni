@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\RowPermissionMiddleware;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Application;
@@ -27,11 +28,17 @@ return Application::configure(basePath: dirname(__DIR__))
 
 
             Route::middleware('web')
-            ->group(base_path('routes/web.php'));
+                ->group(base_path('routes/web.php'));
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
+        // RowPermission
+
+        //add this middleware to the $routeMiddleware array in app/Http/Kernel.php
+        $middleware->alias([
+            'row-perm' => RowPermissionMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         if (request()->expectsJson() && !request()->ajax()) {
