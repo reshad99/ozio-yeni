@@ -19,15 +19,17 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     ) {
         parent::__construct($model);
     }
+
     /** {@inheritDoc} */
     public function yajraDatatableOrderBy(Request $request): void
     {
         $order = $request->order[0]; // order parametersindeki ilk elemanı alır
-        $columns = ['id', 'name', 'email', 'phone', 'bonus_card_no'];
+        $columns = ['id', 'id', 'name', 'email', 'phone', 'bonus_card_no', 'created_at'];
         $column = $columns[$order['column']];
         $direction = $order['dir'];
         $this->query->orderBy($column, $direction);
     }
+
     /** {@inheritDoc} */
     public function yajraDatatableSearch($request): void
     {
@@ -35,8 +37,13 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
          * @var Builder<User> $query
          */
         $query = $this->query;
-        $query->name($request['name']);
+        $query->name($request['name'])
+            ->email($request['email'])
+            ->phone($request['phone'])
+            ->bonusCardNo($request['bonus_card_no'])
+            ->createdAtBetween($request['startDate'], $request['endDate']);
     }
+
     /** {@inheritDoc} */
     public function yajraDatatableExport(Request $request): JsonResponse
     {
@@ -48,7 +55,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         }
 
         $data = DataTables::of($this->query)
-            ->addIndexColumn()
+            ->addColumn('recordId', function ($row) {
+                return $row->id;
+            })
+            ->addColumn('id', function ($row) {
+                return $row->id;
+            })
             ->addColumn('name', function ($row) {
                 return $row->name;
             })
@@ -60,6 +72,9 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             })
             ->addColumn('bonus_card_no', function ($row) {
                 return $row->bonus_card_no;
+            })
+            ->addColumn('created_at', function ($row) {
+                return $row->created_at;
             })
             ->make(true);
         return $data;

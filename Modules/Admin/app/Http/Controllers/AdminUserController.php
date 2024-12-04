@@ -32,7 +32,7 @@ class AdminUserController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function userDatatable(Request $request)
+    public function datatable(Request $request)
     {
         return $this->userService->yajraDatatableExport($request);
     }

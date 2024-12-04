@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Country extends Model
@@ -23,5 +24,10 @@ class Country extends Model
     public function cities(): HasMany
     {
         return $this->hasMany(City::class);
+    }
+
+    public function flag(): MorphOne
+    {
+        return $this->morphOne(Upload::class, 'uploadable');
     }
 }
