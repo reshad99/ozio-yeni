@@ -3,7 +3,7 @@
 namespace Modules\Admin\Services\Auth;
 
 use Illuminate\Support\Facades\Auth;
-use Modules\Admin\Http\Requests\AdminLoginRequest;
+use Modules\Admin\Http\Requests\Admin\AdminLoginRequest;
 
 class AdminLoginService
 {
