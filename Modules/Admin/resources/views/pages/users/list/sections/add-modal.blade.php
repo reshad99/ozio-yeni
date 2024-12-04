@@ -34,7 +34,8 @@
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label for="name" class="required fw-semibold fs-6 mb-2">{{__('admin::general.pages.users.list.table.name')}}</label>
+                            <label for="name"
+                                   class="required fw-semibold fs-6 mb-2">{{__('admin::general.pages.users.list.table.name')}}</label>
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input type="text" name="name" id="name"
@@ -46,7 +47,8 @@
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label for="email" class="required fw-semibold fs-6 mb-2">{{__('admin::general.pages.users.list.table.email')}}</label>
+                            <label for="email"
+                                   class="required fw-semibold fs-6 mb-2">{{__('admin::general.pages.users.list.table.email')}}</label>
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input type="email" name="email" id="email"
@@ -58,10 +60,37 @@
                         <!--begin::Input group-->
                         <div class="fv-row mb-7">
                             <!--begin::Label-->
-                            <label for="password" class="required fw-semibold fs-6 mb-2">{{__('admin::general.pages.users.list.table.password')}}</label>
+                            <label for="password"
+                                   class="required fw-semibold fs-6 mb-2">{{__('admin::general.pages.users.list.table.password')}}</label>
                             <!--end::Label-->
                             <!--begin::Input-->
                             <input type="password" name="password" id="password"
+                                   class="form-control form-control-solid mb-3 mb-lg-0"
+                                   placeholder="example@domain.com"/>
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label for="phone"
+                                   class="required fw-semibold fs-6 mb-2">{{__('admin::general.pages.users.list.table.phone')}}</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input name="phone" id="phone"
+                                   class="form-control form-control-solid mb-3 mb-lg-0"
+                                   placeholder="example@domain.com"/>
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label for="bonus_card_no"
+                                   class="required fw-semibold fs-6 mb-2">{{__('admin::general.pages.users.list.table.bonus_card_no')}}</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" name="bonus_card_no" id="bonus_card_no"
                                    class="form-control form-control-solid mb-3 mb-lg-0"
                                    placeholder="example@domain.com"/>
                             <!--end::Input-->

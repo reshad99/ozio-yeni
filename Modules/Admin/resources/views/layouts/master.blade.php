@@ -22,6 +22,7 @@
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
     <!--end::Fonts-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@24.8.2/build/css/intlTelInput.css">
 
     {{-- meta[name="csrf-token"] --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -448,6 +449,7 @@
 
     };
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.19/js/intlTelInput.min.js"></script>
 
 @yield('scripts')
 <!--end::Javascript-->
