@@ -34,4 +34,72 @@ class Admin extends Authenticatable
             ->whereJsonContains('accessible_id', $id)
             ->exists();
     }
+
+
+    //SCOPES
+
+    /**
+     * Scope a query to filter users by name.
+     *
+     * @param Builder<Admin> $query
+     * @param string|null $name
+     * @return Builder<Admin>
+     */
+    public function scopeName($query, $name)
+    {
+        if (isset($name)) {
+            return $query->where('name', 'like', '%' . $name . '%');
+        }
+        return $query;
+    }
+
+    //email,phone,createdAtBetween scopes
+
+    /**
+     * Scope a query to filter users by email.
+     *
+     * @param Builder<Admin> $query
+     * @param string|null $email
+     * @return Builder<Admin>
+     */
+    public function scopeEmail($query, $email)
+    {
+        if (isset($email)) {
+            return $query->where('email', 'like', '%' . $email . '%');
+        }
+        return $query;
+    }
+
+    /**
+     * Scope a query to filter users by phone.
+     *
+     * @param Builder<Admin> $query
+     * @param string|null $phone
+     * @return Builder<Admin>
+     */
+    public function scopePhone($query, $phone)
+    {
+        if (isset($phone)) {
+            return $query->where('phone', 'like', '%' . $phone . '%');
+        }
+        return $query;
+    }
+
+    /**
+     * Scope a query to filter users by created_at between.
+     *
+     * @param Builder<Admin> $query
+     * @param string|null $startDate
+     * @param string|null $endDate
+     * @return Builder<Admin>
+     */
+    public function scopeCreatedAtBetween($query, $startDate, $endDate)
+    {
+        if (isset($startDate) && isset($endDate)) {
+            return $query->whereBetween('created_at', [$startDate, $endDate]);
+        }
+        return $query;
+    }
+
+    
 }
