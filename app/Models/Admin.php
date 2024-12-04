@@ -30,7 +30,7 @@ class Admin extends Authenticatable
     public function canPermission($class, $id): bool
     {
         return AdminAccessibleModel::where('admin_id', $this->id)
-            ->where('accessible_type',  $class)
+            ->where('accessible_type', $class)
             ->whereJsonContains('accessible_id', $id)
             ->exists();
     }

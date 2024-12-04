@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Admin;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Exceptions\PermissionDoesNotExist;
@@ -65,8 +64,9 @@ class RowPermissionMiddleware
         try {
             $modelId = $request->route('id'); // Route'tan ID'yi al
             // if modelId is null then return false
-            if (!$modelId)
+            if (!$modelId) {
                 return false;
+            }
 
             return app($modelClass)->findOrFail($modelId);
         } catch (\Throwable $th) {

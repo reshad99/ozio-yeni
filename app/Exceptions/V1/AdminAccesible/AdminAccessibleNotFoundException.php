@@ -10,5 +10,5 @@ class AdminAccessibleNotFoundException extends Exception
      * The exception message.
      * @var string $message
      */
-    protected $message =  'AdminAccessible not found';
+    protected $message = 'AdminAccessible not found';
 }
