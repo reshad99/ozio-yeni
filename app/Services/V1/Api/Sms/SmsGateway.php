@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\V1\Sms;
+namespace App\Services\V1\Api\Sms;
 
 interface SmsGateway
 {
