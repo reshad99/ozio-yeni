@@ -18,6 +18,7 @@ return new class () extends Migration {
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
+            $table->unique(['email', 'deleted_at']);
         });
     }
 

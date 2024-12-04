@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\V1\RepositoryServices\UserService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
-use Modules\Admin\Http\Requests\AdminLoginRequest;
+use Modules\Admin\Http\Requests\Admin\AdminLoginRequest;
 use Modules\Admin\Services\Auth\AdminLoginService;
 
 class AdminLoginController extends Controller

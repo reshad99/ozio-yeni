@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Password;
 
-class StoreAdminRequest extends FormRequest
+class UpdateAdminRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,8 +16,9 @@ class StoreAdminRequest extends FormRequest
     {
         return [
             'name' => ['required', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u'],
-            'email' => ['required', 'email', Rule::unique('users', 'email')->whereNull('deleted_at')],
-            'password' => ['required', 'max:25', Password::min(8)->max(25)->numbers()->mixedCase()],
+            //@todo maybe ignore will not work
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($this->admin, 'id')->whereNull('deleted_at')],
+            'password' => ['nullable', 'max:25', Password::min(8)->max(25)->numbers()->mixedCase()],
         ];
     }
 
