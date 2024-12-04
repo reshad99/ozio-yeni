@@ -23,6 +23,8 @@ return new class () extends Migration {
             $table->boolean('want_notification');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->unique(['email', 'phone', 'bonus_card_no', 'ref_code', 'deleted_at']);
         });
     }
 
