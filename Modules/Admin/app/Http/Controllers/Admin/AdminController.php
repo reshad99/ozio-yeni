@@ -40,6 +40,10 @@ class AdminController extends Controller
 
 
     //store
+    /**
+     * @param StoreAdminRequest $request
+     * @return JsonResponse
+     */
     public function store(StoreAdminRequest $request)
     {
         return $this->adminService->createAdmin($request->validated());
@@ -53,10 +57,13 @@ class AdminController extends Controller
      */
     public function update(UpdateAdminRequest $request, $id)
     {
-        dd($request->validated());
-        $test = $request->validated();
-
-        return $this->adminService->updateAdmin($request->validated(), $id);
+        try {
+            $this->adminService->updateAdmin($request->validated(), $id);
+            return response()->json(['status' => true, 'message' => 'Admin updated successfully']);
+            //code...
+        } catch (AdminNotFoundException $th) {
+            return response()->json(['status' => false, 'message' => 'Admin not found']);
+        }
     }
 
     //delete
@@ -87,6 +94,11 @@ class AdminController extends Controller
      */
     public function read($id)
     {
-        return $this->adminService->findOrFailAdmin($id);
+        try {
+            $model = $this->adminService->findOrFailAdmin($id);
+            return $model;
+        } catch (\Throwable $th) {
+            return response()->json(['status' => false, 'message' => 'Admin not found']);
+        }
     }
 }

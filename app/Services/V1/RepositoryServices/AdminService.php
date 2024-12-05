@@ -71,7 +71,7 @@ class AdminService
         return $model;
     }
     /**
-     * @param UpdateAdminRequest $admin
+     * @param UpdateAdminRequest $adminUpdateRequest
      * @param int $id
      * @return Admin
      * @throws AdminNotFoundException
