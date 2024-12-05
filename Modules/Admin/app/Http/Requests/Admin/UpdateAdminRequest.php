@@ -15,10 +15,12 @@ class UpdateAdminRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
-            'password' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Password::min(8)->max(25)->numbers()->mixedCase()],
-            'email' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'email', Rule::unique('admins', 'email')->ignore($this->admin, 'id')->whereNull('deleted_at')],
-            'phone' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Rule::unique('admins', 'phone')->ignore($this->admin, 'id')->whereNull('deleted_at')],
+            'name' => ['required', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u'],
+            'password' => ['nullable', 'max:25', Password::min(8)->max(25)->numbers()->mixedCase()],
+            'password_confirmation' => ['required_with:password', 'same:password'],
+            //@todo maybe ignore will not work
+            'email' => ['required', 'email', Rule::unique('admins', 'email')->ignore($this->admin, 'id')->whereNull('deleted_at')],
+            'phone' => ['required', 'numeric', 'max:25', Rule::unique('admins', 'phone')->ignore($this->admin, 'id')->whereNull('deleted_at')],
         ];
     }
 

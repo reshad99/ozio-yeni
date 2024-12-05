@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Admin\Http\Controllers\Admin\AdminController;
 use Modules\Admin\Http\Controllers\Auth\AdminLoginController;
 use Modules\Admin\Http\Controllers\Auth\AdminLogoutController;
 use Modules\Admin\Http\Controllers\User\AdminUserController;
@@ -35,22 +36,29 @@ Route::middleware('auth:admin')->group(function () {
 
 //route group for admin '
 Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
+
     //route group for admin users
     //admin.users
     Route::prefix('users')->name('users.')->group(function () {
         Route::get('/', [AdminUserController::class, 'index'])->name('index');
-        Route::get('create', [AdminUserController::class, 'create'])->name('create');
-        Route::post('store', [AdminUserController::class, 'store'])->name('store');
-        Route::get('edit/{id}', [AdminUserController::class, 'edit'])->name('edit');
-        Route::post('update/{id}', [AdminUserController::class, 'update'])->name('update');
-        Route::get('delete/{id}', [AdminUserController::class, 'destroy'])->name('delete');
     });
-
+    Route::prefix('admins')->name('admins.')->group(function () {
+        Route::get('/', [AdminController::class, 'index'])->name('index');
+    });
 
     //admin.ajax
     Route::prefix('ajax')->name('ajax.')->group(function () {
         Route::prefix('users')->name('users.')->group(function () {
             Route::get('datatable', [AdminUserController::class, 'datatable'])->name('datatable');
+        });
+        Route::prefix('admins')->name('admins.')->group(function () {
+            Route::get('datatable', [AdminController::class, 'datatable'])->name('datatable');
+
+            //store update delete
+            Route::get('/{id}', [AdminController::class, 'read'])->name('read');
+            Route::post('store', [AdminController::class, 'store'])->name('store');
+            Route::put('update/{id}', [AdminController::class, 'update'])->name('update');
+            Route::delete('delete/{id}', [AdminController::class, 'delete'])->name('delete');
         });
     });
 });
@@ -58,4 +66,3 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
 Route::get('/', function () {
     return view('welcome');
 });
-
