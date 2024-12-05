@@ -56,6 +56,18 @@
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
                                     <!--begin::Label-->
+                                    <label for="phone"
+                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.admins.list.table.phone') }}</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <input name="phone" id="phone"
+                                        class="form-control form-control-solid mb-3 mb-lg-0"
+                                        placeholder="example@domain.com" />
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+                                <div class="fv-row mb-7">
+                                    <!--begin::Label-->
                                     <label for="password"
                                         class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.admins.list.table.password') }}</label>
                                     <!--end::Label-->
@@ -65,17 +77,16 @@
                                         placeholder="example@domain.com" />
                                     <!--end::Input-->
                                 </div>
-                                <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
                                     <!--begin::Label-->
-                                    <label for="phone"
-                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.admins.list.table.phone') }}</label>
+                                    <label for="password_confirmation"
+                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.admins.list.table.password_confirmation') }}</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input name="phone" id="phone"
+                                    <input type="password" name="password_confirmation" id="password_confirmation"
                                         class="form-control form-control-solid mb-3 mb-lg-0"
-                                        placeholder="example@domain.com" />
+                                        placeholder="Confirm password" />
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->

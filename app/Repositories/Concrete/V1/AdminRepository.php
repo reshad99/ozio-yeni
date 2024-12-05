@@ -32,14 +32,16 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
     /** {@inheritDoc} */
     public function yajraDatatableSearch($request): void
     {
+        $request = (object)$request;
         /**
          * @var Builder<Admin> $query
          */
         $query = $this->query;
-        $query->name($request['name'])
-            ->email($request['email'])
-            ->phone($request['phone'])
-            ->createdAtBetween($request['startDate'], $request['endDate']);
+
+        $query->name($request->name)
+            ->email($request->email)
+            ->phone($request->phone)
+            ->createdAtBetween($request->created_at_start, $request->created_at_end);
     }
 
     /** {@inheritDoc} */

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Admin\Http\Controllers;
+namespace Modules\Admin\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\V1\RepositoryServices\AdminService;
@@ -16,9 +16,7 @@ class AdminController extends Controller
     /**
      * @param AdminService $adminService
      */
-    public function __construct(protected AdminService $adminService)
-    {
-    }
+    public function __construct(protected AdminService $adminService) {}
 
     /**
      * Display a listing of the resource.
@@ -26,7 +24,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin::pages.users.list.index');
+        return view('admin::pages.admins.list.index');
     }
 
 
@@ -46,9 +44,29 @@ class AdminController extends Controller
     {
         return $this->adminService->createAdmin($request->validated());
     }
-    
-
-    //delete
 
     //update
+    public function update(UpdateAdminRequest $request, $id)
+    {
+        return $this->adminService->updateAdmin($request->validated(), $id);
+    }
+
+    //delete
+    public function destroy($id)
+    {
+        return $this->adminService->deleteAdmin($id);
+    }
+
+    //delete multiple
+    public function deleteMultiple(Request $request)
+    {
+        // return $this->adminService->deleteMultipleAdmin($request->all());
+    }
+
+    //read
+    public function read($id)
+    {
+        return $this->adminService->findOrFailAdmin($id);
+    }
+
 }

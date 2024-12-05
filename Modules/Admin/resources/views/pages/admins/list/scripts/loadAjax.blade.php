@@ -17,7 +17,7 @@
                     data: {},
                     success: function(response) {
                         response = JSON.parse(JSON.stringify(response));
-                        console.log(response);
+                        // console.log(response);
                         resolve();
                     },
                     error: function(xhr, status, error) {

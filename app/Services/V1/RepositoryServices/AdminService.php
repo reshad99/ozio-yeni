@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Modules\Admin\Http\Requests\Admin\StoreAdminRequest;
 use Modules\Admin\Http\Requests\Admin\UpdateAdminRequest;
 
@@ -62,7 +63,7 @@ class AdminService
         $admin->name = $adminRequest['name'];
         $admin->email = $adminRequest['email'];
         $admin->phone = $adminRequest['phone'];
-        $admin->password = Auth::hash($adminRequest['password']);
+        $admin->password = Hash::make($adminRequest['password']);
 
         /**
          * @var Admin $model
@@ -87,7 +88,7 @@ class AdminService
         $model->name = $adminUpdateRequest['name'];
         $model->email = $adminUpdateRequest['email'];
         $model->phone = $adminUpdateRequest['phone'];
-        $model->password = Auth::hash($adminUpdateRequest['password']);
+        $model->password = Hash::make($adminUpdateRequest['password']);
 
         $this->adminRepository->update($model);
         return $model;

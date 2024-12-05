@@ -4,13 +4,13 @@
         // <input class="form-check-input" type="checkbox" value="${data}" /> get value of checkbox
         await window.loadAjax();
 
-        let user_id = $(this).data('id');
+        let id = $(this).data('id');
 
         let form = $("#kt_modal_new2_target_form");
         //ROUTE USER
         let url =
-            `{{ route('', ['id' => '-1']) }}`;
-        url = url.replace("-1", user_id);
+            `{{ route('admin.ajax.admins.read', ['id' => '-1']) }}`;
+        url = url.replace("-1", id);
         KTApp.showPageLoading();
 
         //ajax read role data
@@ -29,6 +29,16 @@
 
                 //set form data
                 form.find("input[name='edit_id']").val(response.id);
+                form.find("input[name='name']").val(response.name);
+                form.find("input[name='email']").val(response.email);
+                //seperate phone take first 4 char and remove + and find this country from phoneIntl and set selected
+                let phoneItl = window.intlTelInput(document.querySelector("#phone"));
+                phoneItl.setNumber(response.phone);
+
+                //remove first 4 char and + from phone
+                let phone = response.phone.substring(4);
+                form.find("input[name='phone']").val(phone);
+
                 KTApp.hidePageLoading();
 
             },
@@ -52,6 +62,7 @@
             var form;
             var modal;
             var modalEl;
+            var phoneIntl;
 
             // Init form inputs
             var initForm = function() {
@@ -84,8 +95,12 @@
                 // });
 
                 const input = form.querySelector("#phone");
-                window.intlTelInput(input, {
-                    loadUtilsOnInit: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.8.2/build/js/utils.js",
+                phoneIntl = window.intlTelInput(input, {
+                    initialCountry: "auto", // Varsayılan ülke: Auto
+                    preferredCountries: ["az", "tr", "us"], // Tercih edilen ülkeler
+                    separateDialCode: true, // Ülke kodunu ayrı göstermek için
+                    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.8.2/build/js/utils.js", // Maskeleme desteği için gerekli
+
                 });
             }
 
@@ -144,18 +159,21 @@
                                 let formValues = $("#kt_modal_new2_target_form")
                                     .serializeArray();
                                 let formData = new FormData();
+                                //append form data
 
-                                //check model and form data they have any changes only send changes
+
                                 formData.append('edit_id', model.id);
                                 formValues.forEach(function(item) {
                                     if (model.hasOwnProperty(item.name) &&
                                         model[item.name] != item.value) {
+
+                                        console.log(model[item.name] +
+                                            ' ------- ' +
+                                            item.name + " : " + item.value);
+
                                         formData.append(item.name, item.value);
                                     }
                                 });
-
-
-
 
                                 submitButton.setAttribute('data-kt-indicator', 'on');
                                 // Disable button to avoid multiple click
@@ -173,9 +191,12 @@
                                 url = url.replace("-1", id);
 
                                 $.ajax({
-                                    type: "PUT",
+                                    //put method
+                                    method: "PUT",
                                     url: url, // Update with your API endpoint
                                     data: formData,
+                                    processData: false,
+                                    contentType: false,
                                     success: function(response) {
                                         // Handle the success response here
                                         submitButton.removeAttribute(

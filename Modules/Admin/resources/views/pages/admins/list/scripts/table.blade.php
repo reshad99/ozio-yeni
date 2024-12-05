@@ -13,7 +13,7 @@
 
         // Private functions
         var initDatatable = function() {
-            dt = $("#kt_datatable_example_1").DataTable({
+            window.datatable = dt = $("#kt_datatable_example_1").DataTable({
                 searchDelay: 500,
                 processing: true,
                 serverSide: true,
@@ -26,9 +26,25 @@
                 },
                 ajax: function(data, callback, settings) {
 
-                    data.filter = {};
-                    //FILTERS GONNA CAME HERE
-                    
+                    //DATATABLE FILTERS SEND
+                    data.filters = {};
+                    //get data #filter_username
+                    data.filters.name = $('#filter_name').val();
+                    //get data #filter_email
+                    data.filters.email = $('#filter_email').val();
+                    //get data #filter_phone_number
+                    data.filters.phone = $('#filter_phone_number').val();
+                    //get data #filter_date_start
+                    data.filters.date_start = $('#filter_date_start').val();
+                    //get data #filter_date_end
+                    data.filters.date_end = $('#filter_date_end').val();
+
+                    //remove '' from
+                    Object.keys(data.filters).forEach(function(key) {
+                        if (data.filters[key] === '') {
+                            delete data.filters[key];
+                        }
+                    });
 
                     $.ajax({
                         url: "{{ route('admin.ajax.admins.datatable') }}", // AJAX isteğinin yapılacağı URL

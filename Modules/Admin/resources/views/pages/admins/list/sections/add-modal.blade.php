@@ -56,6 +56,7 @@
                                 <label for="phone"
                                     class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.admins.list.table.phone') }}</label>
                                 <!--end::Label-->
+                                <br>
                                 <!--begin::Input-->
                                 <input name="phone" id="phone"
                                     class="form-control form-control-solid mb-3 mb-lg-0"

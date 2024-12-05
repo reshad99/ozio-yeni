@@ -121,6 +121,7 @@ return [
         ],
     ],
     'shared' => [
+        'delete_selected' => 'Seçilmişləri sil',
         'created_at' => 'Yaradılma tarixi',
         "actions" => "Əməliyyatlar",
         "edit" => "Redaktə et",

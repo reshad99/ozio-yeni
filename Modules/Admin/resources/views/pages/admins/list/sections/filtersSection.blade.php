@@ -20,17 +20,10 @@
                             placeholder="{{ __('admin::general.filters.start_date') }}">
                         <input type="hidden" class="form-control" id="filter_date_end"
                             placeholder="{{ __('admin::general.filters.end_date') }}">
-
-                        <div class="col-6 mt-5">
-                            <label
-                                for="kt_daterangepicker_1">{{ __('admin::general.filters.created_at_range') }}</label>
-                            <input class="form-control form-control-solid" placeholder="Pick date rage"
-                                id="kt_daterangepicker_1" />
-                        </div>
                         <div class="col-3 mt-5">
-                            <label for="filter_username">{{ __('admin::general.filters.username') }}</label>
-                            <input type="text" class="form-control w-170px " id="filter_username"
-                                placeholder="{{ __('admin::general.filters.username') }}">
+                            <label for="filter_name">{{ __('admin::general.filters.name') }}</label>
+                            <input type="text" class="form-control w-170px " id="filter_name"
+                                placeholder="{{ __('admin::general.filters.name') }}">
                         </div>
                         <div class="col-3 mt-5">
                             <label for="filter_email">{{ __('admin::general.filters.email') }}</label>
@@ -42,10 +35,11 @@
                             <input type="text" class="form-control w-170px " id="filter_phone_number"
                                 placeholder="{{ __('admin::general.filters.phone_number') }}">
                         </div>
-                        <div class="col-3 mt-5">
-                            <label for="filter_bonus_card_no">{{ __('admin::general.filters.bonus_card_no') }}</label>
-                            <input type="text" class="form-control w-170px " id="filter_bonus_card_no"
-                                placeholder="{{ __('admin::general.filters.bonus_card_no') }}">
+                        <div class="col-6 mt-5">
+                            <label
+                                for="kt_daterangepicker_1">{{ __('admin::general.filters.created_at_range') }}</label>
+                            <input class="form-control form-control-solid" placeholder="Pick date rage"
+                                id="kt_daterangepicker_1" />
                         </div>
                     </div>
 

@@ -12,6 +12,7 @@
             var form;
             var modal;
             var modalEl;
+            var phoneIntl;
 
             // Init form inputs
             var initForm = function() {
@@ -44,8 +45,12 @@
                 // });
 
                 const input = form.querySelector("#phone");
-                window.intlTelInput(input, {
-                    loadUtilsOnInit: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.8.2/build/js/utils.js",
+                phoneIntl = window.intlTelInput(input, {
+                    initialCountry: "az", // Varsayılan ülke: Azerbaycan
+                    preferredCountries: ["az", "tr", "us"], // Tercih edilen ülkeler
+                    separateDialCode: true, // Ülke kodunu ayrı göstermek için
+                    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.8.2/build/js/utils.js", // Maskeleme desteği için gerekli
+
                 });
             }
 
@@ -115,11 +120,21 @@
                                     .serializeArray();
                                 console.log(formData);
 
-                                //remove empty fields
-                                formData = formData.filter(function(item) {
-                                    return item.value != '' && item.value !=
-                                        '0';
+                                //get country code from intlTelInput
+                                let phone = phoneIntl.getSelectedCountryData();
+                                console.log(phone);
+
+
+                                //change form data phone to international format
+                                formData = formData.map(function(item) {
+                                    if (item.name == 'phone') {
+                                        item.value = '+' + phone.dialCode + item
+                                            .value.replace(/\s+/g, '');
+                                    }
+                                    return item;
                                 });
+
+
 
                                 submitButton.setAttribute(
                                     'data-kt-indicator',
@@ -130,8 +145,7 @@
                                 console.log(formData);
                                 $.ajax({
                                     type: "POST",
-                                    //TODO ROUTE AJAX
-                                    url: "", // Update with your API endpoint
+                                    url: "{{ route('admin.ajax.admins.store') }}",
                                     data: formData,
                                     success: function(response) {
 

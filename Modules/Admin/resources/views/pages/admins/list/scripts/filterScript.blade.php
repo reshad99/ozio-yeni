@@ -48,14 +48,6 @@
             $('#filter_date_end').val(picker.endDate.format('YYYY-MM-DD HH:mm'));
         });
 
-        // let StatusEnum = @json(Modules\Shared\app\Enums\EmergencyCallStatusEnum::values()); 
-        // console.log(StatusEnum);
-        //status is object $('#filter_status').append('<option value="' + item + '">' + StatusTranslates[item] +'</option>');
-        //foreach is not working
-        // for (let item in StatusEnum) {
-        //     $('#filter_status').append('<option value="' + StatusEnum[item] + '">' + StatusTranslates[
-        //         StatusEnum[item]] + '</option>');
-        // }
 
         $('#filter_status').val('').trigger('change');
 
