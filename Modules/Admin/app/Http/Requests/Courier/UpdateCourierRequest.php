@@ -15,11 +15,11 @@ class UpdateCourierRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:25'],
-            'phone' => ['required', 'string', 'max:25', Rule::unique('couriers', 'phone')->ignore($this->courier, 'id')->whereNull('deleted_at')],
-            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('couriers', 'email')->ignore($this->courier, 'id')->whereNull('deleted_at')],
-            'store_id' => ['required', Rule::exists('stores', 'id')->whereNull('deleted_at')],
-            'password' => ['nullable', 'string', Password::min(6), 'confirmed'],
+            'name' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
+            'phone' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Rule::unique('couriers', 'phone')->ignore($this->courier, 'id')->whereNull('deleted_at')],
+            'email' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'email', 'max:255', Rule::unique('couriers', 'email')->ignore($this->courier, 'id')->whereNull('deleted_at')],
+            'store_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('stores', 'id')->whereNull('deleted_at')],
+            'password' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', Password::min(6), 'confirmed'],
         ];
     }
 

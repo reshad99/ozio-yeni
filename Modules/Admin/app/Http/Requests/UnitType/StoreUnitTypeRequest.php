@@ -2,7 +2,9 @@
 
 namespace Modules\Admin\Http\Requests\UnitType;
 
+use App\Enums\StatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class StoreUnitTypeRequest extends FormRequest
 {
@@ -14,7 +16,8 @@ class StoreUnitTypeRequest extends FormRequest
     {
         return [
             'name' => ['required', 'array'],
-            'name.*' => ['required', 'string', 'max:255']
+            'name.*' => ['required', 'string', 'max:255'],
+            'status' => ['required', new Enum(StatusEnum::class)],
         ];
     }
 

@@ -16,15 +16,15 @@ class UpdateCouponRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'limit' => ['required', 'integer', 'min:1'],
-            'code' => ['required', 'string', Rule::unique('coupons', 'code')->ignore($this->coupon, 'id')->whereNull('deleted_at')],
-            'discount_type' => ['required', new Enum(CouponDiscountTypeEnum::class)],
-            'discount_value' => ['required', 'numeric'],
-            'start_date' => ['required', 'date', 'before_or_equal:end_date'],
-            'start_time' => ['required'],
-            'end_date' => ['required', 'date', 'after_or_equal:start_date'],
-            'end_time' => ['required'],
-            'active_for_first_order' => ['sometimes', 'boolean'],
+            'limit' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'integer', 'min:1'],
+            'code' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', Rule::unique('coupons', 'code')->ignore($this->coupon, 'id')->whereNull('deleted_at')],
+            'discount_type' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', new Enum(CouponDiscountTypeEnum::class)],
+            'discount_value' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric'],
+            'start_date' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'date', 'before_or_equal:end_date'],
+            'start_time' => ['nullable', 'sometimes', 'not_regex:/^\s*$/',],
+            'end_date' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'date', 'after_or_equal:start_date'],
+            'end_time' => ['nullable', 'sometimes', 'not_regex:/^\s*$/',],
+            'active_for_first_order' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'boolean'],
         ];
     }
 

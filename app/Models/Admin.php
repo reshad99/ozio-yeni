@@ -23,6 +23,24 @@ class Admin extends Authenticatable
     protected $guarded = [];
 
     /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed'
+        ];
+    }
+
+    /**
+     * @var array<string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
      * @param string $class
      * @param int $id
      * @return bool

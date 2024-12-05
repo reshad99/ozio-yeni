@@ -15,7 +15,6 @@ return new class () extends Migration {
             $table->string('name');
             $table->string('email');
             $table->string('password');
-            $table->string('remember_token');
             $table->string('country_code');
             $table->string('phone');
             $table->string('bonus_card_no')->nullable();

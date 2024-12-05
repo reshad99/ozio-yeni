@@ -14,8 +14,8 @@ class UpdateCityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:25', Rule::unique('cities', 'name')->ignore($this->city, 'id')->whereNull('deleted_at')],
-            'country_id' => ['required', Rule::exists('countries', 'id')->whereNull('deleted_at')],
+            'name' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Rule::unique('cities', 'name')->ignore($this->city, 'id')->whereNull('deleted_at')],
+            'country_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('countries', 'id')->whereNull('deleted_at')],
         ];
     }
 

@@ -16,10 +16,10 @@ class UpdateCurrencyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:25', Rule::unique('currencies', 'name')->whereNull('deleted_at')->ignore($this->currency, 'id')],
-            'code' => ['required', 'string', 'max:25', Rule::unique('currencies', 'code')->whereNull('deleted_at')->ignore($this->currency, 'id')],
-            'symbol' => ['required', 'string', 'max:25', Rule::unique('currencies', 'symbol')->whereNull('deleted_at')->ignore($this->currency, 'id')],
-            'status' => ['required', new Enum(StatusEnum::class)],
+            'name' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/','max:25', Rule::unique('currencies', 'name')->whereNull('deleted_at')->ignore($this->currency, 'id')],
+            'code' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Rule::unique('currencies', 'code')->whereNull('deleted_at')->ignore($this->currency, 'id')],
+            'symbol' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Rule::unique('currencies', 'symbol')->whereNull('deleted_at')->ignore($this->currency, 'id')],
+            'status' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', new Enum(StatusEnum::class)],
         ];
     }
 

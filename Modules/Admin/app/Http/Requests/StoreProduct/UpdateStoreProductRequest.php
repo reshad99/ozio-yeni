@@ -17,23 +17,23 @@ class UpdateStoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'array'],
-            'name.*' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'array'],
-            'description.*' => ['required', 'string', 'max:500'],
-            'category_id' => ['required', Rule::exists('categories', 'id')->whereNull('deleted_at')],
-            'order_count' => ['required', 'integer', 'min:0'],
-            'tax' => ['required', 'numeric', 'min:0'],
-            'tax_type' => ['sometimes', new Enum(TaxTypeEnum::class)],
-            'tax_percent' => ['required', 'numeric', 'min:0'],
-            'unit_id' => ['required', Rule::exists('units', 'id')->whereNull('deleted_at')],
-            'rating' => ['required', 'numeric', 'min:0', 'max:5'],
-            'is_recommended' => ['required', 'boolean'],
-            'is_organic' => ['required', 'boolean'],
-            'is_halal' => ['required', 'boolean'],
-            'is_vegan' => ['required', 'boolean'],
-            'is_popular_item' => ['required', 'boolean'],
-            'status' => ['sometimes', new Enum(StatusEnum::class)]
+            'name' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'array'],
+            'name.*' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:255'],
+            'description' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'array'],
+            'description.*' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:500'],
+            'category_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('categories', 'id')->whereNull('deleted_at')],
+            'order_count' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'integer', 'min:0'],
+            'tax' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'min:0'],
+            'tax_type' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', new Enum(TaxTypeEnum::class)],
+            'tax_percent' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'min:0'],
+            'unit_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('units', 'id')->whereNull('deleted_at')],
+            'rating' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'min:0', 'max:5'],
+            'is_recommended' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'boolean'],
+            'is_organic' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'boolean'],
+            'is_halal' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'boolean'],
+            'is_vegan' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'boolean'],
+            'is_popular_item' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'boolean'],
+            'status' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', new Enum(StatusEnum::class)]
         ];
     }
 

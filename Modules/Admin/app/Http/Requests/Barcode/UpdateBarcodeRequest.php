@@ -14,8 +14,8 @@ class UpdateBarcodeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'store_product_id' => ['required', 'integer', Rule::exists('store_products', 'id')->whereNull('deleted_at')],
-            'barcode' => ['required', 'string', Rule::unique('store_product_barcodes', 'barcode')->ignore($this->barcode, 'id')->whereNull('deleted_at')],
+            'store_product_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'integer', Rule::exists('store_products', 'id')->whereNull('deleted_at')],
+            'barcode' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', Rule::unique('store_product_barcodes', 'barcode')->ignore($this->barcode, 'id')->whereNull('deleted_at')],
         ];
     }
 

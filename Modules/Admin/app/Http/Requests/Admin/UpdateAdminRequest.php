@@ -15,10 +15,10 @@ class UpdateAdminRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:25'],
-            'password' => ['nullable', 'max:25', Password::min(8)->max(25)->numbers()->mixedCase()],
-            'email' => ['required', 'email', Rule::unique('admins', 'email')->ignore($this->admin, 'id')->whereNull('deleted_at')],
-            'phone' => ['required', 'max:25', Rule::unique('admins', 'phone')->ignore($this->admin, 'id')->whereNull('deleted_at')],
+            'name' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
+            'password' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Password::min(8)->max(25)->numbers()->mixedCase()],
+            'email' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'email', Rule::unique('admins', 'email')->ignore($this->admin, 'id')->whereNull('deleted_at')],
+            'phone' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Rule::unique('admins', 'phone')->ignore($this->admin, 'id')->whereNull('deleted_at')],
         ];
     }
 

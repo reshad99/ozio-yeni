@@ -14,18 +14,18 @@ class UpdateUserAddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => ['required', 'string', 'max:25'],
-            'phone' => ['required', 'string', 'max:25'],
-            'lng' => ['required', 'string', 'max:100'],
-            'lat' => ['required', 'string', 'max:100'],
-            'user_id' => ['required', Rule::exists('users', 'id')->whereNull('deleted_at')],
-            'person_name' => ['required', 'string', 'max:25'],
-            'floor' => ['nullable', 'string', 'max:25'],
-            'apartment' => ['nullable', 'string', 'max:25'],
-            'road' => ['nullable', 'string', 'max:25'],
-            'house' => ['nullable', 'string', 'max:25'],
-            'is_selected' => ['sometimes', 'boolean'],
-            'zone_id' => ['nullable', Rule::exists('zones', 'id')->whereNull('deleted_at')],
+            'type' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
+            'phone' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
+            'lng' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:100'],
+            'lat' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:100'],
+            'user_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('users', 'id')->whereNull('deleted_at')],
+            'person_name' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
+            'floor' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
+            'apartment' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
+            'road' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
+            'house' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
+            'is_selected' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'boolean'],
+            'zone_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('zones', 'id')->whereNull('deleted_at')],
         ];
     }
 
