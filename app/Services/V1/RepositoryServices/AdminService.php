@@ -78,7 +78,7 @@ class AdminService
     public function updateAdmin($adminUpdateRequest): Admin
     {
 
-        $id = $adminUpdateRequest['id'];
+        $id = $adminUpdateRequest['edit_id'];
         /**
          * @var Admin $model|null
          */
