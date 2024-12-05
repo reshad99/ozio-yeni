@@ -17,7 +17,7 @@ return new class () extends Migration {
             $table->string('title');
             $table->string('content');
             $table->string('image');
-            $table->dateTime('readed_at')->nullable();
+            $table->dateTime('read_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
