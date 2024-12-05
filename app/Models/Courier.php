@@ -31,7 +31,7 @@ class Courier extends Model
     }
 
     /**
-     * @var array<string>
+     * @var array<int,string>
      */
     protected $hidden = [
         'password'
