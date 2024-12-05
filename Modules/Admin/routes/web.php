@@ -2,10 +2,9 @@
 
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use Modules\Admin\Http\Controllers\AdminController;
-use Modules\Admin\Http\Controllers\AdminUserController;
 use Modules\Admin\Http\Controllers\Auth\AdminLoginController;
 use Modules\Admin\Http\Controllers\Auth\AdminLogoutController;
+use Modules\Admin\Http\Controllers\User\AdminUserController;
 
 /*
 |--------------------------------------------------------------------------

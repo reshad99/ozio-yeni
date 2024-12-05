@@ -14,10 +14,10 @@ return new class () extends Migration {
             $table->id();
             $table->string('name');
             $table->smallInteger('minimum_order')->nullable();
-            $table->decimal('comission', 10, 2)->default(0);
+            $table->decimal('commission', 10, 2)->default(0);
             $table->smallInteger('courier_self_service')->default(0);
             $table->smallInteger('schedule_order')->default(0);
-            $table->smallInteger('take_away')->nullable()->default(0);
+            $table->smallInteger('take_away')->default(0);
             $table->smallInteger('free_delivery')->default(0);
             $table->timestamps();
             $table->softDeletes();

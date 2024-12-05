@@ -15,7 +15,7 @@ return new class () extends Migration {
             $table->id();
             $table->json('name');
             $table->enum('status', array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);
-            $table->smallInteger('featured');
+            $table->smallInteger('featured')->default(0);
             $table->smallInteger('priorty');
             $table->bigInteger('module_id');
             $table->foreign('module_id')->references('id')->on('modules')->onDelete('cascade');
