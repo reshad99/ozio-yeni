@@ -14,7 +14,7 @@ class StoreCityRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u',Rule::unique('cities', 'name')->whereNull('deleted_at')],
+            'name' => ['required', 'string', 'max:25', Rule::unique('cities', 'name')->whereNull('deleted_at')],
             'country_id' => ['required', Rule::exists('countries', 'id')->whereNull('deleted_at')],
         ];
     }

@@ -14,7 +14,7 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u'],
+            'name' => ['required', 'max:25'],
             'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($this->user, 'id')->whereNull('deleted_at')],
             'country_code' => ['required', 'max:25'],
             'phone' => ['required', 'numeric', 'max:25', Rule::unique('users', 'phone')->ignore($this->user, 'id')->whereNull('deleted_at')],

@@ -14,7 +14,7 @@ class UpdateCountryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u', Rule::unique('countries', 'name')->whereNull('deleted_at')->ignore($this->country, 'id')],
+            'name' => ['required', 'string', 'max:25', Rule::unique('countries', 'name')->whereNull('deleted_at')->ignore($this->country, 'id')],
             'code' => ['required', 'string', 'max:25', Rule::unique('countries', 'code')->whereNull('deleted_at')->ignore($this->country, 'id')],
             'phone_code' => ['required', 'string', 'max:25', Rule::unique('countries', 'phone_code')->whereNull('deleted_at')->ignore($this->country, 'id')],
         ];

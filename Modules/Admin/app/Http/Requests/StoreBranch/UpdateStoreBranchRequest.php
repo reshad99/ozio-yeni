@@ -14,7 +14,7 @@ class UpdateStoreBranchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u', Rule::unique('store_branches', 'name')->whereNull('deleted_at')->ignore($this->store_branch, 'id')],
+            'name' => ['required', 'string', 'max:25', Rule::unique('store_branches', 'name')->whereNull('deleted_at')->ignore($this->store_branch, 'id')],
             'minimum_order' => ['nullable', 'numeric', 'min:0'],
             'commission' => ['sometimes', 'numeric', 'min:0'],
             'courier_self_service' => ['sometimes', 'numeric', 'in:0,1'],

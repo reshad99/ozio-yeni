@@ -16,9 +16,9 @@ class UpdateCurrencyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u', Rule::unique('currencies', 'name')->whereNull('deleted_at')->ignore($this->currency, 'id')],
-            'code' => ['required', 'string', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u', Rule::unique('currencies', 'code')->whereNull('deleted_at')->ignore($this->currency, 'id')],
-            'symbol' => ['required', 'string', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u', Rule::unique('currencies', 'symbol')->whereNull('deleted_at')->ignore($this->currency, 'id')],
+            'name' => ['required', 'string', 'max:25', Rule::unique('currencies', 'name')->whereNull('deleted_at')->ignore($this->currency, 'id')],
+            'code' => ['required', 'string', 'max:25', Rule::unique('currencies', 'code')->whereNull('deleted_at')->ignore($this->currency, 'id')],
+            'symbol' => ['required', 'string', 'max:25', Rule::unique('currencies', 'symbol')->whereNull('deleted_at')->ignore($this->currency, 'id')],
             'status' => ['required', new Enum(StatusEnum::class)],
         ];
     }

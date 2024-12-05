@@ -14,10 +14,10 @@ class StoreUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u'],
+            'name' => ['required', 'max:25'],
             'email' => ['required', 'email', Rule::unique('users', 'email')->whereNull('deleted_at')],
             'country_code' => ['required', 'max:25'],
-            'phone' => ['required', 'numeric', 'max:25', Rule::unique('users', 'phone')->whereNull('deleted_at')],
+            'phone' => ['required', 'string', 'max:25', Rule::unique('users', 'phone')->whereNull('deleted_at')],
             'bonus_card_no' => ['nullable', 'max:25', Rule::unique('users', 'bonus_card_no')->whereNull('deleted_at')],
             'ref_code' => ['nullable', 'max:25', Rule::unique('users', 'ref_code')->whereNull('deleted_at')],
             'want_notification' => ['required', 'boolean'],

@@ -17,7 +17,7 @@ class UpdateCategoryRequest extends FormRequest
     {
         return [
             'name' => ['required', 'array'],
-            'name.*' => ['required', 'string', 'max:255', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u'],
+            'name.*' => ['required', 'string', 'max:255'],
             'status' => ['sometimes', new Enum(StatusEnum::class)],
             'featured' => ['sometimes', 'in:0,1'],
             'priority' => ['required', 'integer', 'min:0'],
