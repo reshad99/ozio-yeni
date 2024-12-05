@@ -32,13 +32,14 @@
                 form.find("input[name='name']").val(response.name);
                 form.find("input[name='email']").val(response.email);
                 //seperate phone take first 4 char and remove + and find this country from phoneIntl and set selected
-                let phoneItl = window.intlTelInput(document.querySelector("#phone"));
-                phoneItl.setNumber(response.phone);
+                if (response.phone) {
+                    let phoneItl = window.intlTelInput(document.querySelector("#phone"));
+                    phoneItl.setNumber(response.phone);
+                    //remove first 4 char and + from phone
+                    let phone = response.phone.substring(4);
+                    form.find("input[name='phone']").val(phone);
 
-                //remove first 4 char and + from phone
-                let phone = response.phone.substring(4);
-                form.find("input[name='phone']").val(phone);
-
+                }
                 KTApp.hidePageLoading();
 
             },
