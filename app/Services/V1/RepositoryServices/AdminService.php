@@ -78,15 +78,20 @@ class AdminService
      */
     public function updateAdmin(UpdateAdminRequest $adminUpdateRequest, $id): Admin
     {
+        $adminUpdateRequest = $adminUpdateRequest->validated();
         /**
          * @var Admin $model|null
          */
         $model = $this->findOrFailAdmin($id);
 
-        $model->name = $adminUpdateRequest['name'];
-        $model->email = $adminUpdateRequest['email'];
-        $model->phone = $adminUpdateRequest['phone'];
-        $model->password = Hash::make($adminUpdateRequest['password']);
+        if (isset($adminUpdateRequest['name']))
+            $model->name = $adminUpdateRequest['name'];
+        if (isset($adminUpdateRequest['email']))
+            $model->email = $adminUpdateRequest['email'];
+        if (isset($adminUpdateRequest['phone']))
+            $model->phone = $adminUpdateRequest['phone'];
+        if (isset($adminUpdateRequest['password']))
+            $model->password = Hash::make($adminUpdateRequest['password']);
 
         $this->adminRepository->update($model);
         return $model;

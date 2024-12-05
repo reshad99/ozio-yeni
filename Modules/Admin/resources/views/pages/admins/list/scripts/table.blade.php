@@ -216,7 +216,6 @@
                 // Delete button on click
                 d.addEventListener('click', function(e) {
                     e.preventDefault();
-
                     // Select parent row
                     const parent = e.target.closest('tr');
 
@@ -225,48 +224,61 @@
 
                     // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "Are you sure you want to delete " +
+                        text: "{{ __('admin::general.pages.department.list.are_you_sure_you_want_to_delete_this') }} " +
                             customerName + "?",
                         icon: "warning",
                         showCancelButton: true,
                         buttonsStyling: false,
-                        confirmButtonText: "Yes, delete!",
-                        cancelButtonText: "No, cancel",
+                        confirmButtonText: "{{ __('admin::general.shared.yes_delete') }}",
+                        cancelButtonText: "{{ __('admin::general.shared.no_cancel') }}",
                         customClass: {
                             confirmButton: "btn fw-bold btn-danger",
                             cancelButton: "btn fw-bold btn-active-light-primary"
                         }
                     }).then(function(result) {
                         if (result.value) {
-                            // Simulate delete request -- for demo purpose only
-                            Swal.fire({
-                                text: "Deleting " + customerName,
-                                icon: "info",
-                                buttonsStyling: false,
-                                showConfirmButton: false,
-                                timer: 2000
-                            }).then(function() {
-                                Swal.fire({
-                                    text: "You have deleted " +
-                                        customerName + "!.",
-                                    icon: "success",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: {
-                                        confirmButton: "btn fw-bold btn-primary",
-                                    }
-                                }).then(function() {
-                                    // delete row data from server and re-draw datatable
-                                    dt.draw();
-                                });
+
+                            // <input class="form-check-input" type="checkbox" value="${data}" />
+                            let id = parent.querySelectorAll('td')[1]
+                                .innerText;
+
+                            let url =
+                                `{{ route('admin.ajax.admins.destroy', ['id' => '-1']) }}`;
+                            url = url.replace("-1", id);
+                            //ajax
+                            $.ajax({
+                                url: url,
+                                type: "DELETE",
+                                success: function(response) {
+                                    Swal.fire({
+                                        text: "" +
+                                            customerName +
+                                            " {{ __('admin::general.pages.department.list.department_was_successfully_deleted') }}" +
+                                            "!.",
+                                        icon: "success",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "{{ __('admin::general.shared.got_it') }}",
+                                        customClass: {
+                                            confirmButton: "btn fw-bold btn-primary",
+                                        }
+                                    }).then(function() {
+                                        // ajax reload
+                                        dt.draw();
+
+                                    });
+                                },
+                                error: function(xhr) {
+                                    // Handle errors here
+                                    customSwal.dataError(xhr);
+                                }
                             });
                         } else if (result.dismiss === 'cancel') {
                             Swal.fire({
                                 text: customerName +
-                                    " was not deleted.",
+                                    "{{ __('admin::general.pages.emergencyCall.list.department_was_not_deleted') }}",
                                 icon: "error",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "{{ __('admin::general.shared.got_it') }}",
                                 customClass: {
                                     confirmButton: "btn fw-bold btn-primary",
                                 }

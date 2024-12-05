@@ -58,7 +58,7 @@ class AdminController extends Controller
     public function update(UpdateAdminRequest $request, $id)
     {
         try {
-            $this->adminService->updateAdmin($request->validated(), $id);
+            $this->adminService->updateAdmin($request, $id);
             return response()->json(['status' => true, 'message' => 'Admin updated successfully']);
             //code...
         } catch (AdminNotFoundException $th) {

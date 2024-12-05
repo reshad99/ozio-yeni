@@ -58,7 +58,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
             Route::get('/{id}', [AdminController::class, 'read'])->name('read');
             Route::post('store', [AdminController::class, 'store'])->name('store');
             Route::post('update/{id}', [AdminController::class, 'update'])->name('update');
-            Route::delete('delete/{id}', [AdminController::class, 'delete'])->name('delete');
+            Route::delete('destroy/{id}', [AdminController::class, 'destroy'])->name('destroy');
         });
     });
 });
