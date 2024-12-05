@@ -72,13 +72,12 @@ class AdminService
     }
     /**
      * @param UpdateAdminRequest $admin
+     * @param int $id
      * @return Admin
      * @throws AdminNotFoundException
      */
-    public function updateAdmin($adminUpdateRequest): Admin
+    public function updateAdmin(UpdateAdminRequest $adminUpdateRequest, $id): Admin
     {
-
-        $id = $adminUpdateRequest['edit_id'];
         /**
          * @var Admin $model|null
          */
@@ -93,11 +92,14 @@ class AdminService
         return $model;
     }
     /**
-     * @param Admin $model
+     * @param int $id
      * @return void
+     * @throws AdminNotFoundException
      */
-    public function deleteAdmin($model): void
+    public function deleteAdmin($id): void
     {
+        $model = $this->findOrFailAdmin($id);
+
         $this->adminRepository->delete($model);
     }
     /**

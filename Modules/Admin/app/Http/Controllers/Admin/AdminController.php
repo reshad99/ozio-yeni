@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Http\Controllers\Admin;
 
+use App\Exceptions\V1\Admin\AdminNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Services\V1\RepositoryServices\AdminService;
 use Illuminate\Http\JsonResponse;
@@ -15,9 +16,7 @@ class AdminController extends Controller
     /**
      * @param AdminService $adminService
      */
-    public function __construct(protected AdminService $adminService)
-    {
-    }
+    public function __construct(protected AdminService $adminService) {}
 
     /**
      * Display a listing of the resource.
@@ -47,15 +46,32 @@ class AdminController extends Controller
     }
 
     //update
+    /**
+     * @param UpdateAdminRequest $request
+     * @param int $id
+     * @return JsonResponse
+     */
     public function update(UpdateAdminRequest $request, $id)
     {
+        dd($request->validated());
+        $test = $request->validated();
+
         return $this->adminService->updateAdmin($request->validated(), $id);
     }
 
     //delete
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
     public function destroy($id)
     {
-        return $this->adminService->deleteAdmin($id);
+        try {
+            $this->adminService->deleteAdmin($id);
+            return response()->json(['status' => true, 'message' => 'Admin deleted successfully']);
+        } catch (AdminNotFoundException $th) {
+            return response()->json(['status' => false, 'message' => 'Admin not found']);
+        }
     }
 
     //delete multiple
@@ -65,9 +81,12 @@ class AdminController extends Controller
     }
 
     //read
+    /**
+     * @param int $id
+     * @return Admin
+     */
     public function read($id)
     {
         return $this->adminService->findOrFailAdmin($id);
     }
-
 }
