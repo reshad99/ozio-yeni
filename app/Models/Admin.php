@@ -33,7 +33,7 @@ class Admin extends Authenticatable
     }
 
     /**
-     * @var array<string>
+     * @var array<int,string>
      */
     protected $hidden = [
         'password',
@@ -119,5 +119,5 @@ class Admin extends Authenticatable
         return $query;
     }
 
-    
+
 }

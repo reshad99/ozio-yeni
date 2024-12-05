@@ -26,6 +26,9 @@ class Country extends Model
         return $this->hasMany(City::class);
     }
 
+    /**
+     * @return MorphOne<Upload>
+     */
     public function flag(): MorphOne
     {
         return $this->morphOne(Upload::class, 'uploadable');
