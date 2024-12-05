@@ -4,7 +4,6 @@ namespace Modules\Api\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Services\V1\Api\TestService;
-use Illuminate\Http\Request;
 
 class TestController extends Controller
 {

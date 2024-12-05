@@ -2,10 +2,8 @@
 
 namespace Modules\Admin\Http\Requests\StoreBranch;
 
-use App\Enums\StatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Enum;
 
 class StoreStoreBranchRequest extends FormRequest
 {

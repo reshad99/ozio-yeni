@@ -4,7 +4,6 @@ namespace Modules\Admin\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Services\V1\RepositoryServices\AdminService;
-use App\Services\V1\RepositoryServices\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -16,7 +15,9 @@ class AdminController extends Controller
     /**
      * @param AdminService $adminService
      */
-    public function __construct(protected AdminService $adminService) {}
+    public function __construct(protected AdminService $adminService)
+    {
+    }
 
     /**
      * Display a listing of the resource.
@@ -39,7 +40,7 @@ class AdminController extends Controller
     }
 
 
-    //store 
+    //store
     public function store(StoreAdminRequest $request)
     {
         return $this->adminService->createAdmin($request->validated());
