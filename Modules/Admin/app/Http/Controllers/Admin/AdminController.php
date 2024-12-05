@@ -4,6 +4,7 @@ namespace Modules\Admin\Http\Controllers\Admin;
 
 use App\Exceptions\V1\Admin\AdminNotFoundException;
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use App\Services\V1\RepositoryServices\AdminService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -16,7 +17,9 @@ class AdminController extends Controller
     /**
      * @param AdminService $adminService
      */
-    public function __construct(protected AdminService $adminService) {}
+    public function __construct(protected AdminService $adminService)
+    {
+    }
 
     /**
      * Display a listing of the resource.
@@ -40,9 +43,10 @@ class AdminController extends Controller
 
 
     //store
+
     /**
      * @param StoreAdminRequest $request
-     * @return JsonResponse
+     * @return Admin
      */
     public function store(StoreAdminRequest $request)
     {
@@ -50,6 +54,7 @@ class AdminController extends Controller
     }
 
     //update
+
     /**
      * @param UpdateAdminRequest $request
      * @param int $id
@@ -67,6 +72,7 @@ class AdminController extends Controller
     }
 
     //delete
+
     /**
      * @param int $id
      * @return JsonResponse
@@ -81,16 +87,20 @@ class AdminController extends Controller
         }
     }
 
-    //delete multiple
+    /**
+     * @param Request $request
+     * @return void
+     */
     public function deleteMultiple(Request $request)
     {
         // return $this->adminService->deleteMultipleAdmin($request->all());
     }
 
     //read
+
     /**
      * @param int $id
-     * @return Admin
+     * @return Admin|JsonResponse
      */
     public function read($id)
     {
