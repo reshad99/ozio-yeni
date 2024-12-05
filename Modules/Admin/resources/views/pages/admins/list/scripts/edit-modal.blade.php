@@ -180,7 +180,7 @@
                                 // Disable button to avoid multiple click
                                 submitButton.disabled = true;
 
-                                //ROUTE UPDATE 
+                                //ROUTE UPDATE
                                 let url =
                                     `{{ route('admin.ajax.admins.update', ['id' => '-1']) }}`;
                                 console.log(url);
@@ -193,7 +193,7 @@
 
                                 $.ajax({
                                     //put method
-                                    method: "PUT",
+                                    method: "POST",
                                     url: url, // Update with your API endpoint
                                     data: formData,
                                     processData: false,

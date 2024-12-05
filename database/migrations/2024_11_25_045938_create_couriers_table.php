@@ -30,6 +30,7 @@ return new class () extends Migration {
             $table->string('lng')->nullable();
             $table->enum('status', array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);
             $table->timestamps();
+            $table->softDeletes();
             $table->unique(['email', 'deleted_at']);
         });
     }
