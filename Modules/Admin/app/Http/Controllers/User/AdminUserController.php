@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Admin\Http\Controllers;
+namespace Modules\Admin\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Services\V1\RepositoryServices\UserService;
