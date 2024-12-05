@@ -56,8 +56,11 @@ class AdminService
      * @param StoreAdminRequest $adminRequest
      * @return Admin
      */
-    public function createAdmin($adminRequest): Admin
+    public function createAdmin(StoreAdminRequest $adminRequest): Admin
     {
+        $adminRequest = $adminRequest->validated();
+
+
         $admin = new Admin();
         $admin->name = $adminRequest['name'];
         $admin->email = $adminRequest['email'];

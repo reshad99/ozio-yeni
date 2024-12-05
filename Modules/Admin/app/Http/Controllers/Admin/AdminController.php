@@ -46,7 +46,7 @@ class AdminController extends Controller
      */
     public function store(StoreAdminRequest $request)
     {
-        return $this->adminService->createAdmin($request->validated());
+        return $this->adminService->createAdmin($request);
     }
 
     //update

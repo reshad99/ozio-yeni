@@ -7,6 +7,7 @@ use App\Repositories\Abstract\V1\AdminRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Database\Eloquent\Builder;
 
 class AdminRepository extends BaseRepository implements AdminRepositoryInterface
 {
