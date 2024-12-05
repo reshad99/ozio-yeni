@@ -15,10 +15,10 @@ class StoreAdminRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u'],
+            'name' => ['required', 'max:25'],
             'email' => ['required', 'email', Rule::unique('admins', 'email')->whereNull('deleted_at')],
             'password' => ['required', 'max:25', Password::min(8)->max(25)->numbers()->mixedCase()],
-            'phone' => ['required', 'numeric', 'max:25', Rule::unique('admins', 'phone')->whereNull('deleted_at')],
+            'phone' => ['required', 'max:25', Rule::unique('admins', 'phone')->whereNull('deleted_at')],
         ];
     }
 

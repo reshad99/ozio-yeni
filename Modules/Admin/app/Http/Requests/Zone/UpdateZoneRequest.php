@@ -16,9 +16,9 @@ class UpdateZoneRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'type' => [new Enum(ZoneTypeEnum::class)],
-            'coordinates' => ['required', 'string'],
-            'status' => ['required', new Enum(StatusEnum::class)],
+            'type' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', new Enum(ZoneTypeEnum::class)],
+            'coordinates' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/',],
+            'status' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', new Enum(StatusEnum::class)],
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -18,6 +19,25 @@ class Store extends Model
      * @var array<string>|bool
      */
     protected $guarded = [];
+
+    /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'password' => 'hashed',
+            'status' => StatusEnum::class,
+            'have_vegan' => 'boolean',
+            'have_not_vegan' => 'boolean',
+            'open_time' => 'datetime',
+            'close_time' => 'datetime',
+        ];
+    }
+
+    protected $hidden = [
+        'password',
+    ];
 
     /**
      * @return BelongsTo<Module, self>

@@ -2,7 +2,9 @@
 
 namespace Modules\Admin\Http\Requests\UnitType;
 
+use App\Enums\StatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
 class UpdateUnitTypeRequest extends FormRequest
 {
@@ -13,7 +15,9 @@ class UpdateUnitTypeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'array'],
+            'name.*' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:255'],
+            'status' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', new Enum(StatusEnum::class)],
         ];
     }
 

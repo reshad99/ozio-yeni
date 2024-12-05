@@ -16,15 +16,15 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'array'],
-            'name.*' => ['required', 'string', 'max:255', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u'],
-            'status' => ['sometimes', new Enum(StatusEnum::class)],
-            'featured' => ['sometimes', 'in:0,1'],
-            'priority' => ['required', 'integer', 'min:0'],
-            'module_id' => ['required', Rule::exists('modules', 'id')->whereNull('deleted_at')],
-            'parent_id' => ['nullable', Rule::exists('categories', 'id')->whereNull('deleted_at')],
-            '_lft' => ['sometimes', 'integer', 'min:0'],
-            '_rgt' => ['sometimes', 'integer', 'min:0'],
+            'name' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'array'],
+            'name.*' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:255'],
+            'status' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', new Enum(StatusEnum::class)],
+            'featured' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'in:0,1'],
+            'priority' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'min:0'],
+            'module_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('modules', 'id')->whereNull('deleted_at')],
+            'parent_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('categories', 'id')->whereNull('deleted_at')],
+            '_lft' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'min:0'],
+            '_rgt' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'min:0'],
         ];
     }
 

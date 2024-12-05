@@ -16,8 +16,8 @@ class UpdateModuleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:25', Rule::unique('modules', 'name')->ignore($this->module, 'id')->whereNull('deleted_at')],
-            'status'=>['sometimes',new Enum(StatusEnum::class)]
+            'name' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Rule::unique('modules', 'name')->ignore($this->module, 'id')->whereNull('deleted_at')],
+            'status' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', new Enum(StatusEnum::class)]
         ];
     }
 

@@ -14,9 +14,9 @@ class UpdateTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:25', Rule::unique('tags', 'name')->whereNull('deleted_at')->ignore($this->tag, 'id')],
-            'color' => ['nullable', 'string', 'max:25'],
-            'priority' => ['required', 'numeric', 'min:0'],
+            'name' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Rule::unique('tags', 'name')->whereNull('deleted_at')->ignore($this->tag, 'id')],
+            'color' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
+            'priority' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'min:0'],
         ];
     }
 

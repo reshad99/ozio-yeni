@@ -16,12 +16,12 @@ class UpdateUnitRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'array'],
-            'name.*' => ['required', 'string', 'max:255'],
-            'unit_type_id' => ['required', Rule::exists('unit_types', 'id')->whereNull('deleted_at')],
-            'symbol' => ['required', 'string', 'max:255'],
-            'conversion' => ['required', 'string', 'max:255'],
-            'status' => ['sometimes', new Enum(StatusEnum::class)]
+            'name' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'array'],
+            'name.*' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:255'],
+            'unit_type_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('unit_types', 'id')->whereNull('deleted_at')],
+            'symbol' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:255'],
+            'conversion' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:255'],
+            'status' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', new Enum(StatusEnum::class)]
         ];
     }
 

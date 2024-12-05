@@ -14,9 +14,9 @@ class UpdateStoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u', Rule::unique('store_categories', 'name')->whereNull('deleted_at')->ignore($this->store_category, 'id')],
-            'module_id' => ['required', Rule::exists('modules', 'id')->whereNull('deleted_at')],
-            'priority' => ['required', 'integer', 'min:0'],
+            'name' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Rule::unique('store_categories', 'name')->whereNull('deleted_at')->ignore($this->store_category, 'id')],
+            'module_id' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('modules', 'id')->whereNull('deleted_at')],
+            'priority' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'integer', 'min:0'],
         ];
     }
 

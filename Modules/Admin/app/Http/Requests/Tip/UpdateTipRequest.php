@@ -14,9 +14,9 @@ class UpdateTipRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'value' => ['required', 'numeric', 'min:0'],
-            'name' => ['required', 'string', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u', Rule::unique('tips', 'name')->whereNull('deleted_at')->ignore($this->tip, 'id')],
-            'currency_id' => ['required', Rule::exists('currencies', 'id')->whereNull('deleted_at')],
+            'value' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'min:0'],
+            'name' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u', Rule::unique('tips', 'name')->whereNull('deleted_at')->ignore($this->tip, 'id')],
+            'currency_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('currencies', 'id')->whereNull('deleted_at')],
         ];
     }
 

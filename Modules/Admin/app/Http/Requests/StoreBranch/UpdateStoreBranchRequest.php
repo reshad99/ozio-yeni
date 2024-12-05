@@ -14,13 +14,13 @@ class UpdateStoreBranchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u', Rule::unique('store_branches', 'name')->whereNull('deleted_at')->ignore($this->store_branch, 'id')],
-            'minimum_order' => ['nullable', 'numeric', 'min:0'],
-            'commission' => ['sometimes', 'numeric', 'min:0'],
-            'courier_self_service' => ['sometimes', 'numeric', 'in:0,1'],
-            'schedule_order' => ['sometimes', 'numeric', 'in:0,1'],
-            'take_away' => ['nullable', 'numeric', 'in:0,1'],
-            'free_delivery' => ['sometimes', 'numeric', 'in:0,1'],
+            'name' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Rule::unique('store_branches', 'name')->whereNull('deleted_at')->ignore($this->store_branch, 'id')],
+            'minimum_order' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'min:0'],
+            'commission' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'min:0'],
+            'courier_self_service' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'in:0,1'],
+            'schedule_order' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'in:0,1'],
+            'take_away' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'in:0,1'],
+            'free_delivery' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'in:0,1'],
         ];
     }
 

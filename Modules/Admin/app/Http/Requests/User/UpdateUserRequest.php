@@ -14,13 +14,13 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:25', 'regex:/(^([a-zA-Z]+)(\d+)?$)/u'],
-            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($this->user, 'id')->whereNull('deleted_at')],
-            'country_code' => ['required', 'max:25'],
-            'phone' => ['required', 'numeric', 'max:25', Rule::unique('users', 'phone')->ignore($this->user, 'id')->whereNull('deleted_at')],
-            'bonus_card_no' => ['nullable', 'max:25', Rule::unique('users', 'bonus_card_no')->ignore($this->user, 'id')->whereNull('deleted_at')],
-            'ref_code' => ['nullable', 'max:25', Rule::unique('users', 'ref_code')->ignore($this->user, 'id')->whereNull('deleted_at')],
-            'want_notification' => ['required', 'boolean'],
+            'name' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
+            'email' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'email', Rule::unique('users', 'email')->ignore($this->user, 'id')->whereNull('deleted_at')],
+            'country_code' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
+            'phone' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'max:25', Rule::unique('users', 'phone')->ignore($this->user, 'id')->whereNull('deleted_at')],
+            'bonus_card_no' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Rule::unique('users', 'bonus_card_no')->ignore($this->user, 'id')->whereNull('deleted_at')],
+            'ref_code' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Rule::unique('users', 'ref_code')->ignore($this->user, 'id')->whereNull('deleted_at')],
+            'want_notification' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'boolean'],
         ];
     }
 

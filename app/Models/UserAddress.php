@@ -19,6 +19,16 @@ class UserAddress extends Model
     protected $guarded = [];
 
     /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'is_selected' => 'boolean'
+        ];
+    }
+
+    /**
      * @return BelongsTo<User, self>
      */
     public function user(): BelongsTo
