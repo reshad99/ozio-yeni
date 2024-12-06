@@ -119,6 +119,31 @@ return [
                 'user_dep' => 'istifadəçi şöbəsi',
             ]
         ],
+        'admins' => [
+            'list' => [
+                'table' => [
+                    'id' => 'ID',
+                    'name' => 'Ad',
+                    'email' => 'E-poçt',
+                    'phone' => 'Telefon',
+                    'password' => 'Şifrə',
+                    'created_at' => 'Yaradılma tarixi',
+                    'actions' => 'Əməliyyatlar',
+                    'password_confirmation' => 'Şifrəni təsdiqlə',
+                ],
+                'access_modules' => 'Icazə verilən modullar',
+                'search_admin' => 'Admin axtar',
+                'admins' => 'Adminlər',
+                'filter_options' => 'filtır seçimləri',
+                'role' => 'Rol',
+                'reset' => 'Sıfırla',
+                'apply' => 'Tətbiq et',
+                'add_new_admin' => 'Admin əlavə et',
+                'added_new_admin' => 'Yeni admin əlavə edildi',
+                'add_admin' => 'Admin əlavə et',
+                'edit_admin' => 'Admini dəyiş',
+            ]
+        ]
     ],
     'shared' => [
         'delete_selected' => 'Seçilmişləri sil',
@@ -195,6 +220,7 @@ return [
     ],
     'filters' => [
         'title' => 'Filtrlar',
+        'name' => 'Ad',
         'reset' => 'Sıfırla',
         'search' => 'Axtar',
         'start_date' => 'Başlama tarixi',

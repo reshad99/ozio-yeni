@@ -9,6 +9,7 @@ use App\Services\V1\RepositoryServices\AdminService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Modules\Admin\Http\Requests\Admin\DeleteMultipleAdminRequest;
 use Modules\Admin\Http\Requests\Admin\StoreAdminRequest;
 use Modules\Admin\Http\Requests\Admin\UpdateAdminRequest;
 
@@ -88,12 +89,17 @@ class AdminController extends Controller
     }
 
     /**
-     * @param Request $request
-     * @return void
+     * @param DeleteMultipleAdminRequest $request
+     * @return JsonResponse
      */
-    public function deleteMultiple(Request $request)
+    public function destroyMultiple(DeleteMultipleAdminRequest $request): JsonResponse
     {
-        // return $this->adminService->deleteMultipleAdmin($request->all());
+        try {
+            $this->adminService->deleteMultipleAdmin($request->input('ids'));
+            return response()->json(['status' => true, 'message' => 'Admin deleted successfully']);
+        } catch (AdminNotFoundException $th) {
+            return response()->json(['status' => false, 'message' => 'Admin not found']);
+        }
     }
 
     //read
