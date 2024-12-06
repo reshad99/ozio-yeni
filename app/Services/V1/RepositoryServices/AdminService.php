@@ -20,7 +20,8 @@ class AdminService
      */
     public function __construct(
         private AdminRepositoryInterface $adminRepository
-    ) {
+    )
+    {
         $this->adminRepository = $adminRepository;
     }
 
@@ -30,7 +31,7 @@ class AdminService
     public function getAllAdmins(): Collection
     {
         /**
-         * @var Collection<int, Admin> $models;
+         * @var Collection<int, Admin> $models ;
          */
         $models = $this->adminRepository->all();
         return $models;
@@ -52,6 +53,7 @@ class AdminService
         }
         return $model;
     }
+
     /**
      * @param StoreAdminRequest $adminRequest
      * @return Admin
@@ -73,6 +75,7 @@ class AdminService
         $model = $this->adminRepository->create($admin);
         return $model;
     }
+
     /**
      * @param UpdateAdminRequest $adminUpdateRequest
      * @param int $id
@@ -83,7 +86,7 @@ class AdminService
     {
         $adminUpdateRequest = $adminUpdateRequest->validated();
         /**
-         * @var Admin $model|null
+         * @var Admin $model |null
          */
         $model = $this->findOrFailAdmin($id);
 
@@ -99,6 +102,7 @@ class AdminService
         $this->adminRepository->update($model);
         return $model;
     }
+
     /**
      * @param int $id
      * @return void
@@ -110,6 +114,13 @@ class AdminService
 
         $this->adminRepository->delete($model);
     }
+
+
+    public function deleteMultipleAdmin($ids): void
+    {
+        $this->adminRepository->deleteMultiple($ids);
+    }
+
     /**
      * @param array<string,mixed> $with
      * @return self
@@ -119,6 +130,7 @@ class AdminService
         $this->adminRepository->with($with);
         return $this;
     }
+
     /**
      * @param array<string,mixed> $filter
      * @return self
@@ -128,6 +140,7 @@ class AdminService
         $this->adminRepository->filterBy($filter);
         return $this;
     }
+
     /**
      * @param string $columnNumber
      * @param string $sort
@@ -138,6 +151,7 @@ class AdminService
         $this->adminRepository->orderBy($columnNumber, $sort);
         return $this;
     }
+
     /**
      * @param int $perpage
      * @param int $page
@@ -153,6 +167,7 @@ class AdminService
     }
 
     //group by
+
     /**
      *
      * @param string $column
@@ -164,6 +179,7 @@ class AdminService
         return $this;
     }
     //having
+
     /**
      *
      * @param string $column
@@ -177,6 +193,7 @@ class AdminService
         return $this;
     }
     //where
+
     /**
      *
      * @param string $column
@@ -190,6 +207,7 @@ class AdminService
         return $this;
     }
     //orWhere
+
     /**
      *
      * @param string $column
@@ -202,6 +220,7 @@ class AdminService
         $this->adminRepository->orWhere($column, $operator, $value);
         return $this;
     }
+
     /**
      *
      * @param string $column
@@ -213,6 +232,7 @@ class AdminService
         $this->adminRepository->whereIn($column, $value);
         return $this;
     }
+
     /**
      *
      * @param string $column
@@ -231,6 +251,6 @@ class AdminService
      */
     public function yajraDatatableExport(Request $request)
     {
-        return  $this->adminRepository->yajraDatatableExport($request);
+        return $this->adminRepository->yajraDatatableExport($request);
     }
 }

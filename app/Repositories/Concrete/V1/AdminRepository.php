@@ -4,6 +4,7 @@ namespace App\Repositories\Concrete\V1;
 
 use App\Models\Admin;
 use App\Repositories\Abstract\V1\AdminRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
@@ -16,7 +17,8 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
      */
     public function __construct(
         Admin $model
-    ) {
+    )
+    {
         parent::__construct($model);
     }
 
@@ -76,5 +78,14 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
             })
             ->make(true);
         return $data;
+    }
+
+    /**
+     * @param array $ids
+     * @return void
+     */
+    public function deleteMultiple($ids): void
+    {
+        $this->query->whereIn('id', $ids)->delete();
     }
 }

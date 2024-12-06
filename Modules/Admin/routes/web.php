@@ -59,6 +59,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
             Route::post('store', [AdminController::class, 'store'])->name('store');
             Route::post('update/{id}', [AdminController::class, 'update'])->name('update');
             Route::delete('destroy/{id}', [AdminController::class, 'destroy'])->name('destroy');
+            Route::delete('destroy-multiple/{ids}', [AdminController::class, 'destroyMultiple'])
+                ->name('destroy-multiple');
         });
     });
 });
