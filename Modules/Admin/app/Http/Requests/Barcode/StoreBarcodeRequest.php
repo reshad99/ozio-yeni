@@ -20,6 +20,21 @@ class StoreBarcodeRequest extends FormRequest
     }
 
     /**
+     * @return array<string,string>
+     */
+    public function messages(): array
+    {
+        return [
+            'store_product_id.required' => __('admin::general.validation.required', ['attribute' => 'Məhsul']),
+            'store_product_id.integer' => __('admin::general.validation.integer', ['attribute' => 'Məhsul']),
+            'store_product_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Məhsul']),
+            'barcode.required' => __('admin::general.validation.required', ['attribute' => 'Barkod']),
+            'barcode.string' => __('admin::general.validation.string', ['attribute' => 'Barkod']),
+            'barcode.unique' => __('admin::general.validation.unique', ['attribute' => 'barkod']),
+        ];
+    }
+
+    /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool

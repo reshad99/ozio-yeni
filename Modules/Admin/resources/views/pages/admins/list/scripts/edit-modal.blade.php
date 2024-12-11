@@ -17,10 +17,8 @@
         $.ajax({
             type: "GET",
             url: url, // Update with your API endpoint
-            data: {
-
-            },
-            success: function(response) {
+            data: {},
+            success: function (response) {
                 console.log(response);
                 model = response;
                 //clear form all inputs
@@ -43,7 +41,7 @@
                 KTApp.hidePageLoading();
 
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 KTApp.hidePageLoading();
                 // Handle errors here
                 customSwal.dataError(xhr);
@@ -51,12 +49,12 @@
         });
 
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         "use strict";
 
         // Class definition
-        var KTModalNewTarget = function() {
+        var KTModalNewTarget = function () {
             var submitButton;
             var cancelButton;
             var validator;
@@ -66,7 +64,7 @@
             var phoneIntl;
 
             // Init form inputs
-            var initForm = function() {
+            var initForm = function () {
                 // // Tags. For more info, please visit the official plugin site: https://yaireo.github.io/tagify/
                 // var tags = new Tagify(form.querySelector('[name="tags"]'), {
                 //     whitelist: ["Important", "Urgent", "High", "Medium", "Low"],
@@ -106,35 +104,57 @@
             }
 
             // Handle form validation and submittion
-            var handleForm = function() {
+            var handleForm = function () {
                 // Stepper custom navigation
 
                 // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
                 validator = FormValidation.formValidation(
                     form, {
                         fields: {
-                            //TODO XANLAR
-                            // first_name: {
-                            //     validators: {
-                            //         notEmpty: {
-                            //             message: "{{ __('admin::general.pages.users.list.first_name_is_required') }}"
-                            //         }
-                            //     }
-                            // },
-                            // last_name: {
-                            //     validators: {
-                            //         notEmpty: {
-                            //             message: "{{ __('admin::general.pages.users.list.last_name_is_required') }}"
-                            //         }
-                            //     }
-                            // },
-                            // email: {
-                            //     validators: {
-                            //         notEmpty: {
-                            //             message: "{{ __('admin::general.pages.users.list.email_is_required') }}"
-                            //         }
-                            //     }
-                            // },
+                            name: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "{{ __('admin::general.validation.required', ['attribute' => 'Ad'])  }}"
+                                    }
+                                }
+                            },
+                            email: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "{{ __('admin::general.validation.required', ['attribute' => 'E-poçt']) }}"
+                                    },
+                                    emailAddress: {
+                                        message: "{{ __('admin::general.validation.email') }}"
+                                    }
+                                }
+                            },
+                            phone: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "{{ __('admin::general.validation.required', ['attribute' => 'Telefon nömrəsi']) }}"
+                                    }
+                                }
+                            },
+                            password: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "{{ __('admin::general.validation.required', ['attribute' => 'Şifrə']) }}"
+                                    }
+                                }
+                            },
+                            password_confirmation: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "{{ __('admin::general.validation.required', ['attribute' => 'Şifrə təkrarı']) }}"
+                                    },
+                                    identical: {
+                                        compare: function () {
+                                            return form.querySelector('[name="password"]').value;
+                                        },
+                                        message: "{{ __('admin::general.validation.same',['attribute' => 'Şifrə']) }}"
+                                    }
+                                }
+                            }
                         },
                         plugins: {
                             trigger: new FormValidation.plugins.Trigger(),
@@ -148,12 +168,12 @@
                 );
 
                 // Action buttons
-                submitButton.addEventListener('click', function(e) {
+                submitButton.addEventListener('click', function (e) {
                     e.preventDefault();
 
                     // Validate form before submit
                     if (validator) {
-                        validator.validate().then(function(status) {
+                        validator.validate().then(function (status) {
                             console.log('validated!');
 
                             if (status == 'Valid') {
@@ -164,7 +184,7 @@
 
 
                                 formData.append('edit_id', model.id);
-                                formValues.forEach(function(item) {
+                                formValues.forEach(function (item) {
                                     if (model.hasOwnProperty(item.name) &&
                                         model[item.name] != item.value) {
 

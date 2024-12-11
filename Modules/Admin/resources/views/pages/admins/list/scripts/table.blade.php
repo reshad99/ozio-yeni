@@ -220,11 +220,11 @@
                     const parent = e.target.closest('tr');
 
                     // Get customer name
-                    const customerName = parent.querySelectorAll('td')[1].innerText;
+                    const customerName = parent.querySelectorAll('td')[2].innerText;
 
                     // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "{{ __('admin::general.pages.department.list.are_you_sure_you_want_to_delete_this') }} " +
+                        text: "{{ __('admin::general.shared.are_you_sure_you_want_to_delete_this') }} " +
                             customerName + "?",
                         icon: "warning",
                         showCancelButton: true,
@@ -253,7 +253,7 @@
                                     Swal.fire({
                                         text: "" +
                                             customerName +
-                                            " {{ __('admin::general.pages.department.list.department_was_successfully_deleted') }}" +
+                                            " {{ __('admin::general.shared.successfully_deleted',['attribute' => 'admin']) }}" +
                                             "!.",
                                         icon: "success",
                                         buttonsStyling: false,
@@ -275,7 +275,7 @@
                         } else if (result.dismiss === 'cancel') {
                             Swal.fire({
                                 text: customerName +
-                                    "{{ __('admin::general.pages.emergencyCall.list.department_was_not_deleted') }}",
+                                    " {{__('admin::general.shared.not_deleted',['attribute' => 'admin']) }}",
                                 icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "{{ __('admin::general.shared.got_it') }}",

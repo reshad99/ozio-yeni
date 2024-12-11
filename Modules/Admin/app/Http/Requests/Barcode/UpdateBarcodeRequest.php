@@ -20,6 +20,21 @@ class UpdateBarcodeRequest extends FormRequest
     }
 
     /**
+     * @return array<string,string>
+     */
+    public function messages(): array
+    {
+        return [
+            'store_product_id.integer' => __('admin::general.validation.integer', ['attribute' => 'Məhsul']),
+            'store_product_id.not_regex' => __('admin::general.validation.not_regex', ['attribute' => 'Məhsul', 'regex' => 'boşluq']),
+            'store_product_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Məhsul']),
+            'barcode.not_regex' => __('admin::general.validation.not_regex', ['attribute' => 'Barkod', 'regex' => 'boşluq']),
+            'barcode.unique' => __('admin::general.validation.unique', ['attribute' => 'barkod']),
+            'barcode.string' => __('admin::general.validation.string', ['attribute' => 'Barkod']),
+        ];
+    }
+
+    /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
