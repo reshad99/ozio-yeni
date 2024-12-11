@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Rules\Password;
+use const _PHPStan_c684505c9\__;
 
 class UpdateStoreRequest extends FormRequest
 {
@@ -37,6 +38,34 @@ class UpdateStoreRequest extends FormRequest
             'close_time' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'date_format:H:i:s'],
             'zone_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('zones', 'id')->whereNull('deleted_at')],
             'branch_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('branches', 'id')->whereNull('deleted_at')],
+        ];
+    }
+
+    /**
+     * @return array<string,string>
+     */
+    public function messages(): array
+    {
+        return [
+            'module_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Modul']),
+            'name.unique' => __('admin::general.validation.unique', ['attribute' => 'Ad']),
+            'name.string' => __('admin::general.validation.string', ['attribute' => 'Ad']),
+            'name.max' => __('admin::general.validation.max', ['attribute' => 'Ad', 'max' => '25']),
+            'store_code.unique' => __('admin::general.validation.unique', ['attribute' => 'Mağaza kodu']),
+            'store_code.string' => __('admin::general.validation.string', ['attribute' => 'Mağaza kodu']),
+            'store_code.max' => __('admin::general.validation.max', ['attribute' => 'Mağaza kodu', 'max' => '25']),
+            'phone.unique' => __('admin::general.validation.unique', ['attribute' => 'Telefon']),
+            'phone.string' => __('admin::general.validation.string', ['attribute' => 'Telefon']),
+            'phone.max' => __('admin::general.validation.max', ['attribute' => 'Telefon', 'max' => '25']),
+            'email.unique' => __('admin::general.validation.unique', ['attribute' => 'Email']),
+            'email.email' => __('admin::general.validation.email', ['attribute' => 'Email']),
+            'password.string' => __('admin::general.validation.string', ['attribute' => 'Şifrə']),
+            'password.min' => __('admin::general.validation.min', ['attribute' => 'Şifrə', 'min' => '6']),
+            'password.confirmed' => __('admin::general.validation.confirmed', ['attribute' => 'Şifrə']),
+            'city_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Şəhər']),
+            'device_id.unique' => __('admin::general.validation.unique', ['attribute' => 'Cihaz kodu']),
+            'device_id.max' => __('admin::general.validation.max', ['attribute' => 'Cihaz kodu', 'max' => '25']),
+            'device.string' => __('admin::general.validation.string', ['attribute' => 'Cihaz kodu']),
         ];
     }
 

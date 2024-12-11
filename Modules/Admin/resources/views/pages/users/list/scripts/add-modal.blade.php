@@ -1,11 +1,11 @@
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         document.querySelector('[data-bs-target="#kt_modal_new_target"]').addEventListener('click',
-            async function() {
+            async function () {
                 await window.loadAjax();
             });
         // Class definition
-        var KTModalNewTarget = function() {
+        var KTModalNewTarget = function () {
             var submitButton;
             var cancelButton;
             var validator;
@@ -14,7 +14,7 @@
             var modalEl;
 
             // Init form inputs
-            var initForm = function() {
+            var initForm = function () {
                 // Tags. For more info, please visit the official plugin site: https://yaireo.github.io/tagify/
                 // var tags = new Tagify(form.querySelector('[name="tags"]'), {
                 //     whitelist: ["Important", "Urgent", "High", "Medium", "Low"],
@@ -50,7 +50,7 @@
             }
 
             // Handle form validation and submittion
-            var handleForm = function() {
+            var handleForm = function () {
                 // Stepper custom navigation
 
 
@@ -58,31 +58,34 @@
                 validator = FormValidation.formValidation(
                     form, {
                         fields: {
-                            first_name: {
+                            name: {
                                 validators: {
                                     notEmpty: {
-                                        message: "{{ __('admin::general.pages.users.list.first_name_is_required') }}"
-                                    }
-                                }
-                            },
-                            last_name: {
-                                validators: {
-                                    notEmpty: {
-                                        message: "{{ __('admin::general.pages.users.list.last_name_is_required') }}"
+                                        message: "{{ __('admin::general.validation.required', ['attribute' => 'Ad']) }}"
                                     }
                                 }
                             },
                             email: {
                                 validators: {
                                     notEmpty: {
-                                        message: "{{ __('admin::general.pages.users.list.email_is_required') }}"
+                                        message: "{{ __('admin::general.validation.required', ['attribute' => 'E-poçt']) }}"
+                                    },
+                                    emailAddress: {
+                                        message: "{{ __('admin::general.validation.email') }}"
+                                    }
+                                }
+                            },
+                            phone: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "{{ __('admin::general.validation.required', ['attribute' => 'Telefon nömrəsi']) }}"
                                     }
                                 }
                             },
                             password: {
                                 validators: {
                                     notEmpty: {
-                                        message: "{{ __('admin::general.pages.users.list.password_is_required') }}"
+                                        message: "{{ __('admin::general.validation.required', ['attribute' => 'Şifrə']) }}"
                                     }
                                 }
                             },
@@ -99,24 +102,25 @@
                     }
                 );
 
+
                 // Action buttons
-                submitButton.addEventListener('click', function(e) {
+                submitButton.addEventListener('click', function (e) {
                     console.log('click');
                     e.preventDefault();
 
                     // Validate form before submit
                     if (validator) {
-                        validator.validate().then(function(status) {
+                        validator.validate().then(function (status) {
                             console.log('validated!');
 
                             if (status == 'Valid') {
                                 let formData = $(
-                                        "#kt_modal_new_target_form")
+                                    "#kt_modal_new_target_form")
                                     .serializeArray();
                                 console.log(formData);
 
                                 //remove empty fields
-                                formData = formData.filter(function(item) {
+                                formData = formData.filter(function (item) {
                                     return item.value != '' && item.value !=
                                         '0';
                                 });
@@ -133,7 +137,7 @@
                                     //TODO ROUTE AJAX
                                     url: "", // Update with your API endpoint
                                     data: formData,
-                                    success: function(response) {
+                                    success: function (response) {
 
                                         // Handle the success response here
                                         submitButton
@@ -151,7 +155,7 @@
                                                 confirmButton: "btn btn-primary"
                                             }
                                         }).then(
-                                            function(
+                                            function (
                                                 result
                                             ) {
                                                 if (result
@@ -163,7 +167,7 @@
                                                         $(
                                                             '#kt_datatable_example_1'
                                                         )
-                                                        .DataTable();
+                                                            .DataTable();
                                                     datatable
                                                         .ajax
                                                         .reload();
@@ -172,8 +176,8 @@
                                                 }
                                             });
                                     },
-                                    error: function(xhr, status,
-                                        error) {
+                                    error: function (xhr, status,
+                                                     error) {
                                         submitButton
                                             .removeAttribute(
                                                 'data-kt-indicator'
@@ -194,10 +198,10 @@
                     }
                 });
 
-                cancelButton.addEventListener('click', function(e) {
+                cancelButton.addEventListener('click', function (e) {
                     e.preventDefault();
 
-                    customSwal.cancelIt().then(function(result) {
+                    customSwal.cancelIt().then(function (result) {
                         if (result.value) {
                             form.reset(); // Reset form
                             modal.hide(); // Hide modal
@@ -210,7 +214,7 @@
 
             return {
                 // Public functions
-                init: function() {
+                init: function () {
                     // Elements
                     modalEl = document.querySelector('#kt_modal_new_target');
 
@@ -231,7 +235,7 @@
         }();
 
         // On document ready
-        KTUtil.onDOMContentLoaded(function() {
+        KTUtil.onDOMContentLoaded(function () {
             KTModalNewTarget.init();
         });
     });

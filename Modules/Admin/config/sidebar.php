@@ -11,8 +11,8 @@ return [
             'can' => []
         ],
         [
-            'name' => __('admin::general.menu.users'),
-            'url' => 'admin.users.index',
+            'name' => __('admin::general.menu.admins'),
+            'url' => 'admin.admins.index',
             'icon' => 'ki-outline ki-people fs-2',
             'can' => [],
         ]
