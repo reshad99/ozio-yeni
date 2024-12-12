@@ -159,7 +159,7 @@ return [
         'got_it' => 'Bağla!',
         'sorry_looks_like_there_are_some_errors_detected' => 'Bağışlayın, görünür səhv var',
         'please_check_the_errors_and_try_again' => 'Xahiş edirik səhvləri yoxlayın və yenidən cəhd edin',
-        'are_you_sure_you_want_to_delete_this' => 'Bunu silmək istədiyinizə əminsiniz',
+        'are_you_sure_you_want_to_delete_this' => 'adlı :attribute silmək istədiyinizə əminsiniz',
         'not_deleted' => 'adlı :attribute silinmədi!',
         'successfully_deleted' => 'adlı :attribute uğurla silindi!',
         'yes_delete' => 'Bəli, sil',

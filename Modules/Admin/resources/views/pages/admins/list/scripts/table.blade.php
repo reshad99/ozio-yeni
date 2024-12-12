@@ -224,8 +224,7 @@
 
                     // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                     Swal.fire({
-                        text: "{{ __('admin::general.shared.are_you_sure_you_want_to_delete_this') }} " +
-                            customerName + "?",
+                        text: customerName + " {{ __('admin::general.shared.are_you_sure_you_want_to_delete_this',['attribute' => 'admini']) }} " + "?",
                         icon: "warning",
                         showCancelButton: true,
                         buttonsStyling: false,
