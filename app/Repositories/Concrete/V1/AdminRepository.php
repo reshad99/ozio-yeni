@@ -4,7 +4,6 @@ namespace App\Repositories\Concrete\V1;
 
 use App\Models\Admin;
 use App\Repositories\Abstract\V1\AdminRepositoryInterface;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
