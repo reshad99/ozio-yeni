@@ -21,6 +21,16 @@ interface IBaseRepository
      */
     public function orderBy($columnNumber, $sort): self;
 
+
+    /**
+     * @param string $outputColumn
+     * @param string $idColumn
+     * @param string $secondOutput
+     * @param string $jsonKey
+     * @return string
+     */
+    public function getSelectTwo($outputColumn, $idColumn = 'id', $secondOutput = '', $jsonKey = null): string;
+
     /**
      * @param int $limit
      * @return self
