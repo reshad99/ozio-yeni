@@ -129,8 +129,8 @@ class BaseRepository implements IBaseRepository
     /** {@inheritDoc} */
     public function getSelect2($perPage, $page, $outputColumn, $idColumn = 'id', $secondOutput = '', $jsonKey = null): string
     {
-        $this->paginate($perPage, $page);
-        $this->query->getCollection()->transform(function ($item) use ($outputColumn, $idColumn, $secondOutput, $jsonKey) {
+        $type = $this->paginate($perPage, $page);
+        $type->getCollection()->transform(function ($item) use ($outputColumn, $idColumn, $secondOutput, $jsonKey) {
             $text = $item->$outputColumn;
 
             if ($jsonKey && is_string($text) && self::isJson($text)) {
@@ -160,9 +160,9 @@ class BaseRepository implements IBaseRepository
         });
 
         return json_encode([
-            'results' => $this->query->items(),
+            'results' => $type->items(),
             'pagination' => [
-                'more' => $this->query->hasMorePages()
+                'more' => $type->hasMorePages()
             ]
         ]);
     }

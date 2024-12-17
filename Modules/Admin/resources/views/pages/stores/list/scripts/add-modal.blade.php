@@ -8,8 +8,8 @@
         $('.module-select2').select2({
                 dropdownParent: $("#kt_modal_new_target_form"),
                 placeholder: "Modul Axtar",
-                multiple: true,
-                closeOnSelect: false,
+                multiple: false,
+                closeOnSelect: true,
                 ajax: {
                     url: "{{ route('admin.ajax.modules.select2') }}",
                     delay: 250,

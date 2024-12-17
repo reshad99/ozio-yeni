@@ -19,7 +19,7 @@ class ModuleService
 
     public function getSelect2($perPage,$page)
     {
-        return $this->moduleRepository->getSelect2($perPage, $page, 'id', 'name');
+        return $this->moduleRepository->getSelect2($perPage, $page, 'name','id');
     }
 
     /**
