@@ -15,4 +15,9 @@ class ModuleRepository extends BaseRepository implements ModuleRepositoryInterfa
     ) {
         parent::__construct($model);
     }
+
+    public function select2()
+    {
+
+    }
 }

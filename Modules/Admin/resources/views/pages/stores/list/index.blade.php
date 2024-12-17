@@ -26,7 +26,7 @@
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#kt_modal_new_target">
                                         <i class="ki-duotone ki-plus fs-2"></i>
-                                        {{ __('admin::general.pages.admins.list.add_new_admin') }}
+                                        {{ __('admin::general.pages.stores.list.add_new_store') }}
                                     </button>
                                 </div>
                                 <!--end::Add user-->
@@ -197,11 +197,11 @@
                         </div>
                         <!--end::Modal - New Card-->
                     </div>
-                    @include('admin::pages.admins.list.sections.filtersSection')
+                    @include('admin::pages.stores.list.sections.filtersSection')
 
                     <!--begin::Datatable-->
                     <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
-                        @include('admin::pages.admins.list.sections.thSection')
+                        @include('admin::pages.stores.list.sections.thSection')
                         <tbody class="text-gray-600 fw-semibold">
                         </tbody>
                     </table>
@@ -215,16 +215,16 @@
     </div>
     <!--end::Content-->
 
-    @include('admin::pages.admins.list.sections.add-modal')
-    @include('admin::pages.admins.list.sections.edit-modal')
+    @include('admin::pages.stores.list.sections.add-modal')
+    @include('admin::pages.stores.list.sections.edit-modal')
 @endsection
 
 @section('scripts')
-    @include('admin::pages.admins.list.scripts.loadAjax')
-    @include('admin::pages.admins.list.scripts.table')
-    @include('admin::pages.admins.list.scripts.add-modal')
-    @include('admin::pages.admins.list.scripts.edit-modal')
-    @include('admin::pages.admins.list.scripts.filterScript')
+    @include('admin::pages.stores.list.scripts.loadAjax')
+    @include('admin::pages.stores.list.scripts.table')
+    @include('admin::pages.stores.list.scripts.add-modal')
+    @include('admin::pages.stores.list.scripts.edit-modal')
+    @include('admin::pages.stores.list.scripts.filterScript')
 
     <script>
         var hostUrl = "{{ asset('admin/assets/') }}";

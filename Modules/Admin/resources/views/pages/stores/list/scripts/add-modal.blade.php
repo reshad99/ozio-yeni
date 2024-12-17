@@ -4,6 +4,57 @@
             async function () {
                 await window.loadAjax();
             });
+
+        $('.module-select2').select2({
+                dropdownParent: $("#kt_modal_new_target_form"),
+                placeholder: "Modul Axtar",
+                multiple: true,
+                closeOnSelect: false,
+                ajax: {
+                    url: "{{ route('admin.ajax.modules.select2') }}",
+                    delay: 250,
+                    dataType: 'json',
+                }
+            }
+        );
+
+        new tempusDominus.TempusDominus(document.getElementById("open_time"), {
+            display: {
+                viewMode: "clock",
+                components: {
+                    decades: false,
+                    year: false,
+                    month: false,
+                    date: false,
+                    hours: true,
+                    minutes: true,
+                    seconds: false
+                }
+            },
+            localization: {
+                format: 'HH:mm',
+                hourCycle: 'h23'
+            }
+        });
+        new tempusDominus.TempusDominus(document.getElementById("close_time"), {
+            display: {
+                viewMode: "clock",
+                components: {
+                    decades: false,
+                    year: false,
+                    month: false,
+                    date: false,
+                    hours: true,
+                    minutes: true,
+                    seconds: false
+                }
+            },
+            localization: {
+                format: 'HH:mm',
+                hourCycle: 'h23'
+            }
+        });
+
         // Class definition
         var KTModalNewTarget = function () {
             var submitButton;

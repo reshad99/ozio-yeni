@@ -17,13 +17,15 @@ class BaseRepository implements IBaseRepository
     protected Builder $query;
 
     /**
-     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param \Illuminate\Database\Eloquent\Model $model
      */
     public function __construct(
         private $model
-    ) {
+    )
+    {
         $this->query = $this->model->newQuery();
     }
+
     /** {@inheritDoc} */
     public function search(string $search): self
     {
@@ -53,6 +55,7 @@ class BaseRepository implements IBaseRepository
     {
         return $this->query->skip($start)->take($limit)->get();
     }
+
     /** {@inheritDoc} */
     public function limit(int $limit): self
     {
@@ -78,7 +81,7 @@ class BaseRepository implements IBaseRepository
     public function count(): int
     {
         $query = clone $this->query;
-        return  $query->count();
+        return $query->count();
     }
 
     /** {@inheritDoc} */
@@ -124,8 +127,9 @@ class BaseRepository implements IBaseRepository
     // return getSelectTwo('id', 'product_code', '( {{product_code}} )', 'AZ');
 
     /** {@inheritDoc} */
-    public function getSelectTwo($outputColumn, $idColumn = 'id', $secondOutput = '', $jsonKey = null): string
+    public function getSelect2($perPage, $page, $outputColumn, $idColumn = 'id', $secondOutput = '', $jsonKey = null): string
     {
+        $this->paginate($perPage, $page);
         $this->query->getCollection()->transform(function ($item) use ($outputColumn, $idColumn, $secondOutput, $jsonKey) {
             $text = $item->$outputColumn;
 

@@ -24,7 +24,6 @@ return new class () extends Migration {
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('set null');
             $table->string('email')->nullable();
             $table->string('password')->nullable();
-            $table->string('device_id')->nullable();
             $table->string('lat');
             $table->string('lng');
             $table->enum('status', array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);
