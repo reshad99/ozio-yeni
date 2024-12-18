@@ -47,7 +47,7 @@
                     });
 
                     $.ajax({
-                        url: "{{ route('admin.ajax.admins.datatable') }}", // AJAX isteğinin yapılacağı URL
+                        url: "{{ route('admin.ajax.stores.datatable') }}", // AJAX isteğinin yapılacağı URL
                         data: data,
                         success: function (response) {
                             callback(
@@ -242,7 +242,7 @@
                                 .innerText;
 
                             let url =
-                                `{{ route('admin.ajax.admins.destroy', ['id' => '-1']) }}`;
+                                `{{ route('admin.ajax.stores.destroy', ['id' => '-1']) }}`;
                             url = url.replace("-1", id);
                             //ajax
                             $.ajax({
@@ -334,7 +334,7 @@
             deleteSelected.addEventListener('click', function () {
                 // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
                 Swal.fire({
-                    text: "Are you sure you want to delete selected admins?",
+                    text: "Are you sure you want to delete selected stores?",
                     icon: "warning",
                     showCancelButton: true,
                     buttonsStyling: false,
@@ -372,16 +372,16 @@
                             const headerCheckbox = container.querySelectorAll(
                                 '[type="checkbox"]')[0];
                             headerCheckbox.checked = false;
-                            let url = `{{ route('admin.ajax.admins.destroy-multiple', ['ids' => '-1']) }}`;
+                            let url = `{{ route('admin.ajax.stores.destroy-multiple', ['ids' => '-1']) }}`;
                             $.ajax({
                                 url: url,
                                 type: "DELETE",
                                 data: {ids: ids},
                                 success: function (response) {
-                                    console.log("Admins deleted successfully!");
+                                    console.log("stores deleted successfully!");
                                 },
                                 error: function (xhr) {
-                                    console.error("Error deleting admins", xhr);
+                                    console.error("Error deleting stores", xhr);
                                 }
                             });
                         });

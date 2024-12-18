@@ -6,6 +6,8 @@ use Modules\Admin\Http\Controllers\Auth\AdminLoginController;
 use Modules\Admin\Http\Controllers\Auth\AdminLogoutController;
 use Modules\Admin\Http\Controllers\User\AdminUserController;
 use Modules\Admin\Http\Controllers\Store\StoreController;
+use Modules\Admin\Http\Controllers\Module\ModuleController;
+use Modules\Admin\Http\Controllers\Currency\CurrencyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +46,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
         Route::get('/', [AdminController::class, 'index'])->name('index');
     });
 
+    Route::prefix('stores')->name('stores.')->group(function () {
+        Route::get('/', [StoreController::class, 'index'])->name('index');
+    });
+
     Route::prefix('ajax')->name('ajax.')->group(function () {
         Route::prefix('users')->name('users.')->group(function () {
             Route::get('datatable', [AdminUserController::class, 'datatable'])->name('datatable');
@@ -66,6 +72,14 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
             Route::post('update/{id}', [StoreController::class, 'update'])->name('update');
             Route::delete('destroy/{id}', [StoreController::class, 'destroy'])->name('destroy');
             Route::delete('destroy-multiple/{ids}', [StoreController::class, 'destroyMultiple'])->name('destroy-multiple');
+        });
+
+        Route::prefix('modules')->name('modules.')->group(function () {
+            Route::get('select2', [ModuleController::class, 'moduleSelect2'])->name('select2');
+        });
+
+        Route::prefix('currencies')->name('currencies.')->group(function () {
+            Route::get('select2', [CurrencyController::class, 'currencySelect2'])->name('select2');
         });
     });
 });

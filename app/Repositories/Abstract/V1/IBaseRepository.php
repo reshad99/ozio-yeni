@@ -29,7 +29,7 @@ interface IBaseRepository
      * @param string $jsonKey
      * @return string
      */
-    public function getSelectTwo($outputColumn, $idColumn = 'id', $secondOutput = '', $jsonKey = null): string;
+    public function getSelect2($perPage, $page, $outputColumn, $idColumn = 'id', $secondOutput = '', $jsonKey = null): string;
 
     /**
      * @param int $limit

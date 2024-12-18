@@ -16,7 +16,11 @@ class DatabaseSeeder extends Seeder
             [
                 RoleAndPermissionSeeder::class,
                 AdminSeeder::class,
-                UserSeeder::class
+                UserSeeder::class,
+                ModuleSeeder::class,
+                CountrySeeder::class,
+                CitySeeder::class,
+                CurrencySeeder::class,
             ]
         );
     }

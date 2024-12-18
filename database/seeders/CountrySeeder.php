@@ -13,7 +13,6 @@ class CountrySeeder extends Seeder
     public function run(): void
     {
         $countries = [
-            [
                 ['code' => 'US', 'name' => 'United States', 'phone_code' => '+1'],
                 ['code' => 'CA', 'name' => 'Canada', 'phone_code' => '+1'],
                 ['code' => 'AF', 'name' => 'Afghanistan', 'phone_code' => '+93'],
@@ -44,8 +43,6 @@ class CountrySeeder extends Seeder
                 ['code' => 'BO', 'name' => 'Bolivia', 'phone_code' => '+591'],
                 ['code' => 'BA', 'name' => 'Bosnia and Herzegovina', 'phone_code' => '+387'],
                 ['code' => 'BW', 'name' => 'Botswana', 'phone_code' => '+267'],
-
-
                 ['code' => 'BV', 'name' => 'Bouvet Island', 'phone_code' => '+47'],
                 ['code' => 'BR', 'name' => 'Brazil', 'phone_code' => '+55'],
                 ['code' => 'IO', 'name' => 'British lndian Ocean Territory', 'phone_code' => '+246'],
@@ -258,7 +255,6 @@ class CountrySeeder extends Seeder
                 ['code' => 'ZR', 'name' => 'Zaire', 'phone_code' => '+243'],
                 ['code' => 'ZM', 'name' => 'Zambia', 'phone_code' => '+260'],
                 ['code' => 'ZW', 'name' => 'Zimbabwe', 'phone_code' => '+263'],
-            ]
         ];
 
         Country::insert($countries);

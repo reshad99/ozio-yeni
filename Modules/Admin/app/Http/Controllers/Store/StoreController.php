@@ -34,7 +34,7 @@ class StoreController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function datateble(Request $request)
+    public function datatable(Request $request)
     {
         return $this->storeService->yajraDatatableExport($request);
     }

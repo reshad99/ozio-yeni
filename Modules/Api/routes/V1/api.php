@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+//use Modules\Api\Http\Controllers\TestController;
+//
+//Route::get('test', [TestController::class, 'test']);
+
 use Modules\Api\Http\Controllers\TestController;
 use Modules\Api\Http\Controllers\V1\AuthController;
 

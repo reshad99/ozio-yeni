@@ -15,6 +15,12 @@ return [
             'url' => 'admin.admins.index',
             'icon' => 'ki-outline ki-people fs-2',
             'can' => [],
+        ],
+        [
+            'name' => __('admin::general.menu.stores'),
+            'url' => 'admin.stores.index',
+            'icon' => 'ki-outline ki-people fs-2',
+            'can' => [],
         ]
         // [
         //     'name' => __('admin::general.menu.emergency-calls'),
