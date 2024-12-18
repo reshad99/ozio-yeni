@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Api\Http\Controllers\ApiController;
+use Modules\Api\Http\Controllers\V1\AuthController;
 
 /*
  *--------------------------------------------------------------------------

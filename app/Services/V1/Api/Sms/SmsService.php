@@ -5,6 +5,7 @@ namespace App\Services\V1\Api\Sms;
 use App\Enums\SmsText;
 use App\Jobs\SmsBulk;
 use App\Models\SmsLog;
+use App\Services\V1\Api\Sms\Gateways\Lsim;
 use App\Services\V1\Api\Sms\SmsGateway;
 use Illuminate\Support\Facades\Log;
 use Nette\Utils\Json;
