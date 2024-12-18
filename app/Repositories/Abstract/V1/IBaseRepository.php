@@ -66,6 +66,12 @@ interface IBaseRepository
      */
     public function ofId(int $id);
 
+       /**
+     * @param int $id
+     * @return  Model
+     */
+    public function first();
+
     /**
      * Create a new model instance.
      *

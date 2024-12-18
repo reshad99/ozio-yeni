@@ -36,7 +36,8 @@ class CreateVersion extends Command
      * @var string[]
      */
     private $rootDirectories = [
-        'routes',
+        'Modules/Api/app/Http/Controllers',
+        'Modules/Api/routes',
     ];
 
     /**

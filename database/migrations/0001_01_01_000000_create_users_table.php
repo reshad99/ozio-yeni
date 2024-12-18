@@ -14,12 +14,13 @@ return new class () extends Migration {
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->string('password');
+            $table->string('password')->nullable();
+            $table->string('remember_token')->nullable();
             $table->string('country_code');
             $table->string('phone');
             $table->string('bonus_card_no')->nullable();
             $table->string('ref_code')->nullable();
-            $table->boolean('want_notification');
+            $table->boolean('want_notification')->default(1);
             $table->timestamps();
             $table->softDeletes();
 

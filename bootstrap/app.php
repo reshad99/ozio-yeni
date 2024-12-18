@@ -1,5 +1,6 @@
 <?php
 
+use App\Exceptions\ExceptionResponse;
 use App\Http\Middleware\RowPermissionMiddleware;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -18,11 +19,11 @@ return Application::configure(basePath: dirname(__DIR__))
         then: function () {
 
             foreach (config('services.versions') as $version) {
-                $version = ucfirst($version);
+                $capitalVersion = ucfirst($version);
 
                 Route::middleware('api')
                     ->prefix("api/$version")
-                    ->group(base_path("Modules/Api/routes/$version/api.php"));
+                    ->group(base_path("Modules/Api/routes/$capitalVersion/api.php"));
             }
 
 
@@ -39,8 +40,13 @@ return Application::configure(basePath: dirname(__DIR__))
             'row-perm' => RowPermissionMiddleware::class,
         ]);
     })
-    ->withExceptions(function (Exceptions $exceptions) {
+    ->withExceptions(function (Exceptions $exceptions): void {
         if (request()->expectsJson() && !request()->ajax()) {
+
+            $exceptions->report(function (ExceptionResponse $e) {
+                return response(['success' => false, 'statusCode' => $e->getCode(), 'message' => $e->getMessage()], $e->getCode());
+            });
+
             $exceptions->report(function (ValidationException $e) {
                 return response(['success' => false, 'statusCode' => 422, 'message' => 'Məlumatlar düzgün deyil', 'errors' => $e->errors()], 422);
             });

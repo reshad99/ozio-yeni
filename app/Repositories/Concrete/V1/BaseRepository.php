@@ -20,9 +20,12 @@ class BaseRepository implements IBaseRepository
      * @param \Illuminate\Database\Eloquent\Model $model
      */
     public function __construct(
+
         private $model
     )
     {
+        protected $model
+    ) {
         $this->query = $this->model->newQuery();
     }
 
@@ -89,6 +92,15 @@ class BaseRepository implements IBaseRepository
     {
         $query = clone $this->query;
         $object = $query->find($id);
+        return $object;
+    }
+
+
+    /** {@inheritDoc} */
+    public function first()
+    {
+        $query = clone $this->query;
+        $object = $query->first();
         return $object;
     }
 

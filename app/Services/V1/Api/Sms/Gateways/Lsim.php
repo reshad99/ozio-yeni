@@ -84,6 +84,8 @@ class Lsim implements SmsGateway
         $this->setRequestBody($message);
         $htppCall = Http::post($this->url, $this->body);
         if (isset($htppCall->json()["successMessage"])) {
+            Log::channel('sms')->info("sms success");
+
             return true;
         } else {
             Log::channel('sms')->info("sms error");
