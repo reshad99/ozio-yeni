@@ -71,22 +71,30 @@
                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.stores.list.table.currency') }}</label>
                                 <!--end::Label-->
                                 <!--begin::Select-->
-                                <select class="form-select form-select-solid select2_col" data-control="select2"
+                                <select class="form-select form-select-solid currency-select2" data-control="select2"
                                         data-hide-search="true" id="currency_id" name="currency_id">
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
+                                </select>
+                                <!--end::Select-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <div class="col-4 col-lg-4">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7">
+                                <!--begin::Label-->
+                                <label for="country_id"
+                                       class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.stores.list.table.country') }}</label>
+                                <!--end::Label-->
+                                <!--begin::Select-->
+                                <select class="form-select form-select-solid country-select2" data-control="select2"
+                                        data-hide-search="true" id="city_id" name="country_id">
                                     <option value="asd">ASD</option>
                                 </select>
                                 <!--end::Select-->
                             </div>
                             <!--end::Input group-->
                         </div>
-                        <div class="col-6 col-lg-6">
+                        <div class="col-4 col-lg-4">
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
@@ -94,22 +102,15 @@
                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.stores.list.table.city') }}</label>
                                 <!--end::Label-->
                                 <!--begin::Select-->
-                                <select class="form-select form-select-solid select2_col" data-control="select2"
+                                <select class="form-select form-select-solid city-select2" data-control="select2"
                                         data-hide-search="true" id="city_id" name="city_id">
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
                                     <option value="asd">ASD</option>
                                 </select>
                                 <!--end::Select-->
                             </div>
                             <!--end::Input group-->
                         </div>
-                        <div class="col-6 col-lg-6">
+                        <div class="col-4 col-lg-4">
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
@@ -203,16 +204,11 @@
                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.stores.list.table.status') }}</label>
                                 <!--end::Label-->
                                 <!--begin::Select-->
-                                <select class="form-select form-select-solid select2_col" data-control="select2"
+                                <select class="form-select form-select-solid status-select2" data-control="select2"
                                         data-hide-search="true" id="status" name="status">
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
+                                    @foreach(\App\Enums\StatusEnum::cases() as $case)
+                                        <option value="{{$case->value}}">{{$case->value}}</option>
+                                    @endforeach
                                 </select>
                                 <!--end::Select-->
                             </div>
@@ -256,27 +252,27 @@
                             </div>
                             <!--end::Input group-->
                         </div>
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div>
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-7">
-                                    <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" name="have_vegan"/>
-                                        <span
-                                            class="form-check-label fw-semibold text-gray-700 ms-2">{{ __('admin::general.pages.stores.list.table.have_vegan') }}</span>
-                                    </label>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="fv-row mb-7">
-                                    <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                        <input class="form-check-input" type="checkbox" name="have_not_vegan"/>
-                                        <span
-                                            class="form-check-label fw-semibold text-gray-700 ms-2">{{ __('admin::general.pages.stores.list.table.have_not_vegan') }}</span>
-                                    </label>
-                                </div>
-                                <!--end::Input group-->
+                        <div class="col-6 col-lg-6">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7">
+                                <label class="form-check form-check-sm form-check-custom form-check-solid">
+                                    <input class="form-check-input" type="checkbox" name="have_vegan"/>
+                                    <span
+                                        class="form-check-label fw-semibold text-gray-700 ms-2">{{ __('admin::general.pages.stores.list.table.have_vegan') }}</span>
+                                </label>
                             </div>
+                            <!--end::Input group-->
+                        </div>
+                        <div class="col-6 col-lg-6">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7">
+                                <label class="form-check form-check-sm form-check-custom form-check-solid">
+                                    <input class="form-check-input" type="checkbox" name="have_not_vegan"/>
+                                    <span
+                                        class="form-check-label fw-semibold text-gray-700 ms-2">{{ __('admin::general.pages.stores.list.table.have_not_vegan') }}</span>
+                                </label>
+                            </div>
+                            <!--end::Input group-->
                         </div>
                         <div class="col-6 col-lg-6">
                             <!--begin::Input group-->

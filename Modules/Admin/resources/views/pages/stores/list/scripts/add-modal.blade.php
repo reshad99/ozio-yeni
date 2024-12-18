@@ -18,6 +18,37 @@
             }
         );
 
+        $('.currency-select2').select2({
+                dropdownParent: $("#kt_modal_new_target_form"),
+                placeholder: "Valyuta Axtar",
+                multiple: false,
+                closeOnSelect: true,
+                ajax: {
+                    url: "{{ route('admin.ajax.currencies.select2') }}",
+                    delay: 250,
+                    dataType: 'json',
+                }
+            }
+        );
+
+        {{--$('.city-select2').select2({--}}
+        {{--        dropdownParent: $("#kt_modal_new_target_form"),--}}
+        {{--        placeholder: "Şəhər Axtar",--}}
+        {{--        multiple: false,--}}
+        {{--        closeOnSelect: true,--}}
+        {{--        ajax: {--}}
+        {{--            url: "{{ route('admin.ajax.cities.select2') }}",--}}
+        {{--            delay: 250,--}}
+        {{--            dataType: 'json',--}}
+        {{--        }--}}
+        {{--    }--}}
+        {{--);--}}
+
+        $('.status-select2').select2({
+                dropdownParent: $("#kt_modal_new_target_form"),
+            }
+        );
+
         new tempusDominus.TempusDominus(document.getElementById("open_time"), {
             display: {
                 viewMode: "clock",

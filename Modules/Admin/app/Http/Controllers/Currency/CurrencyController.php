@@ -1,30 +1,25 @@
 <?php
 
-namespace Modules\Admin\Http\Controllers\Module;
+namespace Modules\Admin\Http\Controllers\Currency;
 
 use App\Http\Controllers\Controller;
-use App\Models\Module;
-use App\Services\V1\RepositoryServices\ModuleService;
+use App\Services\V1\RepositoryServices\CurrencyService;
 use Illuminate\Http\Request;
 
-class ModuleController extends Controller
+class CurrencyController extends Controller
 {
 
-    public function __construct(private ModuleService $moduleService)
+    public function __construct(private CurrencyService $currencyService)
     {
     }
 
-    /**
-     * @param Request $request
-     * @return mixed
-     */
-    public function moduleSelect2(Request $request)
+    public function currencySelect2(Request $request)
     {
         $filter = [];
         $filter['name'] = ["operator" => "LIKE", 'value' => '%' . $request->q . '%'];
-        $this->moduleService->setFilter($filter);
+        $this->currencyService->setFilter($filter);
 
-        return $this->moduleService->getSelect2(10, $request->page ?? 1);
+        return $this->currencyService->getSelect2(10, $request->page ?? 1);
     }
 
     /**

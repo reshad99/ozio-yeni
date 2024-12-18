@@ -7,6 +7,7 @@ use Modules\Admin\Http\Controllers\Auth\AdminLogoutController;
 use Modules\Admin\Http\Controllers\User\AdminUserController;
 use Modules\Admin\Http\Controllers\Store\StoreController;
 use Modules\Admin\Http\Controllers\Module\ModuleController;
+use Modules\Admin\Http\Controllers\Currency\CurrencyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,10 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
 
         Route::prefix('modules')->name('modules.')->group(function () {
             Route::get('select2', [ModuleController::class, 'moduleSelect2'])->name('select2');
+        });
+
+        Route::prefix('currencies')->name('currencies.')->group(function () {
+            Route::get('select2', [CurrencyController::class, 'currencySelect2'])->name('select2');
         });
     });
 });

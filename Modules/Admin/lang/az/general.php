@@ -155,6 +155,7 @@ return [
                     'currency' => 'Valyuta',
                     'phone' => 'Telefon nömrəsi',
                     'city' => 'Şəhər',
+                    'country' => 'Ölkə',
                     'email' => 'E-poçt',
                     'password' => 'Şifrə',
                     'password_confirmation' => 'Şifrəni təsdiqlə',

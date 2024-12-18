@@ -20,6 +20,8 @@ return new class () extends Migration {
             $table->bigInteger('currency_id');
             $table->foreign('currency_id')->references('id')->on('currencies')->onDelete('set null');
             $table->string('phone');
+            $table->bigInteger('country_id');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('set null');
             $table->bigInteger('city_id');
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('set null');
             $table->string('email')->nullable();
