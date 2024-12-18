@@ -59,10 +59,16 @@ class User extends Authenticatable implements JWTSubject
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * @var array<int,string>
+     */
+    protected $hidden = [
+        'password'
+    ];
 
     /**
      * @return HasMany<UserAddress>

@@ -4,10 +4,8 @@ namespace App\Services\V1\Api\Sms\Gateways;
 
 use App\Enums\LsimResponseCode;
 use App\Services\V1\Api\Sms\SmsGateway;
-use Exception;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
-use Nette\Utils\Json;
 
 class Lsim implements SmsGateway
 {
@@ -66,7 +64,8 @@ class Lsim implements SmsGateway
             'sender' => $this->sender,
             'scheduled' => $scheduledData,
             'unicode' => $unicodeData
-        ];;
+        ];
+        ;
     }
 
     public function setContent(string $content): void

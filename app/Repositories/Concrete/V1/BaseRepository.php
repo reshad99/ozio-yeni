@@ -129,6 +129,59 @@ class BaseRepository implements IBaseRepository
         return $this->query->paginate($perPage, ['*'], 'page', $page);
     }
 
+    //example using
+    // return getSelectTwo('id', 'product_code', '( {{product_code}} )', 'AZ');
+
+    /** {@inheritDoc} */
+    public function getSelectTwo($outputColumn, $idColumn = 'id', $secondOutput = '', $jsonKey = null): string
+    {
+        $this->query->getCollection()->transform(function ($item) use ($outputColumn, $idColumn, $secondOutput, $jsonKey) {
+            $text = $item->$outputColumn;
+
+            if ($jsonKey && is_string($text) && self::isJson($text)) {
+                $textArray = json_decode($text, true);
+                $text = $textArray[$jsonKey] ?? $text;
+            }
+            // Eğer ikinci bir parametre olarak dinamik bir sütun formatı varsa
+            if ($secondOutput != '') {
+                // {{column_name}} olan stringi analiz edelim
+                preg_match_all('/\{\{(\w+)\}\}/', $secondOutput, $matches);
+
+                foreach ($matches[1] as $columnName) {
+                    if (isset($item->$columnName)) {
+                        // Column'u bulduğumuzda, ana metine ekleyelim.
+                        $secondOutput = str_replace('{{' . $columnName . '}}', $item->$columnName, $secondOutput);
+                    }
+                }
+
+                // Sonra bu sonucu ana text'e ekleyelim.
+                $text .= ' ' . $secondOutput;
+            }
+
+            return [
+                'id' => $item->$idColumn,
+                'text' => $text
+            ];
+        });
+
+        return json_encode([
+            'results' => $this->query->items(),
+            'pagination' => [
+                'more' => $this->query->hasMorePages()
+            ]
+        ]);
+    }
+
+    /**
+     * @param string $string
+     * @return bool
+     */
+    private static function isJson($string)
+    {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
+
     /** {@inheritDoc} */
     public function with(array $relations): self
     {
@@ -241,5 +294,4 @@ class BaseRepository implements IBaseRepository
         $this->query->whereNotIn($column, $value);
         return $this;
     }
-
 }

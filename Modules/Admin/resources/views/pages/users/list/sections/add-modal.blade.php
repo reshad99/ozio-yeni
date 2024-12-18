@@ -33,7 +33,7 @@
                                 <!--end::Label-->
                                 <!--begin::Input-->
                                 <input type="text" name="name" id="name"
-                                    class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Full name" />
+                                    class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Name" />
                                 <!--end::Input-->
                             </div>
                             <!--end::Input group-->

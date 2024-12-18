@@ -326,13 +326,14 @@
     <script src="{{ asset('admin/assets/plugins/global/plugins.bundle.js') }}"></script>
     <script src="{{ asset('admin/assets/js/scripts.bundle.js') }}"></script>
     <!--end::Global Javascript Bundle-->
+    <script src="https://cdn.jsdelivr.net/npm/inputmask/dist/inputmask.min.js"></script>
     <script>
         //get all readonly inputs add cursor:alias;
         var inputs = document.querySelectorAll('input[readonly]');
         for (var i = 0; i < inputs.length; i++) {
             inputs[i].style.cursor = 'unset';
         }
-        
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -351,11 +352,22 @@
                 })
             },
             dataError: function(xhr) {
+                let errorMsg = "<br>";
+
+                for (const [key, value] of Object.entries(xhr.responseJSON.errors)) {
+                    //check if value is array 
+                    if (Array.isArray(value)) {
+                        value.forEach(function(item) {
+                            errorMsg += item + "<br>";
+                        });
+                    } else {
+                        errorMsg += value + "<br>";
+                    }
+                }
+
                 return Swal.fire({
-                    text: "{{ __('admin::general.shared.sorry_looks_like_there_are_some_errors_detected') }} " +
-                        xhr
-                        .responseJSON
-                        .message,
+                    html: "{{ __('admin::general.shared.sorry_looks_like_there_are_some_errors_detected') }} " +
+                        errorMsg,
                     icon: "error",
                     buttonsStyling: false,
                     confirmButtonText: "{{ __('admin::general.shared.got_it') }}",

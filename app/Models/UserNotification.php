@@ -18,6 +18,16 @@ class UserNotification extends Model
     protected $guarded = [];
 
     /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'read_at' => 'datetime',
+        ];
+    }
+
+    /**
      * @return BelongsTo<User, self>
      */
     public function user(): BelongsTo

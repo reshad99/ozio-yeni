@@ -19,6 +19,18 @@ class StoreBranch extends Model
     protected $guarded = [];
 
     /**
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'courier_self_service' => 'boolean',
+            'take_away' => 'boolean',
+            'free_delivery' => 'boolean',
+        ];
+    }
+
+    /**
      * @return HasMany<Store>
      */
     public function stores(): HasMany

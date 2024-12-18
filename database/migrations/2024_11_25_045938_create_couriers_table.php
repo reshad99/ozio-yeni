@@ -17,7 +17,7 @@ return new class () extends Migration {
             $table->string('phone')->nullable();
             $table->bigInteger('store_id')->nullable();
             $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
-            $table->string('email')->unique();
+            $table->string('email');
             $table->string('password');
             $table->decimal('total_earn', 8, 2)->default(0);
             $table->decimal('not_paid', 8, 2)->default(0);
@@ -30,6 +30,8 @@ return new class () extends Migration {
             $table->string('lng')->nullable();
             $table->enum('status', array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);
             $table->timestamps();
+            $table->softDeletes();
+            $table->unique(['email', 'deleted_at']);
         });
     }
 

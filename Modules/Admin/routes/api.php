@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Admin\Http\Controllers\AdminController;
-
+use Modules\Admin\Http\Controllers\Admin\AdminController;
 /*
  *--------------------------------------------------------------------------
  * API Routes
