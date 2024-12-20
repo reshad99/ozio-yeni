@@ -30,14 +30,13 @@ class StoreStoreRequest extends FormRequest
             'lat' => ['required', 'string', 'max:25'],
             'lng' => ['required', 'string', 'max:25'],
             'status' => ['sometimes', new Enum(StatusEnum::class)],
-            'rating' => ['sometimes', 'numeric', 'min:1', 'max:5'],
             'store_category_id' => ['sometimes', Rule::exists('categories', 'id')->whereNull('deleted_at')],
             'have_vegan' => ['sometimes', 'numeric', 'min:0', 'max:1'],
             'have_not_vegan' => ['sometimes', 'numeric', 'min:0', 'max:1'],
             'open_time' => ['required', 'date_format:H:i:s'],
             'close_time' => ['required', 'date_format:H:i:s'],
             'zone_id' => ['required', Rule::exists('zones', 'id')->whereNull('deleted_at')],
-            'branch_id' => ['sometimes', Rule::exists('branches', 'id')->whereNull('deleted_at')],
+            'branch_id' => ['sometimes', Rule::exists('store_branches', 'id')->whereNull('deleted_at')],
         ];
     }
 
@@ -48,7 +47,7 @@ class StoreStoreRequest extends FormRequest
     {
         return [
             'module_id.required' => __('admin::general.validation.required', ['attribute' => 'Modul']),
-            'module_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Modul']),
+//            'module_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Modul']),
             'name.required' => __('admin::general.validation.required', ['attribute' => 'Ad']),
             'name.unique' => __('admin::general.validation.unique', ['attribute' => 'ad']),
             'name.string' => __('admin::general.validation.string', ['attribute' => 'Ad']),
@@ -60,7 +59,7 @@ class StoreStoreRequest extends FormRequest
             'store_code.max' => __('admin::general.validation.max', ['attribute' => 'Mağaza kodu']),
 
             'currency_id.required' => __('admin::general.validation.required', ['attribute' => 'Valyuta']),
-            'currency_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Valyuta']),
+//            'currency_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Valyuta']),
 
             'phone.required' => __('admin::general.validation.required', ['attribute' => 'Telefon nömrəsi']),
             'phone.unique' => __('admin::general.validation.unique', ['attribute' => 'telefon nömrəsi']),
@@ -68,7 +67,7 @@ class StoreStoreRequest extends FormRequest
             'phone.max' => __('admin::general.validation.max', ['attribute' => 'Telefon nömrəsi']),
 
             'city_id.required' => __('admin::general.validation.required', ['attribute' => 'Şəhər']),
-            'city_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Şəhər']),
+//            'city_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Şəhər']),
 
             'email.email' => __('admin::general.validation.email'),
             'email.unique' => __('admin::general.validation.unique', ['attribute' => 'email']),
