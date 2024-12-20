@@ -24,8 +24,6 @@ class BaseRepository implements IBaseRepository
         private $model
     )
     {
-        protected $model
-    ) {
         $this->query = $this->model->newQuery();
     }
 

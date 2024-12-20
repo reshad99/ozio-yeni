@@ -31,8 +31,8 @@ class UpdateStoreRequest extends FormRequest
             'lng' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
             'status' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', new Enum(StatusEnum::class)],
             'store_category_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('categories', 'id')->whereNull('deleted_at')],
-            'have_vegan' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'min:0', 'max:1'],
-            'have_not_vegan' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'min:0', 'max:1'],
+            'have_vegan' => ['nullable', 'sometimes', 'boolean'],
+            'have_not_vegan' => ['nullable', 'sometimes', 'boolean'],
             'open_time' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'date_format:H:i:s'],
             'close_time' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'date_format:H:i:s'],
             'zone_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('zones', 'id')->whereNull('deleted_at')],
@@ -65,6 +65,8 @@ class UpdateStoreRequest extends FormRequest
             'device_id.unique' => __('admin::general.validation.unique', ['attribute' => 'Cihaz kodu']),
             'device_id.max' => __('admin::general.validation.max', ['attribute' => 'Cihaz kodu', 'max' => '25']),
             'device.string' => __('admin::general.validation.string', ['attribute' => 'Cihaz kodu']),
+            'have_vegan.boolean' => __('admin::general.validation.boolean', ['attribute' => 'Vegan']),
+            'have_not_vegan.boolean' => __('admin::general.validation.boolean', ['attribute' => 'Vegan']),
         ];
     }
 
