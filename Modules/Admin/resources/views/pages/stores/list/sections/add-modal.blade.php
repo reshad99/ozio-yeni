@@ -37,6 +37,22 @@
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
+                                <label for="store_category_id"
+                                       class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.stores.list.table.store_category') }}</label>
+                                <!--end::Label-->
+                                <!--begin::Select-->
+                                <select class="form-select form-select-solid store-category-select2"
+                                        data-control="select2"
+                                        data-hide-search="true" id="store_category_id" name="store_category_id">
+                                </select>
+                                <!--end::Select-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <div class="col-12 col-lg-12">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7">
+                                <!--begin::Label-->
                                 <label for="name"
                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.stores.list.table.name') }}</label>
                                 <!--end::Label-->
@@ -87,8 +103,7 @@
                                 <!--end::Label-->
                                 <!--begin::Select-->
                                 <select class="form-select form-select-solid country-select2" data-control="select2"
-                                        data-hide-search="true" id="city_id" name="country_id">
-                                    <option value="asd">ASD</option>
+                                        data-hide-search="true" id="country_id" name="country_id">
                                 </select>
                                 <!--end::Select-->
                             </div>
@@ -104,7 +119,6 @@
                                 <!--begin::Select-->
                                 <select class="form-select form-select-solid city-select2" data-control="select2"
                                         data-hide-search="true" id="city_id" name="city_id">
-                                    <option value="asd">ASD</option>
                                 </select>
                                 <!--end::Select-->
                             </div>
@@ -166,7 +180,25 @@
                             </div>
                             <!--end::Input group-->
                         </div>
-                        <div class="col-6 col-lg-6">
+                        <div class="col-4 col-lg-4">
+                            <!--begin::Input group-->
+                            <div class="fv-row mb-7">
+                                <!--begin::Label-->
+                                <label for="status"
+                                       class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.stores.list.table.status') }}</label>
+                                <!--end::Label-->
+                                <!--begin::Select-->
+                                <select class="form-select form-select-solid status-select2" data-control="select2"
+                                        data-hide-search="true" id="status" name="status">
+                                    @foreach(\App\Enums\StatusEnum::cases() as $case)
+                                        <option value="{{$case->value}}">{{ucfirst($case->value)}}</option>
+                                    @endforeach
+                                </select>
+                                <!--end::Select-->
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <div class="col-4 col-lg-4">
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
@@ -181,7 +213,7 @@
                             </div>
                             <!--end::Input group-->
                         </div>
-                        <div class="col-6 col-lg-6">
+                        <div class="col-4 col-lg-4">
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
@@ -193,62 +225,6 @@
                                        class="form-control form-control-solid mb-3 mb-lg-0"
                                        placeholder="{{ __('admin::general.pages.stores.list.table.lng') }}"/>
                                 <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                        </div>
-                        <div class="col-6 col-lg-6">
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label for="status"
-                                       class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.stores.list.table.status') }}</label>
-                                <!--end::Label-->
-                                <!--begin::Select-->
-                                <select class="form-select form-select-solid status-select2" data-control="select2"
-                                        data-hide-search="true" id="status" name="status">
-                                    @foreach(\App\Enums\StatusEnum::cases() as $case)
-                                        <option value="{{$case->value}}">{{$case->value}}</option>
-                                    @endforeach
-                                </select>
-                                <!--end::Select-->
-                            </div>
-                            <!--end::Input group-->
-                        </div>
-                        <div class="col-6 col-lg-6">
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label for="rating"
-                                       class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.stores.list.table.rating') }}</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <input type="text" name="rating" id="rating"
-                                       class="form-control form-control-solid mb-3 mb-lg-0"
-                                       placeholder="{{ __('admin::general.pages.stores.list.table.rating') }}"/>
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                        </div>
-                        <div class="col-12 col-lg-12">
-                            <!--begin::Input group-->
-                            <div class="fv-row mb-7">
-                                <!--begin::Label-->
-                                <label for="store_category_id"
-                                       class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.stores.list.table.store_category') }}</label>
-                                <!--end::Label-->
-                                <!--begin::Select-->
-                                <select class="form-select form-select-solid select2_col" data-control="select2"
-                                        data-hide-search="true" id="store_category_id" name="store_category_id">
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                </select>
-                                <!--end::Select-->
                             </div>
                             <!--end::Input group-->
                         </div>
@@ -307,16 +283,7 @@
                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.stores.list.table.zone') }}</label>
                                 <!--end::Label-->
                                 <!--begin::Select-->
-                                <select class="form-select form-select-solid select2_col" data-control="select2"
-                                        data-hide-search="true" id="zone_id" name="zone_id">
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
+                                <select class="form-select form-select-solid zone-select2" data-control="select2">
                                 </select>
                                 <!--end::Select-->
                             </div>
@@ -330,16 +297,8 @@
                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.stores.list.table.branch') }}</label>
                                 <!--end::Label-->
                                 <!--begin::Select-->
-                                <select class="form-select form-select-solid select2_col" data-control="select2"
+                                <select class="form-select form-select-solid store-branches-select2" data-control="select2"
                                         data-hide-search="true" id="branch_id" name="branch_id">
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
-                                    <option value="asd">ASD</option>
                                 </select>
                                 <!--end::Select-->
                             </div>

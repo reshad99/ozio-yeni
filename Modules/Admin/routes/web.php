@@ -4,10 +4,15 @@ use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\Admin\AdminController;
 use Modules\Admin\Http\Controllers\Auth\AdminLoginController;
 use Modules\Admin\Http\Controllers\Auth\AdminLogoutController;
-use Modules\Admin\Http\Controllers\User\AdminUserController;
-use Modules\Admin\Http\Controllers\Store\StoreController;
-use Modules\Admin\Http\Controllers\Module\ModuleController;
+use Modules\Admin\Http\Controllers\City\CityController;
+use Modules\Admin\Http\Controllers\Country\CountryController;
 use Modules\Admin\Http\Controllers\Currency\CurrencyController;
+use Modules\Admin\Http\Controllers\Module\ModuleController;
+use Modules\Admin\Http\Controllers\Store\StoreController;
+use Modules\Admin\Http\Controllers\StoreCategory\StoreCategoryController;
+use Modules\Admin\Http\Controllers\User\AdminUserController;
+use Modules\Admin\Http\Controllers\StoreBranch\StoreBranchController;
+use Modules\Admin\Http\Controllers\Zone\ZoneController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,6 +85,26 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
 
         Route::prefix('currencies')->name('currencies.')->group(function () {
             Route::get('select2', [CurrencyController::class, 'currencySelect2'])->name('select2');
+        });
+
+        Route::prefix('countries')->name('countries.')->group(function () {
+            Route::get('select2', [CountryController::class, 'countrySelect2'])->name('select2');
+        });
+
+        Route::prefix('cities')->name('cities.')->group(function () {
+            Route::get('select2', [CityController::class, 'citySelect2'])->name('select2');
+        });
+
+        Route::prefix('storeCategories')->name('storeCategories.')->group(function () {
+            Route::get('select2', [StoreCategoryController::class, 'storeCategorySelect2'])->name('select2');
+        });
+
+        Route::prefix('zones')->name('zones.')->group(function () {
+            Route::get('select2', [ZoneController::class, 'zoneSelect2'])->name('select2');
+        });
+
+        Route::prefix('storeBranches')->name('storeBranches.')->group(function () {
+            Route::get('select2', [StoreBranchController::class, 'storeBranchSelect2'])->name('select2');
         });
     });
 });

@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
                 CountrySeeder::class,
                 CitySeeder::class,
                 CurrencySeeder::class,
+                StoreCategorySeeder::class,
+                StoreBranchSeeder::class,
+                ZoneSeeder::class,
             ]
         );
     }

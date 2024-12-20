@@ -30,7 +30,6 @@ class UpdateStoreRequest extends FormRequest
             'lat' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
             'lng' => ['nullable', 'string', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
             'status' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', new Enum(StatusEnum::class)],
-            'rating' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'min:1', 'max:5'],
             'store_category_id' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', Rule::exists('categories', 'id')->whereNull('deleted_at')],
             'have_vegan' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'min:0', 'max:1'],
             'have_not_vegan' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'numeric', 'min:0', 'max:1'],

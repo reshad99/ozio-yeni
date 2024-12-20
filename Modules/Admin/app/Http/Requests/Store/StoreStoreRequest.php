@@ -30,14 +30,13 @@ class StoreStoreRequest extends FormRequest
             'lat' => ['required', 'string', 'max:25'],
             'lng' => ['required', 'string', 'max:25'],
             'status' => ['sometimes', new Enum(StatusEnum::class)],
-            'rating' => ['sometimes', 'numeric', 'min:1', 'max:5'],
             'store_category_id' => ['sometimes', Rule::exists('categories', 'id')->whereNull('deleted_at')],
             'have_vegan' => ['sometimes', 'numeric', 'min:0', 'max:1'],
             'have_not_vegan' => ['sometimes', 'numeric', 'min:0', 'max:1'],
             'open_time' => ['required', 'date_format:H:i:s'],
             'close_time' => ['required', 'date_format:H:i:s'],
             'zone_id' => ['required', Rule::exists('zones', 'id')->whereNull('deleted_at')],
-            'branch_id' => ['sometimes', Rule::exists('branches', 'id')->whereNull('deleted_at')],
+            'branch_id' => ['sometimes', Rule::exists('store_branches', 'id')->whereNull('deleted_at')],
         ];
     }
 

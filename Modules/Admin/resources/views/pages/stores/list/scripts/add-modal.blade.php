@@ -31,21 +31,105 @@
             }
         );
 
-        {{--$('.city-select2').select2({--}}
-        {{--        dropdownParent: $("#kt_modal_new_target_form"),--}}
-        {{--        placeholder: "Şəhər Axtar",--}}
-        {{--        multiple: false,--}}
-        {{--        closeOnSelect: true,--}}
-        {{--        ajax: {--}}
-        {{--            url: "{{ route('admin.ajax.cities.select2') }}",--}}
-        {{--            delay: 250,--}}
-        {{--            dataType: 'json',--}}
-        {{--        }--}}
-        {{--    }--}}
-        {{--);--}}
+        $('.country-select2').select2({
+                dropdownParent: $("#kt_modal_new_target_form"),
+                placeholder: "Ölkə Axtar",
+                multiple: false,
+                closeOnSelect: true,
+                ajax: {
+                    url: "{{ route('admin.ajax.countries.select2') }}",
+                    delay: 250,
+                    dataType: 'json',
+                }
+            }
+        );
+
+        $('.country-select2').on('select2:select', function (e) {
+            e.stopPropagation();
+            let select2Instance = $('.city-select2').data('select2');
+            $('.city-select2').val('').trigger('change')
+            select2Instance.trigger('query', {
+                term: ''
+            });
+        });
+
+        $('.city-select2').select2({
+                dropdownParent: $("#kt_modal_new_target_form"),
+                placeholder: "Şəhər Axtar",
+                multiple: false,
+                closeOnSelect: true,
+                ajax: {
+                    url: "{{ route('admin.ajax.cities.select2') }}",
+                    delay: 250,
+                    dataType: 'json',
+                    data: function (params) {
+                        return {
+                            country_id: $('#country_id').val(),
+                            q: params.term,
+                            page: params.page || 1
+                        }
+                    },
+                }
+            }
+        );
+
+        $('.module-select2').on('select2:select', function (e) {
+            e.stopPropagation();
+            let select2Instance = $('.store-category-select2').data('select2');
+            $('.store-category-select2').val('').trigger('change')
+            select2Instance.trigger('query', {
+                term: ''
+            });
+        });
+
+        $('.store-category-select2').select2({
+                dropdownParent: $("#kt_modal_new_target_form"),
+                placeholder: "Mağaza Kateqoriyası Axtar",
+                multiple: false,
+                closeOnSelect: true,
+                ajax: {
+                    url: "{{ route('admin.ajax.storeCategories.select2') }}",
+                    delay: 250,
+                    dataType: 'json',
+                    data: function (params) {
+                        return {
+                            module_id: $('#module_id').val(),
+                            q: params.term,
+                            page: params.page || 1
+                        }
+                    },
+                }
+            }
+        );
 
         $('.status-select2').select2({
                 dropdownParent: $("#kt_modal_new_target_form"),
+            }
+        );
+
+        $('.zone-select2').select2({
+                dropdownParent: $("#kt_modal_new_target_form"),
+                placeholder: "Zona Axtar",
+                multiple: false,
+                closeOnSelect: true,
+                ajax: {
+                    url: "{{ route('admin.ajax.zones.select2') }}",
+                    delay: 250,
+                    dataType: 'json',
+                }
+            }
+        );
+
+        $('.store-branches-select2').select2({
+                dropdownParent: $("#kt_modal_new_target_form"),
+                placeholder: "Filial Axtar",
+                multiple: false,
+                closeOnSelect: true,
+                ajax: {
+                    url: "{{ route('admin.ajax.storeBranches.select2') }}",
+                    delay: 250,
+                    dataType: 'json',
+                }
             }
         );
 
@@ -241,7 +325,7 @@
                                 console.log(formData);
                                 $.ajax({
                                     type: "POST",
-                                    url: "{{ route('admin.ajax.admins.store') }}",
+                                    url: "{{ route('admin.ajax.stores.store') }}",
                                     data: formData,
                                     success: function (response) {
 
