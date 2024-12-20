@@ -47,7 +47,7 @@ class StoreStoreRequest extends FormRequest
     {
         return [
             'module_id.required' => __('admin::general.validation.required', ['attribute' => 'Modul']),
-//            'module_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Modul']),
+            'module_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Modul']),
             'name.required' => __('admin::general.validation.required', ['attribute' => 'Ad']),
             'name.unique' => __('admin::general.validation.unique', ['attribute' => 'ad']),
             'name.string' => __('admin::general.validation.string', ['attribute' => 'Ad']),
@@ -59,7 +59,7 @@ class StoreStoreRequest extends FormRequest
             'store_code.max' => __('admin::general.validation.max', ['attribute' => 'Mağaza kodu']),
 
             'currency_id.required' => __('admin::general.validation.required', ['attribute' => 'Valyuta']),
-//            'currency_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Valyuta']),
+            'currency_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Valyuta']),
 
             'phone.required' => __('admin::general.validation.required', ['attribute' => 'Telefon nömrəsi']),
             'phone.unique' => __('admin::general.validation.unique', ['attribute' => 'telefon nömrəsi']),
@@ -67,7 +67,7 @@ class StoreStoreRequest extends FormRequest
             'phone.max' => __('admin::general.validation.max', ['attribute' => 'Telefon nömrəsi']),
 
             'city_id.required' => __('admin::general.validation.required', ['attribute' => 'Şəhər']),
-//            'city_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Şəhər']),
+            'city_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Şəhər']),
 
             'email.email' => __('admin::general.validation.email'),
             'email.unique' => __('admin::general.validation.unique', ['attribute' => 'email']),
