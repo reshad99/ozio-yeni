@@ -31,7 +31,7 @@ return new class () extends Migration {
             $table->enum('status', array_column(StatusEnum::cases(), 'value'))->default(StatusEnum::ACTIVE->value);
             $table->string('rating')->default('0');
             $table->bigInteger('store_category_id')->nullable();
-            $table->foreign('store_category_id')->references('id')->on('categories')->onDelete('set null');
+            $table->foreign('store_category_id')->references('id')->on('store_categories')->onDelete('set null');
             $table->smallInteger('have_vegan')->default(0);
             $table->smallInteger('have_not_vegan')->default(0);
             $table->time('open_time');

@@ -23,18 +23,18 @@ class StoreStoreRequest extends FormRequest
             'store_code' => ['required', 'string', 'max:25', Rule::unique('stores', 'store_code')->whereNull('deleted_at')],
             'currency_id' => ['required', Rule::exists('currencies', 'id')->whereNull('deleted_at')],
             'phone' => ['required', 'string', 'max:25', Rule::unique('stores', 'phone')->whereNull('deleted_at')],
+            'country_id' => ['required', Rule::exists('countries', 'id')->whereNull('deleted_at')],
             'city_id' => ['required', Rule::exists('cities', 'id')->whereNull('deleted_at')],
             'email' => ['sometimes', 'email', Rule::unique('stores', 'email')->whereNull('deleted_at')],
             'password' => ['sometimes', 'string', Password::min(6), 'confirmed'],
-            'device_id' => ['sometimes', 'string', 'max:25', Rule::unique('stores', 'device_id')->whereNull('deleted_at')],
             'lat' => ['required', 'string', 'max:25'],
             'lng' => ['required', 'string', 'max:25'],
             'status' => ['sometimes', new Enum(StatusEnum::class)],
-            'store_category_id' => ['sometimes', Rule::exists('categories', 'id')->whereNull('deleted_at')],
+            'store_category_id' => ['sometimes', Rule::exists('store_categories', 'id')->whereNull('deleted_at')],
             'have_vegan' => ['sometimes', 'boolean'],
             'have_not_vegan' => ['sometimes', 'boolean'],
-            'open_time' => ['required', 'date_format:H:i:s'],
-            'close_time' => ['required', 'date_format:H:i:s'],
+            'open_time' => ['required', 'date_format:H:i'],
+            'close_time' => ['required', 'date_format:H:i'],
             'zone_id' => ['required', Rule::exists('zones', 'id')->whereNull('deleted_at')],
             'branch_id' => ['sometimes', Rule::exists('store_branches', 'id')->whereNull('deleted_at')],
         ];
@@ -66,6 +66,9 @@ class StoreStoreRequest extends FormRequest
             'phone.string' => __('admin::general.validation.string', ['attribute' => 'Telefon nömrəsi']),
             'phone.max' => __('admin::general.validation.max', ['attribute' => 'Telefon nömrəsi']),
 
+            'country_id.required' => __('admin::general.validation.required', ['attribute' => 'Ölkə']),
+            'country_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Ölkə']),
+
             'city_id.required' => __('admin::general.validation.required', ['attribute' => 'Şəhər']),
             'city_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Şəhər']),
 
@@ -75,10 +78,6 @@ class StoreStoreRequest extends FormRequest
             'password.string' => __('admin::general.validation.string', ['attribute' => 'Şifrə']),
             'password.min' => __('admin::general.validation.min', ['attribute' => 'Şifrə']),
             'password.confirmed' => __('admin::general.validation.confirmed', ['attribute' => 'Şifrə']),
-
-            'device_id.string' => __('admin::general.validation.string', ['attribute' => 'Cihaz']),
-            'device_id.max' => __('admin::general.validation.max', ['attribute' => 'Cihaz']),
-            'device_id.unique' => __('admin::general.validation.unique', ['attribute' => 'cihaz']),
 
             'lat.required' => __('admin::general.validation.required', ['attribute' => 'En']),
             'lat.string' => __('admin::general.validation.string', ['attribute' => 'En']),
@@ -112,6 +111,15 @@ class StoreStoreRequest extends FormRequest
             'branch_id' => __('admin::general.validation.'),
             'branch_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Filial']),
         ];
+    }
+
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'have_vegan' => $this->has('have_vegan') ? true : false,
+            'have_not_vegan' => $this->has('have_not_vegan') ? true : false,
+        ]);
     }
 
     /**

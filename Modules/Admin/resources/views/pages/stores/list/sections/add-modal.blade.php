@@ -17,6 +17,7 @@
             <div class="modal-body scroll-y px-10 px-lg-15 pt-5 pb-15">
                 <!--begin:Form-->
                 <form id="kt_modal_new_target_form" class="form" action="">
+                    @csrf
                     <div class="row">
                         <div class="col-6 col-lg-6">
                             <!--begin::Input group-->
@@ -279,11 +280,13 @@
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
-                                <label for="zone_id"
-                                       class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.stores.list.table.zone') }}</label>
+                                <label for="branch_id"
+                                       class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.stores.list.table.branch') }}</label>
                                 <!--end::Label-->
                                 <!--begin::Select-->
-                                <select class="form-select form-select-solid zone-select2" data-control="select2">
+                                <select class="form-select form-select-solid store-branches-select2"
+                                        data-control="select2"
+                                        data-hide-search="true" id="branch_id" name="branch_id">
                                 </select>
                                 <!--end::Select-->
                             </div>
@@ -293,12 +296,13 @@
                             <!--begin::Input group-->
                             <div class="fv-row mb-7">
                                 <!--begin::Label-->
-                                <label for="branch_id"
+                                <label for="zone_id"
                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.stores.list.table.branch') }}</label>
                                 <!--end::Label-->
                                 <!--begin::Select-->
-                                <select class="form-select form-select-solid store-branches-select2" data-control="select2"
-                                        data-hide-search="true" id="branch_id" name="branch_id">
+                                <select class="form-select form-select-solid zone-select2"
+                                        data-control="select2"
+                                        data-hide-search="true" id="zone_id" name="zone_id">
                                 </select>
                                 <!--end::Select-->
                             </div>
