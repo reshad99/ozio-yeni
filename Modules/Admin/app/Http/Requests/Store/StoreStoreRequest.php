@@ -31,8 +31,8 @@ class StoreStoreRequest extends FormRequest
             'lng' => ['required', 'string', 'max:25'],
             'status' => ['sometimes', new Enum(StatusEnum::class)],
             'store_category_id' => ['sometimes', Rule::exists('categories', 'id')->whereNull('deleted_at')],
-            'have_vegan' => ['sometimes', 'numeric', 'min:0', 'max:1'],
-            'have_not_vegan' => ['sometimes', 'numeric', 'min:0', 'max:1'],
+            'have_vegan' => ['sometimes', 'boolean'],
+            'have_not_vegan' => ['sometimes', 'boolean'],
             'open_time' => ['required', 'date_format:H:i:s'],
             'close_time' => ['required', 'date_format:H:i:s'],
             'zone_id' => ['required', Rule::exists('zones', 'id')->whereNull('deleted_at')],
@@ -96,13 +96,9 @@ class StoreStoreRequest extends FormRequest
 
             'store_category_id.exists' => __('admin::general.validation.exists', ['attribute' => 'Kateqoriya']),
 
-            'have_vegan.numeric' => __('admin::general.validation.numeric', ['attribute' => 'Veqanın varlığı']),
-            'have_vegan.min' => __('admin::general.validation.min', ['min' => '1']),
-            'have_vegan.max' => __('admin::general.validation.max', ['max' => '5']),
+            'have_vegan.boolean' => __('admin::general.validation.boolean', ['attribute' => 'Veqanın varlığı']),
 
-            'have_not_vegan.numeric' => __('admin::general.validation.numeric', ['attribute' => 'Veqanın yoxluğu']),
-            'have_not_vegan.min' => __('admin::general.validation.min', ['min' => '1']),
-            'have_not_vegan.max' => __('admin::general.validation.max', ['max' => '5']),
+            'have_not_vegan.boolean' => __('admin::general.validation.boolean', ['attribute' => 'Veqanın yoxluğu']),
 
             'open_time.required' => __('admin::general.validation.required', ['attribute' => 'Açılış zamanı']),
             'open_time.date_format' => __('admin::general.validation.date_format', ['attribute' => 'Açılış zamanı']),
