@@ -363,6 +363,7 @@
                                                         .reload();
                                                     form
                                                         .reset();
+                                                    $('[data-control="select2"]').val(null).trigger('change');
                                                 }
                                             });
                                     },

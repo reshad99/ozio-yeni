@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\V1\RepositoryServices\CurrencyService;
 use Illuminate\Http\Request;
 
-class CurrencyController extends Controller
+class AdminCurrencyController extends Controller
 {
 
     public function __construct(private CurrencyService $currencyService)
