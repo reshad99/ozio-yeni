@@ -40,10 +40,23 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
          */
         $query = $this->query;
 
-        $query->name($request->name)
-            ->email($request->email)
-            ->phone($request->phone)
-            ->createdAtBetween($request->created_at_start, $request->created_at_end);
+        if (isset($request->name) && !empty($request->name)) {
+            $query->name($request->name);
+        }
+
+        if (isset($request->email) && !empty($request->email)) {
+            $query->email($request->email);
+        }
+
+        if (isset($request->phone) && !empty($request->phone)) {
+            $query->phone($request->phone);  
+        }
+
+        if (isset($request->created_at_start) && !empty($request->created_at_start) &&
+            isset($request->created_at_end) && !empty($request->created_at_end)) {
+            $query->createdAtBetween($request->created_at_start, $request->created_at_end);
+        }
+
     }
 
     /** {@inheritDoc} */
