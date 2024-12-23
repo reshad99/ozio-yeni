@@ -43,10 +43,10 @@ Route::middleware('auth:admin')->group(function () {
 // Route::resource('users', AdminUserController::class);
 
 Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function () {
-
     Route::prefix('users')->name('users.')->group(function () {
         Route::get('/', [AdminUserController::class, 'index'])->name('index');
     });
+
     Route::prefix('admins')->name('admins.')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('index');
     });
@@ -58,6 +58,12 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
     Route::prefix('ajax')->name('ajax.')->group(function () {
         Route::prefix('users')->name('users.')->group(function () {
             Route::get('datatable', [AdminUserController::class, 'datatable'])->name('datatable');
+
+            Route::get('/{id}', [AdminUserController::class, 'read'])->name('read');
+            Route::post('store', [AdminUserController::class, 'store'])->name('store');
+            Route::post('update/{id}', [AdminUserController::class, 'update'])->name('update');
+            Route::delete('destroy/{id}', [AdminUserController::class, 'destroy'])->name('destroy');
+            Route::delete('destroy-multiple/{ids}', [AdminUserController::class, 'destroyMultiple'])->name('destroy-multiple');
         });
         Route::prefix('admins')->name('admins.')->group(function () {
             Route::get('datatable', [AdminController::class, 'datatable'])->name('datatable');

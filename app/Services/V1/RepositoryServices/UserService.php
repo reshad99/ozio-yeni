@@ -9,6 +9,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Modules\Admin\Http\Requests\User\StoreUserRequest;
 
 class UserService
 {
@@ -17,7 +18,8 @@ class UserService
      */
     public function __construct(
         private UserRepositoryInterface $userRepository
-    ) {
+    )
+    {
         $this->userRepository = $userRepository;
     }
 
@@ -27,7 +29,7 @@ class UserService
     public function getAllUsers(): Collection
     {
         /**
-         * @var Collection<int, User> $models;
+         * @var Collection<int, User> $models ;
          */
         $models = $this->userRepository->all();
         return $models;
@@ -48,18 +50,29 @@ class UserService
         }
         return $model;
     }
+
     /**
-     * @param User $user
+     * @param StoreUserRequest $request
      * @return User
      */
-    public function createUser($user): User
+    public function createUser(StoreUserRequest $request): User
     {
+        $model = new User();
+        $model['name'] = $request['name'];
+        $model['email'] = $request['email'];
+        $model['country_code'] = $request['country_code'];
+        $model['phone'] = $request['phone'];
+        $model['bonus_card_no'] = $request['bonus_card_no'];
+        $model['ref_code'] = $request['ref_code'];
+        $model['want_notification'] = $request['want_notification'];
+
         /**
          * @var User $model
          */
-        $model = $this->userRepository->create($user);
+        $model = $this->userRepository->create($model);
         return $model;
     }
+
     /**
      * @param User $user
      * @return User
@@ -72,6 +85,7 @@ class UserService
         $model = $this->findOrFailUser($user->id);
         return $model;
     }
+
     /**
      * @param User $model
      * @return void
@@ -80,6 +94,7 @@ class UserService
     {
         $this->userRepository->delete($model);
     }
+
     /**
      * @param array<string,mixed> $with
      * @return self
@@ -89,6 +104,7 @@ class UserService
         $this->userRepository->with($with);
         return $this;
     }
+
     /**
      * @param array<string,mixed> $filter
      * @return self
@@ -98,6 +114,7 @@ class UserService
         $this->userRepository->filterBy($filter);
         return $this;
     }
+
     /**
      * @param string $columnNumber
      * @param string $sort
@@ -108,6 +125,7 @@ class UserService
         $this->userRepository->orderBy($columnNumber, $sort);
         return $this;
     }
+
     /**
      * @param int $perpage
      * @param int $page
@@ -123,6 +141,7 @@ class UserService
     }
 
     //group by
+
     /**
      *
      * @param string $column
@@ -134,6 +153,7 @@ class UserService
         return $this;
     }
     //having
+
     /**
      *
      * @param string $column
@@ -147,6 +167,7 @@ class UserService
         return $this;
     }
     //where
+
     /**
      *
      * @param string $column
@@ -160,6 +181,7 @@ class UserService
         return $this;
     }
     //orWhere
+
     /**
      *
      * @param string $column
@@ -172,6 +194,7 @@ class UserService
         $this->userRepository->orWhere($column, $operator, $value);
         return $this;
     }
+
     /**
      *
      * @param string $column
@@ -183,6 +206,7 @@ class UserService
         $this->userRepository->whereIn($column, $value);
         return $this;
     }
+
     /**
      *
      * @param string $column
@@ -201,6 +225,6 @@ class UserService
      */
     public function yajraDatatableExport(Request $request)
     {
-        return  $this->userRepository->yajraDatatableExport($request);
+        return $this->userRepository->yajraDatatableExport($request);
     }
 }
