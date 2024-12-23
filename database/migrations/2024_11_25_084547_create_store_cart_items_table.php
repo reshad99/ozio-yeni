@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration {
     /**
      * Run the migrations.
      */
@@ -12,11 +12,11 @@ return new class () extends Migration {
     {
         Schema::create('store_cart_items', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('cart_id');
+            $table->unsignedBigInteger('cart_id');
             $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade');
-            $table->bigInteger('store_product_id');
+            $table->unsignedBigInteger('store_product_id');
             $table->foreign('store_product_id')->references('id')->on('store_products')->onDelete('cascade');
-            $table->bigInteger('unit_id');
+            $table->unsignedBigInteger('unit_id');
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
             $table->decimal('quantity');
             $table->decimal('price');

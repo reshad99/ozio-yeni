@@ -6,7 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class () extends Migration {
+return new class() extends Migration {
     /**
      * Run the migrations.
      */
@@ -17,13 +17,13 @@ return new class () extends Migration {
             $table->json('name');
             $table->string('material_code');
             $table->json('description');
-            $table->bigInteger('category_id');
+            $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('store_categories')->onDelete('cascade');
             $table->integer('order_count')->default(0);
             $table->decimal('tax');
             $table->enum('tax_type', array_column(TaxTypeEnum::cases(), 'value'))->default(TaxTypeEnum::PERCENTAGE->value);
             $table->decimal('tax_percent');
-            $table->bigInteger('unit_id');
+            $table->unsignedBigInteger('unit_id');
             $table->foreign('unit_id')->references('id')->on('units');
             $table->string('rating')->default(0);
             $table->boolean('is_recommended');

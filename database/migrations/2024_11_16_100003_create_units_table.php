@@ -5,7 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use App\Enums\StatusEnum;
 
-return new class () extends Migration {
+return new class() extends Migration {
     /**
      * Run the migrations.
      */
@@ -14,7 +14,7 @@ return new class () extends Migration {
         Schema::create('units', function (Blueprint $table) {
             $table->id();
             $table->json('name');
-            $table->bigInteger('unit_type_id');
+            $table->unsignedBigInteger('unit_type_id')->index();
             $table->foreign('unit_type_id')->references('id')->on('unit_types');
             $table->string('symbol');
             $table->string('conversion');
