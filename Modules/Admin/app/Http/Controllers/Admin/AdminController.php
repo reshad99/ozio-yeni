@@ -31,7 +31,6 @@ class AdminController extends Controller
         return view('admin::pages.admins.list.index');
     }
 
-
     /**
      * Display a listing of the resource.
      * @param Request $request
@@ -42,9 +41,6 @@ class AdminController extends Controller
         return $this->adminService->yajraDatatableExport($request);
     }
 
-
-    //store
-
     /**
      * @param StoreAdminRequest $request
      * @return Admin
@@ -53,8 +49,6 @@ class AdminController extends Controller
     {
         return $this->adminService->createAdmin($request);
     }
-
-    //update
 
     /**
      * @param UpdateAdminRequest $request
@@ -71,8 +65,6 @@ class AdminController extends Controller
             return response()->json(['status' => false, 'message' => 'Admin not found']);
         }
     }
-
-    //delete
 
     /**
      * @param int $id
@@ -101,8 +93,6 @@ class AdminController extends Controller
             return response()->json(['status' => false, 'message' => 'Admin not found']);
         }
     }
-
-    //read
 
     /**
      * @param int $id
