@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\V1\RepositoryServices\CityService;
 use Illuminate\Http\Request;
 
-class CityController extends Controller
+class AdminCityController extends Controller
 {
     public function __construct(private CityService $cityService)
     {

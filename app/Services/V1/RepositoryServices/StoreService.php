@@ -59,10 +59,32 @@ class StoreService
      */
     public function createStore(StoreStoreRequest $storeRequest): Store
     {
+        $model = new Store();
+
+        $model['module_id'] = $storeRequest['module_id'];
+        $model['name'] = $storeRequest['name'];
+        $model['store_code'] = $storeRequest['store_code'];
+        $model['currency_id'] = $storeRequest['currency_id'];
+        $model['phone'] = $storeRequest['phone'];
+        $model['country_id'] = $storeRequest['country_id'];
+        $model['city_id'] = $storeRequest['city_id'];
+        $model['email'] = $storeRequest['email'];
+        $model['password'] = $storeRequest['password'];
+        $model['lat'] = $storeRequest['lat'];
+        $model['lng'] = $storeRequest['lng'];
+        $model['status'] = $storeRequest['status'];
+        $model['store_category_id'] = $storeRequest['store_category_id'];
+        $model['have_vegan'] = $storeRequest['have_vegan'];
+        $model['have_not_vegan'] = $storeRequest['have_not_vegan'];
+        $model['open_time'] = $storeRequest['open_time'];
+        $model['close_time'] = $storeRequest['close_time'];
+        $model['zone_id'] = $storeRequest['zone_id'];
+        $model['branch_id'] = $storeRequest['branch_id'];
+
         /**
          * @var Store $model
          */
-        $model = $this->storeRepository->create($storeRequest->validated());
+        $model = $this->storeRepository->create($model);
         return $model;
     }
 

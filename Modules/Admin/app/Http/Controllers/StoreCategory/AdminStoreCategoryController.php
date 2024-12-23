@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\V1\RepositoryServices\StoreCategoryService;
 use Illuminate\Http\Request;
 
-class StoreCategoryController extends Controller
+class AdminStoreCategoryController extends Controller
 {
     public function __construct(private StoreCategoryService $storeCategoryService)
     {

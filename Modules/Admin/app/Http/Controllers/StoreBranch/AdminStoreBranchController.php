@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\V1\RepositoryServices\StoreBranchService;
 use Illuminate\Http\Request;
 
-class StoreBranchController extends Controller
+class AdminStoreBranchController extends Controller
 {
     public function __construct(private StoreBranchService $storeBranchService)
     {

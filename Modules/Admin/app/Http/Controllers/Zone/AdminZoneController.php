@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\V1\RepositoryServices\ZoneService;
 use Illuminate\Http\Request;
 
-class ZoneController extends Controller
+class AdminZoneController extends Controller
 {
     public function __construct(private ZoneService $zoneService)
     {
