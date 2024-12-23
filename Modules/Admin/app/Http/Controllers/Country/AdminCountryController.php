@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Services\V1\RepositoryServices\CountryService;
 use Illuminate\Http\Request;
 
-class CountryController extends Controller
+class AdminCountryController extends Controller
 {
     public function __construct(private CountryService $countryService)
     {

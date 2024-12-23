@@ -13,7 +13,7 @@ use Modules\Admin\Http\Requests\Store\DeleteMultipleStoreRequest;
 use Modules\Admin\Http\Requests\Store\StoreStoreRequest;
 use Modules\Admin\Http\Requests\Store\UpdateStoreRequest;
 
-class StoreController extends Controller
+class AdminStoreController extends Controller
 {
     /**
      * @param StoreService $storeService

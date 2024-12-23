@@ -7,7 +7,7 @@ use App\Models\Module;
 use App\Services\V1\RepositoryServices\ModuleService;
 use Illuminate\Http\Request;
 
-class ModuleController extends Controller
+class AdminModuleController extends Controller
 {
 
     public function __construct(private ModuleService $moduleService)

@@ -8,7 +8,7 @@
         let form = $("#kt_modal_new2_target_form");
         //ROUTE USER
         let url =
-            `{{ route('', ['id' => '-1']) }}`;
+            `{{ route('admin.ajax.users.read', ['id' => '-1']) }}`;
         url = url.replace("-1", user_id);
         KTApp.showPageLoading();
 
@@ -16,10 +16,8 @@
         $.ajax({
             type: "GET",
             url: url, // Update with your API endpoint
-            data: {
-
-            },
-            success: function(response) {
+            data: {},
+            success: function (response) {
                 console.log(response);
                 //clear form all inputs
                 form.find("input").val("");
@@ -30,7 +28,7 @@
                 KTApp.hidePageLoading();
 
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 KTApp.hidePageLoading();
                 // Handle errors here
                 customSwal.dataError(xhr);
@@ -38,12 +36,12 @@
         });
 
     });
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         "use strict";
 
         // Class definition
-        var KTModalNewTarget = function() {
+        var KTModalNewTarget = function () {
             var submitButton;
             var cancelButton;
             var validator;
@@ -52,7 +50,7 @@
             var modalEl;
 
             // Init form inputs
-            var initForm = function() {
+            var initForm = function () {
                 // // Tags. For more info, please visit the official plugin site: https://yaireo.github.io/tagify/
                 // var tags = new Tagify(form.querySelector('[name="tags"]'), {
                 //     whitelist: ["Important", "Urgent", "High", "Medium", "Low"],
@@ -83,7 +81,7 @@
             }
 
             // Handle form validation and submittion
-            var handleForm = function() {
+            var handleForm = function () {
                 // Stepper custom navigation
 
                 // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
@@ -125,19 +123,19 @@
                 );
 
                 // Action buttons
-                submitButton.addEventListener('click', function(e) {
+                submitButton.addEventListener('click', function (e) {
                     e.preventDefault();
 
                     // Validate form before submit
                     if (validator) {
-                        validator.validate().then(function(status) {
+                        validator.validate().then(function (status) {
                             console.log('validated!');
 
                             if (status == 'Valid') {
                                 let formData = $("#kt_modal_new2_target_form")
                                     .serializeArray();
                                 //array have null or empty value remove it
-                                formData = formData.filter(function(item) {
+                                formData = formData.filter(function (item) {
                                     return item.value != null && item.value !=
                                         "" && item.value != '0';
                                 });
@@ -148,9 +146,9 @@
                                 // Disable button to avoid multiple click
                                 submitButton.disabled = true;
 
-                                //ROUTE UPDATE 
+                                //ROUTE UPDATE
                                 let url =
-                                    `{{ route('', ['id' => '-1']) }}`;
+                                    `{{ route('admin.ajax.users.update', ['id' => '-1']) }}`;
                                 console.log(url);
 
                                 let id = $("#kt_modal_new2_target_form")

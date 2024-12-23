@@ -134,8 +134,7 @@
                                 console.log(formData);
                                 $.ajax({
                                     type: "POST",
-                                    //TODO ROUTE AJAX
-                                    url: "", // Update with your API endpoint
+                                    url: "{{ route('admin.ajax.users.store') }}",
                                     data: formData,
                                     success: function (response) {
 
