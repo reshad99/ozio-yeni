@@ -17,11 +17,17 @@ return [
             'can' => [],
         ],
         [
-            'name' => __('admin::general.menu.stores'),
-            'url' => 'admin.stores.index',
+            'name' => __('admin::general.menu.users'),
+            'url' => 'admin.users.index',
             'icon' => 'ki-outline ki-people fs-2',
             'can' => [],
-        ]
+        ],
+        [
+            'name' => __('admin::general.menu.stores'),
+            'url' => 'admin.stores.index',
+            'icon' => 'ki-outline ki-shop fs-2',
+            'can' => [],
+        ],
         // [
         //     'name' => __('admin::general.menu.emergency-calls'),
         //     'url' => 'admin.emergency-call.list',
