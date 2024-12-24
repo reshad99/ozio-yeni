@@ -191,8 +191,8 @@
                                 <!--begin::Select-->
                                 <select class="form-select form-select-solid status-select2" data-control="select2"
                                         data-hide-search="true" id="status" name="status">
-                                    @foreach(\App\Enums\StatusEnum::cases() as $case)
-                                        <option value="{{$case->value}}">{{ucfirst($case->value)}}</option>
+                                    @foreach(\App\Enums\StatusEnum::cases() as $status)
+                                        <option value="{{$status->value}}">{{ __('admin::general.pages.list.' . $status->value) }}</option>
                                     @endforeach
                                 </select>
                                 <!--end::Select-->

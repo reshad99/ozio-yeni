@@ -2,6 +2,7 @@
 
 namespace App\Services\V1\RepositoryServices;
 
+use App\Enums\StatusEnum;
 use App\Exceptions\V1\Store\StoreNotFoundException;
 use App\Models\Admin;
 use App\Models\Store;
@@ -303,5 +304,10 @@ class StoreService
     {
         $model = $this->findOrFailStore($id);
         $this->storeRepository->changeStatus($model);
+    }
+
+    public function changeStatusMultiple($ids, $status)
+    {
+        $this->storeRepository->changeStatusMultiple($ids, $status);
     }
 }

@@ -84,6 +84,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth:admin')->group(function
             Route::delete('destroy/{id}', [AdminStoreController::class, 'destroy'])->name('destroy');
             Route::delete('destroy-multiple/{ids}', [AdminStoreController::class, 'destroyMultiple'])->name('destroy-multiple');
             Route::post('change-status/{id}', [AdminStoreController::class, 'changeStatus'])->name('change-status');
+            Route::post('change-status-multiple/{ids}', [AdminStoreController::class, 'changeStatusMultiple'])->name('change-status-multiple');
         });
 
         Route::prefix('modules')->name('modules.')->group(function () {

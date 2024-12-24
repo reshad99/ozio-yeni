@@ -26,8 +26,21 @@ interface StoreRepositoryInterface extends IBaseRepository
     public function yajraDatatableOrderBy(Request $request): void;
 
     /**
+     * @param $ids
+     * @return void
+     */
+    public function deleteMultiple($ids): void;
+
+    /**
      * @param $model
      * @return mixed
      */
     public function changeStatus($model);
+
+    /**
+     * @param array $ids
+     * @param $status
+     * @return void
+     */
+    public function changeStatusMultiple($ids, $status);
 }
