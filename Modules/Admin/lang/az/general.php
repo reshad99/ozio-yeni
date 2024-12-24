@@ -206,6 +206,11 @@ return [
         'are_you_sure_you_would_like_to_cancel' => 'Ləğv etmək istədiyinizə əminsiniz?',
         'yes_cancel' => 'Bəli, ləğv et',
         'your_form_has_not_been_cancelled' => 'Formunuz ləğv edildi',
+        'are_you_want_to_change_status' => ':attribute statusunu dəyişmək istədiyinizə əminsiniz?',
+        'status_is_changing' => 'Status dəyişdirilir',
+        'status_is_changed_successfully' => 'Status uğurla dəyişdirildi',
+        'error_occurred_while_changing_status' => 'Status dəyişdirilərkən səhv baş verdi',
+        'yes_change' => 'Bəli, dəyiş',
         'status' => [
             'OPEN' => 'Yeni',
             'DISPATCHED' => 'Təyin edilib',

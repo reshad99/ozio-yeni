@@ -9,6 +9,7 @@ use App\Services\V1\RepositoryServices\StoreService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Modules\Admin\Http\Requests\Store\ChangeStatusMultipleStoreRequest;
 use Modules\Admin\Http\Requests\Store\DeleteMultipleStoreRequest;
 use Modules\Admin\Http\Requests\Store\StoreStoreRequest;
 use Modules\Admin\Http\Requests\Store\UpdateStoreRequest;
@@ -25,7 +26,7 @@ class AdminStoreController extends Controller
     /**
      * @return View
      */
-    public function index()
+    public function index(): View
     {
         return view('admin::pages.stores.list.index');
     }
@@ -60,7 +61,7 @@ class AdminStoreController extends Controller
             $this->storeService->updateStore($request, $id);
             return response()->json(['status' => true, 'message' => 'Store updated successfully']);
         } catch (StoreNotFoundException $th) {
-            return response()->json(['status' => false, 'message' => 'Store not found']);
+            return response()->json(['status' => false, 'message' => 'Store not found', 'error' => $th->getMessage()]);
         }
     }
 
@@ -74,7 +75,7 @@ class AdminStoreController extends Controller
             $this->storeService->deleteStore($id);
             return response()->json(['status' => true, 'message' => 'Store deleted successfully']);
         } catch (StoreNotFoundException $th) {
-            return response()->json(['status' => false, 'message' => 'Store not found']);
+            return response()->json(['status' => false, 'message' => 'Store not found', 'error' => $th->getMessage()]);
         }
     }
 
@@ -82,13 +83,13 @@ class AdminStoreController extends Controller
      * @param DeleteMultipleStoreRequest $request
      * @return JsonResponse
      */
-    public function destroyMultiple(DeleteMultipleStoreRequest $request)
+    public function destroyMultiple(DeleteMultipleStoreRequest $request): JsonResponse
     {
         try {
             $this->storeService->deleteMultipleStore($request->input('ids'));
             return response()->json(['status' => true, 'message' => 'Store deleted successfully']);
         } catch (StoreNotFoundException $th) {
-            return response()->json(['status' => false, 'message' => 'Store not found']);
+            return response()->json(['status' => false, 'message' => 'Store not found', 'error' => $th->getMessage()]);
         }
     }
 
@@ -117,6 +118,18 @@ class AdminStoreController extends Controller
             return response()->json(['status' => true, 'message' => 'Store status changed successfully']);
         } catch (StoreNotFoundException $th) {
             return response()->json(['status' => false, 'message' => 'Store not found']);
+        }
+    }
+
+    public function changeStatusMultiple(ChangeStatusMultipleStoreRequest $request): JsonResponse
+    {
+        try {
+            $this->storeService->changeStatusMultiple($request->input('ids'), $request->input('status'));
+            return response()->json(['status' => true, 'message' => 'Store status changed successfully']);
+        } catch (StoreNotFoundException $th) {
+            return response()->json(['status' => false, 'message' => 'Store not found', 'error' => $th->getMessage()]);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => false, 'message' => 'Store not found', 'error' => $th->getMessage()]);
         }
     }
 }

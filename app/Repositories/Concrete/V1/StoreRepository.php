@@ -118,4 +118,14 @@ class StoreRepository extends BaseRepository implements StoreRepositoryInterface
         $model->status = $model->status == StatusEnum::ACTIVE ? StatusEnum::INACTIVE : StatusEnum::ACTIVE;
         $model->save();
     }
+
+    /**
+     * @param array $ids
+     * @param $status
+     * @return void
+     */
+    public function changeStatusMultiple($ids, $status)
+    {
+        $this->query->whereIn('id', $ids)->update(['status' => $status]);
+    }
 }

@@ -295,6 +295,9 @@
             });
         }
 
+        let ids = [];
+        let forOneTimeClickEvent = true;
+
         // Init toggle toolbar
         var initToggleToolbar = function () {
             // Toggle selected action toolbar
@@ -309,7 +312,9 @@
             const deleteSelected = document.querySelector(
                 '[data-kt-user-table-select="delete_selected"]');
 
-            let ids = [];
+            const changeStatusSelecteds = document.querySelectorAll('.change_status_selected')
+
+            ids = [];
             // Toggle delete selected toolbar
             checkboxes.forEach(c => {
                 // Checkbox on click event
@@ -322,74 +327,153 @@
                 });
             });
 
-            // Deleted selected rows
-            deleteSelected.addEventListener('click', function () {
-                // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
-                Swal.fire({
-                    text: "Are you sure you want to delete selected stores?",
-                    icon: "warning",
-                    showCancelButton: true,
-                    buttonsStyling: false,
-                    showLoaderOnConfirm: true,
-                    confirmButtonText: "Yes, delete!",
-                    cancelButtonText: "No, cancel",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-danger",
-                        cancelButton: "btn fw-bold btn-active-light-primary"
-                    },
-                }).then(function (result) {
-                    if (result.value) {
-                        // Simulate delete request -- for demo purpose only
+            if (forOneTimeClickEvent) {
+                forOneTimeClickEvent = false;
+                changeStatusSelecteds.forEach(changeStatusSelected => {
+                    changeStatusSelected.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        let status = $(this).data('status');
+
                         Swal.fire({
-                            text: "Deleting selected customers",
-                            icon: "info",
+                            text: "Are you sure you want to delete selected stores?",
+                            icon: "warning",
+                            showCancelButton: true,
                             buttonsStyling: false,
-                            showConfirmButton: false,
-                            timer: 2000
-                        }).then(function () {
+                            showLoaderOnConfirm: true,
+                            confirmButtonText: "Yes, delete!",
+                            cancelButtonText: "No, cancel",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-danger",
+                                cancelButton: "btn fw-bold btn-active-light-primary"
+                            },
+                        }).then(function (result) {
+                            if (result.value) {
+                                // Simulate delete request -- for demo purpose only
+                                Swal.fire({
+                                    text: "Deleting selected customers",
+                                    icon: "info",
+                                    buttonsStyling: false,
+                                    showConfirmButton: false,
+                                    timer: 2000
+                                }).then(function () {
+                                    Swal.fire({
+                                        text: "You have deleted all selected customers!.",
+                                        icon: "success",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn fw-bold btn-primary",
+                                        }
+                                    }).then(function () {
+                                        // delete row data from server and re-draw datatable
+                                        dt.draw();
+                                    });
+
+                                    console.log(status);
+                                    const headerCheckbox = container.querySelectorAll(
+                                        '.id-checkbox')[0];
+                                    headerCheckbox.checked = false;
+                                    let url = `{{ route('admin.ajax.stores.change-status-multiple', ['ids' => '-1']) }}`;
+                                    $.ajax({
+                                        url: url,
+                                        type: "POST",
+                                        data: {
+                                            ids: ids,
+                                            status: status
+                                        },
+                                        success: function (response) {
+                                            console.log("stores changed successfully!");
+                                        },
+                                        error: function (xhr) {
+                                            console.error("Error changing stores", xhr);
+                                        }
+                                    });
+                                });
+                            } else if (result.dismiss === 'cancel') {
+                                Swal.fire({
+                                    text: "Selected customers was not deleted.",
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                });
+                            }
+                        });
+                    });
+                });
+                // Deleted selected rows
+                deleteSelected.addEventListener('click', function () {
+                    // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
+                    Swal.fire({
+                        text: "Are you sure you want to delete selected stores?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        buttonsStyling: false,
+                        showLoaderOnConfirm: true,
+                        confirmButtonText: "Yes, delete!",
+                        cancelButtonText: "No, cancel",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-danger",
+                            cancelButton: "btn fw-bold btn-active-light-primary"
+                        },
+                    }).then(function (result) {
+                        if (result.value) {
+                            // Simulate delete request -- for demo purpose only
                             Swal.fire({
-                                text: "You have deleted all selected customers!.",
-                                icon: "success",
+                                text: "Deleting selected customers",
+                                icon: "info",
+                                buttonsStyling: false,
+                                showConfirmButton: false,
+                                timer: 2000
+                            }).then(function () {
+                                Swal.fire({
+                                    text: "You have deleted all selected customers!.",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                }).then(function () {
+                                    // delete row data from server and re-draw datatable
+                                    dt.draw();
+                                });
+
+                                // Remove header checked box
+                                const headerCheckbox = container.querySelectorAll(
+                                    '.id-checkbox')[0];
+                                headerCheckbox.checked = false;
+                                let url = `{{ route('admin.ajax.stores.destroy-multiple', ['ids' => '-1']) }}`;
+                                console.log(ids);
+                                $.ajax({
+                                    url: url,
+                                    type: "DELETE",
+                                    data: {ids: ids},
+                                    success: function (response) {
+                                        console.log("stores deleted successfully!");
+                                    },
+                                    error: function (xhr) {
+                                        console.error("Error deleting stores", xhr);
+                                    }
+                                });
+                            });
+                        } else if (result.dismiss === 'cancel') {
+                            Swal.fire({
+                                text: "Selected customers was not deleted.",
+                                icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok, got it!",
                                 customClass: {
                                     confirmButton: "btn fw-bold btn-primary",
                                 }
-                            }).then(function () {
-                                // delete row data from server and re-draw datatable
-                                dt.draw();
                             });
-
-                            // Remove header checked box
-                            const headerCheckbox = container.querySelectorAll(
-                                '.id-checkbox')[0];
-                            headerCheckbox.checked = false;
-                            let url = `{{ route('admin.ajax.stores.destroy-multiple', ['ids' => '-1']) }}`;
-                            $.ajax({
-                                url: url,
-                                type: "DELETE",
-                                data: {ids: ids},
-                                success: function (response) {
-                                    console.log("stores deleted successfully!");
-                                },
-                                error: function (xhr) {
-                                    console.error("Error deleting stores", xhr);
-                                }
-                            });
-                        });
-                    } else if (result.dismiss === 'cancel') {
-                        Swal.fire({
-                            text: "Selected customers was not deleted.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary",
-                            }
-                        });
-                    }
+                        }
+                    });
                 });
-            });
+
+            }
         }
 
         // Toggle toolbars
@@ -404,7 +488,6 @@
             // Select refreshed checkbox DOM elements
             const allCheckboxes = container.querySelectorAll('tbody .id-checkbox');
 
-            console.log(allCheckboxes);
             // Detect checkboxes state & count
             let checkedState = false;
             let count = 0;
@@ -428,20 +511,19 @@
             }
         }
 
-        $(document).on('click', '.change-store-status', function () {
+        $(document).on('click', '.change-store-status', function (event) {
+            event.preventDefault();
             let id = $(this).find('input').data('id');
-            console.log(id);
-
             let url = `{{ route('admin.ajax.stores.change-status', -1) }}`;
 
             Swal.fire({
-                text: "Are you sure you want to change the store status?",
+                text: "{{__('admin::general.shared.are_you_want_to_change_status',['attribute' => 'Mağaza']) }}",
                 icon: "warning",
                 showCancelButton: true,
                 buttonsStyling: false,
                 showLoaderOnConfirm: true,
-                confirmButtonText: "Yes, change!",
-                cancelButtonText: "No, cancel",
+                confirmButtonText: "{{ __('admin::general.shared.yes_change') }}",
+                cancelButtonText: "{{ __('admin::general.shared.no_cancel') }}",
                 customClass: {
                     confirmButton: "btn fw-bold btn-danger",
                     cancelButton: "btn fw-bold btn-active-light-primary"
@@ -450,7 +532,7 @@
                 if (result.isConfirmed) {
                     // Show loading state
                     Swal.fire({
-                        text: "Changing store status...",
+                        text: "{{ __('admin::general.shared.status_is_changing') }}",
                         icon: "info",
                         buttonsStyling: false,
                         showConfirmButton: false,
@@ -464,10 +546,10 @@
                         url: url.replace('-1', id),
                         success: function (response) {
                             Swal.fire({
-                                text: "You have successfully changed the store status!",
+                                text: "{{__('admin::general.shared.status_is_changed_successfully') }}",
                                 icon: "success",
                                 buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
+                                confirmButtonText: "{{ __('admin::general.shared.got_it') }}",
                                 customClass: {
                                     confirmButton: "btn fw-bold btn-primary"
                                 }
@@ -477,7 +559,7 @@
                         },
                         error: function (xhr) {
                             Swal.fire({
-                                text: "Error occurred while changing the store status.",
+                                text: "{{__('admin::general.shared.error_occurred_while_changing_status') }}",
                                 icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok, I'll try again!",
@@ -492,6 +574,55 @@
             });
         });
 
+        {{--$(document).on('click', '.change-status-multiple', function (event) {--}}
+        {{--    event.preventDefault();--}}
+        {{--    let status = $(this).data('status');--}}
+        {{--    console.log(status);--}}
+        {{--    let url = `{{ route('admin.ajax.stores.change-status-multiple', ['ids' => '-1']) }}`;--}}
+        {{--    const container = document.querySelector('#kt_datatable_example_1');--}}
+        {{--    const checkboxes = container.querySelectorAll('.id-checkbox');--}}
+
+        {{--    let ids = [];--}}
+        {{--    // Toggle delete selected toolbar--}}
+        {{--    checkboxes.forEach(c => {--}}
+        {{--        // Checkbox on click event--}}
+        {{--        c.addEventListener('click', function () {--}}
+        {{--            ids.push(c.value);--}}
+
+        {{--            setTimeout(function () {--}}
+        {{--                toggleToolbars();--}}
+        {{--            }, 50);--}}
+        {{--        });--}}
+        {{--    });--}}
+
+
+        {{--    $.ajax({--}}
+        {{--        type: "POST",--}}
+        {{--        url: url,--}}
+        {{--        data: {--}}
+        {{--            status: status,--}}
+        {{--            ids: ids--}}
+        {{--        },--}}
+        {{--        success: function (response) {--}}
+        {{--            Swal.fire({--}}
+        {{--                text: "{{__('admin::general.shared.status_is_changed_successfully') }}",--}}
+        {{--                icon: "success",--}}
+        {{--                buttonsStyling: false,--}}
+        {{--                confirmButtonText: "{{ __('admin::general.shared.got_it') }}",--}}
+        {{--                customClass: {--}}
+        {{--                    confirmButton: "btn fw-bold btn-primary"--}}
+        {{--                }--}}
+        {{--            }).then(function () {--}}
+        {{--                dt.draw();--}}
+        {{--            });--}}
+        {{--        },--}}
+        {{--        error: function (xhr) {--}}
+        {{--            // Handle errors here--}}
+        {{--            customSwal.dataError(xhr);--}}
+        {{--        }--}}
+        {{--    });--}}
+        {{--});--}}
+
         // Public methods
         return {
             init: function () {
@@ -503,7 +634,8 @@
                 // handleResetForm();
             }
         }
-    }();
+    }
+    ();
 
     // On document ready
     KTUtil.onDOMContentLoaded(function () {
