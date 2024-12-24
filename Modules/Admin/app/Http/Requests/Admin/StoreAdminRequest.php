@@ -18,6 +18,7 @@ class StoreAdminRequest extends FormRequest
             'name' => ['required', 'max:25', Rule::unique('admins', 'name')->whereNull('deleted_at')],
             'email' => ['required', 'email', 'max:25', Rule::unique('admins', 'email')->whereNull('deleted_at')],
             'password' => ['required', 'max:25', Password::min(8)->max(25), 'confirmed'],
+            'country_code' => ['required', 'max:25'],
 //            'password_confirmation' => ['required', 'same:password'],
             'phone' => ['required', 'string', 'max:25', Rule::unique('admins', 'phone')->whereNull('deleted_at')],
         ];

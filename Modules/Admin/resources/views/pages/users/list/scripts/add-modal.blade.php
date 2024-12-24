@@ -121,16 +121,13 @@
                                 let formData = $(
                                         "#kt_modal_new_target_form")
                                     .serializeArray();
-                                console.log(formData);
+                                // console.log(formData);
 
                                 //get country code from intlTelInput
                                 let phone = phoneIntl.getSelectedCountryData();
-                                console.log(phone);
+                                // console.log(phone);
 
-                                formData.push({
-                                    name: "country_code",
-                                    value: phone.dialCode,
-                                });
+
 
 
                                 //change form data phone to international format
@@ -141,13 +138,17 @@
                                     }
                                     return item;
                                 });
+                                formData.push({
+                                    name: "country_code",
+                                    value: phone.dialCode,
+                                });
 
                                 submitButton.setAttribute(
                                     'data-kt-indicator',
                                     'on');
                                 // Disable button to avoid multiple click
                                 submitButton.disabled = true;
-
+                                console.log(123456);
                                 console.log(formData);
                                 $.ajax({
                                     type: "POST",

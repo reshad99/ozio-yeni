@@ -30,15 +30,9 @@
                 form.find("input[name='name']").val(response.name);
                 form.find("input[name='email']").val(response.email);
                 form.find("input[name='bonus_card_no']").val(response.bonus_card_no);
-
-
-
-
-                if (response.phone && response.country_code) {
-                const phoneNumber = `+${response.phone}${response.country_code}`;
-                phoneIntl.setNumber(phoneNumber);
                 form.find("input[name='phone']").val(response.phone);
-                }
+
+
 
                 //seperate phone take first 4 char and remove + and find this country from phoneIntl and set selected
                 // if (response.phone) {
@@ -105,14 +99,14 @@
                 //     validator.revalidateField('team_assign');
                 // });
 
-                const input = form.querySelector("#phone");
-                phoneIntl = window.intlTelInput(input, {
-                    initialCountry: "az", // Varsayılan ülke: Auto
-                    preferredCountries: ["az", "tr", "us"], // Tercih edilen ülkeler
-                    separateDialCode: true, // Ülke kodunu ayrı göstermek için
-                    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.8.2/build/js/utils.js", // Maskeleme desteği için gerekli
+                // const input = form.querySelector("#phone");
+                // phoneIntl = window.intlTelInput(input, {
+                //     initialCountry: "az", // Varsayılan ülke: Auto
+                //     preferredCountries: ["az", "tr", "us"], // Tercih edilen ülkeler
+                //     separateDialCode: true, // Ülke kodunu ayrı göstermek için
+                //     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.8.2/build/js/utils.js", // Maskeleme desteği için gerekli
 
-                });
+                // });
             }
 
             // Handle form validation and submittion
