@@ -225,7 +225,7 @@
     @include('admin::pages.admins.list.scripts.add-modal')
     @include('admin::pages.admins.list.scripts.edit-modal')
     @include('admin::pages.admins.list.scripts.filterScript')
-\
+
     <script>
         var hostUrl = "{{ asset('admin/assets/') }}";
 
