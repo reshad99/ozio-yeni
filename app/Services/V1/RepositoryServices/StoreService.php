@@ -293,4 +293,15 @@ class StoreService
     {
         return $this->storeRepository->yajraDatatableExport($request);
     }
+
+    /**
+     * @param $id
+     * @return void
+     * @throws StoreNotFoundException
+     */
+    public function changeStatus($id): void
+    {
+        $model = $this->findOrFailStore($id);
+        $this->storeRepository->changeStatus($model);
+    }
 }

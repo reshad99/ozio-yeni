@@ -21,7 +21,7 @@
                 language: window.datatableLanguage,
                 select: {
                     style: 'multi',
-                    selector: 'td:first-child input[type="checkbox"]',
+                    selector: 'td:first-child .id-checkbox',
                     className: 'row-selected'
                 },
                 ajax: function (data, callback, settings) {
@@ -81,19 +81,11 @@
                         }
                     },
                     {
-                        data: 'email',
+                        data: 'status',
                         orderable: true,
                         searchable: true,
                         render: function (data, type, row) {
-                            return row.email ? row.email : 'N/A';
-                        }
-                    },
-                    {
-                        data: 'phone',
-                        orderable: true,
-                        searchable: true,
-                        render: function (data, type, row) {
-                            return row.phone ? row.phone : 'N/A';
+                            return row.status ? row.status : 'N/A';
                         }
                     },
                     {
@@ -118,7 +110,7 @@
                     render: function (data) {
                         return `
                             <div class="form-check form-check-sm form-check-custom form-check-solid">
-                                <input class="form-check-input" type="checkbox" value="${data}" />
+                                <input class="form-check-input id-checkbox" type="checkbox" value="${data}" />
                             </div>`;
                     }
                 },
@@ -308,7 +300,7 @@
             // Toggle selected action toolbar
             // Select all checkboxes
             const container = document.querySelector('#kt_datatable_example_1');
-            const checkboxes = container.querySelectorAll('[type="checkbox"]');
+            const checkboxes = container.querySelectorAll('.id-checkbox');
 
             // Select elements
             // toolbarBase = document.querySelector('[data-kt-user-table-toolbar="base"]');
@@ -370,7 +362,7 @@
 
                             // Remove header checked box
                             const headerCheckbox = container.querySelectorAll(
-                                '[type="checkbox"]')[0];
+                                '.id-checkbox')[0];
                             headerCheckbox.checked = false;
                             let url = `{{ route('admin.ajax.stores.destroy-multiple', ['ids' => '-1']) }}`;
                             $.ajax({
@@ -410,8 +402,9 @@
                 '[data-kt-docs-table-select="selected_count"]');
 
             // Select refreshed checkbox DOM elements
-            const allCheckboxes = container.querySelectorAll('tbody [type="checkbox"]');
+            const allCheckboxes = container.querySelectorAll('tbody .id-checkbox');
 
+            console.log(allCheckboxes);
             // Detect checkboxes state & count
             let checkedState = false;
             let count = 0;
@@ -434,6 +427,70 @@
                 toolbarSelected.classList.add('d-none');
             }
         }
+
+        $(document).on('click', '.change-store-status', function () {
+            let id = $(this).find('input').data('id');
+            console.log(id);
+
+            let url = `{{ route('admin.ajax.stores.change-status', -1) }}`;
+
+            Swal.fire({
+                text: "Are you sure you want to change the store status?",
+                icon: "warning",
+                showCancelButton: true,
+                buttonsStyling: false,
+                showLoaderOnConfirm: true,
+                confirmButtonText: "Yes, change!",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then(function (result) {
+                if (result.isConfirmed) {
+                    // Show loading state
+                    Swal.fire({
+                        text: "Changing store status...",
+                        icon: "info",
+                        buttonsStyling: false,
+                        showConfirmButton: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        url: url.replace('-1', id),
+                        success: function (response) {
+                            Swal.fire({
+                                text: "You have successfully changed the store status!",
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary"
+                                }
+                            }).then(function () {
+                                dt.draw();
+                            });
+                        },
+                        error: function (xhr) {
+                            Swal.fire({
+                                text: "Error occurred while changing the store status.",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, I'll try again!",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-danger"
+                                }
+                            });
+                            console.error("Error changing store status", xhr);
+                        }
+                    });
+                }
+            });
+        });
 
         // Public methods
         return {

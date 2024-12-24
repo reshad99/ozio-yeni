@@ -123,6 +123,7 @@ return [
                 'table' => [
                     'id' => 'ID',
                     'name' => 'Ad',
+                    'status' => 'Status',
                     'email' => 'E-poçt',
                     'phone' => 'Telefon',
                     'password' => 'Şifrə',

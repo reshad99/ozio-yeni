@@ -355,7 +355,7 @@
                 let errorMsg = "<br>";
 
                 for (const [key, value] of Object.entries(xhr.responseJSON.errors)) {
-                    //check if value is array 
+                    //check if value is array
                     if (Array.isArray(value)) {
                         value.forEach(function(item) {
                             errorMsg += item + "<br>";
