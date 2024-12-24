@@ -34,7 +34,7 @@ class AdminStoreController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function datatable(Request $request)
+    public function datatable(Request $request): JsonResponse
     {
         return $this->storeService->yajraDatatableExport($request);
     }
@@ -43,7 +43,7 @@ class AdminStoreController extends Controller
      * @param StoreStoreRequest $request
      * @return Store
      */
-    public function store(StoreStoreRequest $request)
+    public function store(StoreStoreRequest $request): Store
     {
         return $this->storeService->createStore($request);
     }
@@ -54,7 +54,7 @@ class AdminStoreController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function update(UpdateStoreRequest $request, $id)
+    public function update(UpdateStoreRequest $request, $id): JsonResponse
     {
         try {
             $this->storeService->updateStore($request, $id);
@@ -64,7 +64,11 @@ class AdminStoreController extends Controller
         }
     }
 
-    public function destroy($id)
+    /**
+     * @param $id
+     * @return JsonResponse
+     */
+    public function destroy($id): JsonResponse
     {
         try {
             $this->storeService->deleteStore($id);
@@ -98,6 +102,20 @@ class AdminStoreController extends Controller
             $model = $this->storeService->findOrFailStore($id);
             return $model;
         } catch (\Throwable $th) {
+            return response()->json(['status' => false, 'message' => 'Store not found']);
+        }
+    }
+
+    /**
+     * @param $id
+     * @return JsonResponse
+     */
+    public function changeStatus($id)
+    {
+        try {
+            $this->storeService->changeStatus($id);
+            return response()->json(['status' => true, 'message' => 'Store status changed successfully']);
+        } catch (StoreNotFoundException $th) {
             return response()->json(['status' => false, 'message' => 'Store not found']);
         }
     }

@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Concrete\V1;
 
+use App\Enums\StatusEnum;
 use App\Models\Store;
 use App\Repositories\Abstract\V1\StoreRepositoryInterface;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,15 +22,23 @@ class StoreRepository extends BaseRepository implements StoreRepositoryInterface
         parent::__construct($model);
     }
 
+    /**
+     * @param Request $request
+     * @return void
+     */
     public function yajraDatatableOrderBy(Request $request): void
     {
         $order = $request->order[0];
-        $columns = ['id', 'id', 'name', 'email', 'phone', 'created_at'];
+        $columns = ['id', 'id', 'name', 'status', 'created_at'];
         $column = $columns[$order['column']];
         $direction = $order['dir'];
         $this->query->orderBy($column, $direction);
     }
 
+    /**
+     * @param $request
+     * @return void
+     */
     public function yajraDatatableSearch($request): void
     {
         $request = (object)$request;
@@ -53,6 +62,11 @@ class StoreRepository extends BaseRepository implements StoreRepositoryInterface
             ->branch($request->branch_id);
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse
+     * @throws \Exception
+     */
     public function yajraDatatableExport(Request $request): JsonResponse
     {
         if ($request->has('filters'))
@@ -71,22 +85,37 @@ class StoreRepository extends BaseRepository implements StoreRepositoryInterface
             ->addColumn('name', function ($row) {
                 return $row->name;
             })
-            ->addColumn('email', function ($row) {
-                return $row->email;
-            })
-            ->addColumn('phone', function ($row) {
-                return $row->phone;
+            ->addColumn('status', function ($row) {
+                return '<label class="form-check form-switch form-switch-sm form-check-custom form-check-solid change-store-status">
+                            <input  class="form-check-input" type="checkbox" value="1" data-id="' . $row->id . '"
+                                    id="kt_example_switch" ' . ($row->status == StatusEnum::ACTIVE ? 'checked' : '') . '/>
+                        </label>';
             })
             ->addColumn('created_at', function ($row) {
                 return $row->created_at;
             })
+            ->rawColumns(['status'])
             ->make(true);
 
         return $data;
     }
 
+    /**
+     * @param $ids
+     * @return void
+     */
     public function deleteMultiple($ids): void
     {
         $this->query->whereIn('id', $ids)->delete();
+    }
+
+    /**
+     * @param $model
+     * @return void
+     */
+    public function changeStatus($model): void
+    {
+        $model->status = $model->status == StatusEnum::ACTIVE ? StatusEnum::INACTIVE : StatusEnum::ACTIVE;
+        $model->save();
     }
 }
