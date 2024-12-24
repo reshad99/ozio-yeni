@@ -21,7 +21,7 @@ class StoreUserRequest extends FormRequest
             'phone' => ['required', 'string', 'max:25', Rule::unique('users', 'phone')->whereNull('deleted_at')],
             'bonus_card_no' => ['nullable', 'max:25', Rule::unique('users', 'bonus_card_no')->whereNull('deleted_at')],
             'ref_code' => ['nullable', 'max:25', Rule::unique('users', 'ref_code')->whereNull('deleted_at')],
-            'want_notification' => ['required', 'boolean'],
+            'want_notification' => ['sometimes', 'boolean'],
         ];
     }
 

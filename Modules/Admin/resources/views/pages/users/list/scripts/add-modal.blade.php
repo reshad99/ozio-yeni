@@ -43,9 +43,13 @@
                 //     validator.revalidateField('team_assign');
                 // });
 
-                const input = document.querySelector("#phone");
-                window.intlTelInput(input, {
-                    loadUtilsOnInit: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.8.2/build/js/utils.js",
+                const input = form.querySelector("#phone");
+                phoneIntl = window.intlTelInput(input, {
+                    initialCountry: "az", // Varsayılan ülke: Azerbaycan
+                    preferredCountries: ["az", "tr", "us"], // Tercih edilen ülkeler
+                    separateDialCode: true, // Ülke kodunu ayrı göstermek için
+                    utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.8.2/build/js/utils.js", // Maskeleme desteği için gerekli
+
                 });
             }
 
@@ -115,14 +119,27 @@
 
                             if (status == 'Valid') {
                                 let formData = $(
-                                    "#kt_modal_new_target_form")
+                                        "#kt_modal_new_target_form")
                                     .serializeArray();
                                 console.log(formData);
 
-                                //remove empty fields
-                                formData = formData.filter(function (item) {
-                                    return item.value != '' && item.value !=
-                                        '0';
+                                //get country code from intlTelInput
+                                let phone = phoneIntl.getSelectedCountryData();
+                                console.log(phone);
+
+                                formData.push({
+                                    name: "country_code",
+                                    value: phone.dialCode,
+                                });
+
+
+                                //change form data phone to international format
+                                formData = formData.map(function(item) {
+                                    if (item.name == 'phone') {
+                                        item.value = '+' + phone.dialCode + item
+                                            .value.replace(/\s+/g, '');
+                                    }
+                                    return item;
                                 });
 
                                 submitButton.setAttribute(
@@ -166,7 +183,7 @@
                                                         $(
                                                             '#kt_datatable_example_1'
                                                         )
-                                                            .DataTable();
+                                                        .DataTable();
                                                     datatable
                                                         .ajax
                                                         .reload();
@@ -176,7 +193,7 @@
                                             });
                                     },
                                     error: function (xhr, status,
-                                                     error) {
+                                        error) {
                                         submitButton
                                             .removeAttribute(
                                                 'data-kt-indicator'

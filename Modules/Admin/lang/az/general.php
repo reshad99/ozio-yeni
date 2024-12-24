@@ -75,6 +75,7 @@ return [
                     'phone' => 'Telefon',
                     'password' => 'Şifrə',
                     'bonus_card_no' => 'Bonus kart nömrəsi',
+                    'want_notification'=>'Bildiriş',
                     'created_at' => 'Yaradılma tarixi',
                     'actions' => 'Əməliyyatlar',
                 ],

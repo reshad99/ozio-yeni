@@ -225,27 +225,39 @@
                         }
                     }).then(function(result) {
                         if (result.value) {
-                            // Simulate delete request -- for demo purpose only
-                            Swal.fire({
-                                text: "Deleting " + customerName,
-                                icon: "info",
-                                buttonsStyling: false,
-                                showConfirmButton: false,
-                                timer: 2000
-                            }).then(function() {
-                                Swal.fire({
-                                    text: "You have deleted " +
-                                        customerName + "!.",
-                                    icon: "success",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: {
-                                        confirmButton: "btn fw-bold btn-primary",
-                                    }
-                                }).then(function() {
-                                    // delete row data from server and re-draw datatable
-                                    dt.draw();
-                                });
+
+                            // <input class="form-check-input" type="checkbox" value="${data}" />
+                            let id = parent.querySelectorAll('td')[1]
+                                .innerText;
+
+                            let url =
+                                `{{ route('admin.ajax.users.destroy', ['id' => '-1']) }}`;
+                            url = url.replace("-1", id);
+                            //ajax
+                            $.ajax({
+                                url: url,
+                                type: "DELETE",
+                                success: function (response) {
+                                    Swal.fire({
+                                        text: "" +
+                                            customerName +
+                                            " {{ __('admin::general.shared.successfully_deleted',['attribute' => 'admin']) }}" +
+                                            "!.",
+                                        icon: "success",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "{{ __('admin::general.shared.got_it') }}",
+                                        customClass: {
+                                            confirmButton: "btn fw-bold btn-primary",
+                                        }
+                                    }).then(function () {
+                                        // ajax reload
+                                        dt.draw();
+                                    });
+                                },
+                                error: function (xhr) {
+                                    // Handle errors here
+                                    customSwal.dataError(xhr);
+                                }
                             });
                         } else if (result.dismiss === 'cancel') {
                             Swal.fire({
@@ -293,10 +305,13 @@
             const deleteSelected = document.querySelector(
                 '[data-kt-user-table-select="delete_selected"]');
 
+            let ids=[];
             // Toggle delete selected toolbar
             checkboxes.forEach(c => {
                 // Checkbox on click event
                 c.addEventListener('click', function() {
+                    ids.push(c.value);
+
                     setTimeout(function() {
                         toggleToolbars();
                     }, 50);
@@ -345,6 +360,18 @@
                             const headerCheckbox = container.querySelectorAll(
                                 '[type="checkbox"]')[0];
                             headerCheckbox.checked = false;
+                            let url = `{{ route('admin.ajax.users.destroy-multiple', ['ids' => '-1']) }}`;
+                            $.ajax({
+                                url: url,
+                                type: "DELETE",
+                                data: {ids: ids},
+                                success: function (response) {
+                                    console.log("Users deleted successfully!");
+                                },
+                                error: function (xhr) {
+                                    console.error("Error deleting users", xhr);
+                                }
+                            });
                         });
                     } else if (result.dismiss === 'cancel') {
                         Swal.fire({

@@ -220,6 +220,7 @@
 @endsection
 
 @section('scripts')
+    @include('admin::pages.admins.list.scripts.loadAjax')
     @include('admin::pages.users.list.scripts.table')
     @include('admin::pages.users.list.scripts.add-modal')
     @include('admin::pages.users.list.scripts.edit-modal')

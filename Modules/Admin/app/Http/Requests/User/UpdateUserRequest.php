@@ -19,8 +19,8 @@ class UpdateUserRequest extends FormRequest
             'country_code' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'max:25'],
             'phone' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'string', 'max:25', Rule::unique('users', 'phone')->ignore($this->user, 'id')->whereNull('deleted_at')],
             'bonus_card_no' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Rule::unique('users', 'bonus_card_no')->ignore($this->user, 'id')->whereNull('deleted_at')],
-            'ref_code' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Rule::unique('users', 'ref_code')->ignore($this->user, 'id')->whereNull('deleted_at')],
-            'want_notification' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'boolean'],
+            // 'ref_code' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'max:25', Rule::unique('users', 'ref_code')->ignore($this->user, 'id')->whereNull('deleted_at')],
+            // 'want_notification' => ['nullable', 'sometimes', 'not_regex:/^\s*$/', 'boolean'],
         ];
     }
 
@@ -44,9 +44,9 @@ class UpdateUserRequest extends FormRequest
             'bonus_card_no.max' => __('admin::validation.max', ['attribute' => 'Bonus kart nömrəsi', 'max' => '25']),
             'bonus_card_no.not_regex' => __('admin::validation.not_regex', ['attribute' => 'Bonus kart nömrəsi', 'regex' => 'boşluq']),
             'bonus_card_no.unique' => __('admin::validation.unique', ['attribute' => 'Bonus kart nömrəsi']),
-            'ref_code.max' => __('admin::validation.max', ['attribute' => 'Referans kodu', 'max' => '25']),
-            'ref_code.not_regex' => __('admin::validation.not_regex', ['attribute' => 'Referans kodu', 'regex' => 'boşluq']),
-            'ref_code.unique' => __('admin::validation.unique', ['attribute' => 'Referans kodu']),
+            // 'ref_code.max' => __('admin::validation.max', ['attribute' => 'Referans kodu', 'max' => '25']),
+            // 'ref_code.not_regex' => __('admin::validation.not_regex', ['attribute' => 'Referans kodu', 'regex' => 'boşluq']),
+            // 'ref_code.unique' => __('admin::validation.unique', ['attribute' => 'Referans kodu']),
             'want_notification.boolean' => __('admin::validation.boolean', ['attribute' => 'Xəbərdarlıq']),
         ];
     }

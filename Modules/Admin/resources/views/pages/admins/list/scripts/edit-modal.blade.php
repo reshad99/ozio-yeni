@@ -29,6 +29,7 @@
                 form.find("input[name='edit_id']").val(response.id);
                 form.find("input[name='name']").val(response.name);
                 form.find("input[name='email']").val(response.email);
+                form.find("input[name='want_notification']").prop('checked', response.want_notification);
                 //seperate phone take first 4 char and remove + and find this country from phoneIntl and set selected
                 if (response.phone) {
                     let phoneItl = window.intlTelInput(document.querySelector("#phone"));
