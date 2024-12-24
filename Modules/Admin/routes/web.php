@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use Modules\Admin\Http\Controllers\Admin\AdminController;
 use Modules\Admin\Http\Controllers\Auth\AdminLoginController;
 use Modules\Admin\Http\Controllers\Auth\AdminLogoutController;
