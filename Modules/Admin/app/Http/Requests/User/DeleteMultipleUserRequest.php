@@ -1,10 +1,11 @@
 <?php
 
-namespace Modules\Admin\Http\Requests\Admin;
+namespace Modules\Admin\Http\Requests\User;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class DeleteMultipleAdminRequest extends FormRequest
+class DeleteMultipleUserRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -12,7 +13,8 @@ class DeleteMultipleAdminRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'ids' => ['required', 'array'],
+            'ids.*' => ['required', 'integer', Rule::exists('users', 'id')->whereNull('deleted_at')],
         ];
     }
 

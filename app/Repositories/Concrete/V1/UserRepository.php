@@ -79,4 +79,13 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
             ->make(true);
         return $data;
     }
+
+        /**
+     * @param array $ids
+     * @return void
+     */
+    public function deleteMultiple($ids): void
+    {
+        $this->query->whereIn('id', $ids)->delete();
+    }
 }

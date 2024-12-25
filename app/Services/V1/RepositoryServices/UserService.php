@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Modules\Admin\Http\Requests\User\StoreUserRequest;
+use Modules\Admin\Http\Requests\User\UpdateUserRequest;
 
 class UserService
 {
@@ -64,7 +65,7 @@ class UserService
         $model['phone'] = $request['phone'];
         $model['bonus_card_no'] = $request['bonus_card_no'];
         $model['ref_code'] = $request['ref_code'];
-        $model['want_notification'] = $request['want_notification'];
+        $model['want_notification'] = $request['want_notification'] ?? 1;
 
         /**
          * @var User $model
@@ -74,25 +75,51 @@ class UserService
     }
 
     /**
-     * @param User $user
+     * @param UpdateUserRequest $adminUpdateRequest
+     * @param int $id
      * @return User
+     * @throws UserNotFoundException
      */
-    public function updateUser($user): User
+    public function updateUser(UpdateUserRequest $userUpdateRequest, $id): User
     {
+        $userUpdateRequest = $userUpdateRequest->validated();
         /**
-         * @var User $model
+         * @var User $model |null
          */
-        $model = $this->findOrFailUser($user->id);
+        $model = $this->findOrFailUser($id);
+
+        if (isset($userUpdateRequest['name']))
+            $model->name = $userUpdateRequest['name'];
+        if (isset($userUpdateRequest['email']))
+            $model->email = $userUpdateRequest['email'];
+        if (isset($userUpdateRequest['country_code']))
+            $model->country_code = $userUpdateRequest['country_code'];
+        if (isset($userUpdateRequest['phone']))
+            $model->phone = $userUpdateRequest['phone'];
+        if (isset($userUpdateRequest['bonus_card_no']))
+        $model->bonus_card_no = $userUpdateRequest['bonus_card_no'];
+        if (isset($userUpdateRequest['want_notification']))
+        $model->want_notification = $userUpdateRequest['want_notification'];
+
+        $this->userRepository->update($model);
         return $model;
     }
 
     /**
-     * @param User $model
+     * @param int $id
      * @return void
+     * @throws UserNotFoundException
      */
-    public function deleteUser($model): void
+    public function deleteUser($id): void
     {
+        $model = $this->findOrFailUser($id);
+
         $this->userRepository->delete($model);
+    }
+
+    public function deleteMultipleUser($ids): void
+    {
+        $this->userRepository->deleteMultiple($ids);
     }
 
     /**

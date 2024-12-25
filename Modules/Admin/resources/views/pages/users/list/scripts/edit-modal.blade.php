@@ -1,15 +1,16 @@
 <script>
+    let model;
     $(document).on('click', "a[data-bs-target='#kt_modal_new2_target']", async function() {
         // <input class="form-check-input" type="checkbox" value="${data}" /> get value of checkbox
         await window.loadAjax();
 
-        let user_id = $(this).data('id');
+        let id = $(this).data('id');
 
         let form = $("#kt_modal_new2_target_form");
         //ROUTE USER
         let url =
             `{{ route('admin.ajax.users.read', ['id' => '-1']) }}`;
-        url = url.replace("-1", user_id);
+        url = url.replace("-1", id);
         KTApp.showPageLoading();
 
         //ajax read role data
@@ -19,12 +20,30 @@
             data: {},
             success: function (response) {
                 console.log(response);
+                model = response;
                 //clear form all inputs
                 form.find("input").val("");
 
 
                 //set form data
                 form.find("input[name='edit_id']").val(response.id);
+                form.find("input[name='name']").val(response.name);
+                form.find("input[name='email']").val(response.email);
+                form.find("input[name='bonus_card_no']").val(response.bonus_card_no);
+                form.find("input[name='phone']").val(response.phone);
+
+
+
+                //seperate phone take first 4 char and remove + and find this country from phoneIntl and set selected
+                // if (response.phone) {
+                //     let phoneItl = window.intlTelInput(document.querySelector("#phone"));
+
+                //     phoneItl.setNumber('994'+response.phone);
+                //     //remove first 4 char and + from phone
+                //     let phone = response.phone.substring(0);
+                //     form.find("input[name='phone']").val('+994'+phone);
+
+                // }
                 KTApp.hidePageLoading();
 
             },
@@ -48,6 +67,7 @@
             var form;
             var modal;
             var modalEl;
+            var phoneIntl;
 
             // Init form inputs
             var initForm = function () {
@@ -78,6 +98,15 @@
                 //     // Revalidate the field when an option is chosen
                 //     validator.revalidateField('team_assign');
                 // });
+
+                // const input = form.querySelector("#phone");
+                // phoneIntl = window.intlTelInput(input, {
+                //     initialCountry: "az", // Varsayılan ülke: Auto
+                //     preferredCountries: ["az", "tr", "us"], // Tercih edilen ülkeler
+                //     separateDialCode: true, // Ülke kodunu ayrı göstermek için
+                //     utilsScript: "https://cdn.jsdelivr.net/npm/intl-tel-input@24.8.2/build/js/utils.js", // Maskeleme desteği için gerekli
+
+                // });
             }
 
             // Handle form validation and submittion
@@ -88,28 +117,57 @@
                 validator = FormValidation.formValidation(
                     form, {
                         fields: {
-                            //TODO XANLAR
-                            // first_name: {
+                            name: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "{{ __('admin::general.validation.required', ['attribute' => 'Ad']) }}"
+                                    }
+                                }
+                            },
+                            email: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "{{ __('admin::general.validation.required', ['attribute' => 'E-poçt']) }}"
+                                    },
+                                    emailAddress: {
+                                        message: "{{ __('admin::general.validation.email') }}"
+                                    }
+                                }
+                            },
+                            phone: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "{{ __('admin::general.validation.required', ['attribute' => 'Telefon nömrəsi']) }}"
+                                    }
+                                }
+                            },
+                            bonus_card_no: {
+                                validators: {
+                                    notEmpty: {
+                                        message: "{{ __('admin::general.validation.required', ['attribute' => 'Bonus kart nömrəsi']) }}"
+                                    }
+                                }
+                            },
+                            // password: {
                             //     validators: {
                             //         notEmpty: {
-                            //             message: "{{ __('admin::general.pages.users.list.first_name_is_required') }}"
+                            //             message: "{{ __('admin::general.validation.required', ['attribute' => 'Şifrə']) }}"
                             //         }
                             //     }
                             // },
-                            // last_name: {
+                            // password_confirmation: {
                             //     validators: {
                             //         notEmpty: {
-                            //             message: "{{ __('admin::general.pages.users.list.last_name_is_required') }}"
+                            //             message: "{{ __('admin::general.validation.required', ['attribute' => 'Şifrə təkrarı']) }}"
+                            //         },
+                            //         identical: {
+                            //             compare: function () {
+                            //                 return form.querySelector('[name="password"]').value;
+                            //             },
+                            //             message: "{{ __('admin::general.validation.same', ['attribute' => 'Şifrə']) }}"
                             //         }
                             //     }
-                            // },
-                            // email: {
-                            //     validators: {
-                            //         notEmpty: {
-                            //             message: "{{ __('admin::general.pages.users.list.email_is_required') }}"
-                            //         }
-                            //     }
-                            // },
+                            // }
                         },
                         plugins: {
                             trigger: new FormValidation.plugins.Trigger(),
@@ -132,15 +190,24 @@
                             console.log('validated!');
 
                             if (status == 'Valid') {
-                                let formData = $("#kt_modal_new2_target_form")
+                                let formValues = $("#kt_modal_new2_target_form")
                                     .serializeArray();
-                                //array have null or empty value remove it
-                                formData = formData.filter(function (item) {
-                                    return item.value != null && item.value !=
-                                        "" && item.value != '0';
-                                });
+                                let formData = new FormData();
+                                //append form data
 
-                                console.log(formData);
+
+                                formData.append('edit_id', model.id);
+                                formValues.forEach(function(item) {
+                                    if (model.hasOwnProperty(item.name) &&
+                                        model[item.name] != item.value) {
+
+                                        console.log(model[item.name] +
+                                            ' ------- ' +
+                                            item.name + " : " + item.value);
+
+                                        formData.append(item.name, item.value);
+                                    }
+                                });
 
                                 submitButton.setAttribute('data-kt-indicator', 'on');
                                 // Disable button to avoid multiple click
@@ -158,9 +225,12 @@
                                 url = url.replace("-1", id);
 
                                 $.ajax({
-                                    type: "PUT",
+                                    //put method
+                                    method: "POST",
                                     url: url, // Update with your API endpoint
                                     data: formData,
+                                    processData: false,
+                                    contentType: false,
                                     success: function(response) {
                                         // Handle the success response here
                                         submitButton.removeAttribute(

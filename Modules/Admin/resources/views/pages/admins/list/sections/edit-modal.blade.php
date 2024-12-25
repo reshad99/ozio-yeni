@@ -60,7 +60,7 @@
                                         class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.admins.list.table.phone') }}</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input name="phone" id="phone"
+                                    <input name="phone" id=""
                                         class="form-control form-control-solid mb-3 mb-lg-0"
                                         placeholder="example@domain.com" />
                                     <!--end::Input-->

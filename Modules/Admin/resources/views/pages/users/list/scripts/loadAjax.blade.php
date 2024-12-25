@@ -8,6 +8,7 @@
                 firstTimeClick = false;
                 //get department list and roles list
                 //ajax read role data
+                resolve();
                 $.ajax({
                     type: "GET",
                     //TODO ROUTE

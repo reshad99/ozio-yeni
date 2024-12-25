@@ -28,115 +28,63 @@
                         <div class="col-12 col-lg-12">
                             <!--begin::Input group-->
                             <div class="row g-9 mb-8">
-                                <div class="fv-row mb-7 col-6">
-                                    <!--begin::Label-->
-                                    <label
-                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.users.list.first_name') }}</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="text" name="first_name" class="form-control  mb-3 mb-lg-0"
-                                        placeholder="{{ __('admin::general.pages.users.list.first_name') }}" />
-                                    <!--end::Input-->
-                                </div>
                                 <!--begin::Input group-->
-                                <div class="fv-row mb-7 col-6">
-                                    <!--begin::Label-->
-                                    <label
-                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.users.list.last_name') }}</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="text" name="last_name" class="form-control  mb-3 mb-lg-0"
-                                        placeholder="{{ __('admin::general.pages.users.list.last_name') }}" />
-                                    <!--end::Input-->
-                                </div>
-                                <!--end::Input-->
-                                <div class="fv-row mb-7 col-6">
-                                    <!--begin::Label-->
-                                    <label
-                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.users.list.father_name') }}</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="text" name="father_name" class="form-control  mb-3 mb-lg-0"
-                                        placeholder="{{ __('admin::general.pages.users.list.search_user') }}" />
-                                    <!--end::Input-->
-                                </div>
-                                <div class="fv-row mb-7 col-6">
-                                    <!--begin::Label-->
-                                    <label
-                                        class="fw-semibold fs-6 mb-2 required">{{ __('admin::general.pages.users.list.phone_number') }}</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="text" name="phone" class="form-control  mb-3 mb-lg-0"
-                                        placeholder="{{ __('admin::general.pages.users.list.phone_number') }}" />
-                                    <!--end::Input-->
-                                </div>
-                                <div class="fv-row mb-7 col-4">
-                                    <label
-                                        class="fw-semibold fs-6 mb-2 required">{{ __('admin::general.pages.users.list.working_organisation') }}</label>
-                                    <select id="org-select2" class="form-select form-select-solid"
-                                        name="organisation_id">
-                                        <option value="0">
-                                            {{ __('admin::general.pages.users.list.none') }}</option>
-                                    </select>
-                                </div>
-                                <div class="fv-row mb-7 col-4">
-                                    <label
-                                        class="fw-semibold fs-6 mb-2">{{ __('admin::general.pages.users.list.working_region') }}</label>
-                                    <select id="reg-select2" class="form-select form-select-solid" name="region_id">
-                                        <option value="unset">
-                                            {{ __('admin::general.pages.users.list.none') }}</option>
-                                    </select>
-                                </div>
-                                <div class="fv-row mb-7 col-4">
-                                    <label
-                                        class="fw-semibold fs-6 mb-2">{{ __('admin::general.pages.users.list.working_department') }}</label>
-                                    <select id="department-select2" class="form-select form-select-solid"
-                                        name="department_id">
-                                        <option value="unset">
-                                            {{ __('admin::general.pages.users.list.none') }}</option>
-                                    </select>
-                                </div>
                                 <div class="fv-row mb-7">
                                     <!--begin::Label-->
-                                    <label
-                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.users.list.email') }}</label>
+                                    <label for="name"
+                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.users.list.table.name') }}</label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input type="email" name="email" class="form-control  mb-3 mb-lg-0"
-                                        placeholder="{{ __('admin::general.pages.users.list.email') }}" />
+                                    <input type="text" name="name" id="name"
+                                        class="form-control form-control-solid mb-3 mb-lg-0" placeholder="Full name" />
                                     <!--end::Input-->
-                                </div>
-                                <div class="fv-row mb-7">
-                                    <!--begin::Label-->
-                                    <label
-                                        class="fw-semibold fs-6 mb-2">{{ __('admin::general.pages.users.list.password') }}</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="password" name="password" class="form-control  mb-3 mb-lg-0"
-                                        placeholder="Password" />
-                                    <!--end::Input-->
-                                </div>
-                                <div class="fv-row mb-7">
-                                    <!--begin::Label-->
-                                    <label
-                                        class="fw-semibold fs-6 mb-2">{{ __('admin::general.pages.users.list.confirm_password') }}</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input-->
-                                    <input type="password" name="password_confirmation"
-                                        class="form-control  mb-3 mb-lg-0"
-                                        placeholder="{{ __('admin::general.pages.users.list.confirm_password') }}" />
-                                    <!--end::Input-->
-                                </div>
-
-                                <!--end::Input group-->
-                                <div class="mb-5 role-section col-6">
-                                    <!--begin::Label-->
-
-                                </div>
-                                <div class="fv-row mb-5 col-6 module-section">
-
                                 </div>
                                 <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-7">
+                                    <!--begin::Label-->
+                                    <label for="email"
+                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.users.list.table.email') }}</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <input type="email" name="email" id="email"
+                                        class="form-control form-control-solid mb-3 mb-lg-0"
+                                        placeholder="example@domain.com" />
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-7">
+                                    <!--begin::Label-->
+                                    <label for="phone"
+                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.users.list.table.phone') }}</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <input name="phone" id=""
+                                        class="form-control form-control-solid mb-3 mb-lg-0"
+                                        placeholder="example@domain.com" />
+                                    <!--end::Input-->
+                                </div>
+                                <div class="fv-row mb-7">
+                                    <!--begin::Label-->
+                                    <label for="bonus_card_no"
+                                        class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.users.list.table.bonus_card_no') }}</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    <input name="bonus_card_no" id="bonus_card_no"
+                                        class="form-control form-control-solid mb-3 mb-lg-0"
+                                        placeholder="example@domain.com" />
+                                    <!--end::Input-->
+                                </div>
+                                <div class="fv-row mb-7">
+                                    <!--begin::Label-->
+                                    <label for="want_notification" class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.users.list.table.want_notification') }}</label>
+                                    <!--end::Label-->
+                                    <!--begin::Input (Checkbox)-->
+                                    <input type="checkbox" name="want_notification" id="want_notification" class="form-check-input mb-3 mb-lg-0" />
+                                    <!--end::Input-->
+                                </div>
+
                             </div>
                         </div>
                         <!--begin::Actions-->

@@ -66,10 +66,12 @@ class Admin extends Authenticatable
      */
     public function scopeName($query, $name)
     {
-        if (isset($name)) {
-            return $query->where('name', 'like', '%' . $name . '%');
-        }
-        return $query;
+    // name parametresi var mı ve boş değilse
+    if (isset($name) && !empty($name)) {
+        return $query->where('name', 'ILIKE', '%' . $name . '%');
+    }
+    // Eğer name parametresi yoksa veya boşsa, sorguya filtre ekleme
+    return $query;
     }
 
     //email,phone,createdAtBetween scopes
@@ -83,8 +85,8 @@ class Admin extends Authenticatable
      */
     public function scopeEmail($query, $email)
     {
-        if (isset($email)) {
-            return $query->where('email', 'like', '%' . $email . '%');
+        if (isset($email) && !empty($email)) {
+            return $query->where('email', 'ILIKE', '%' . $email . '%');
         }
         return $query;
     }
@@ -98,8 +100,8 @@ class Admin extends Authenticatable
      */
     public function scopePhone($query, $phone)
     {
-        if (isset($phone)) {
-            return $query->where('phone', 'like', '%' . $phone . '%');
+        if (isset($phone) && !empty($phone)) {
+            return $query->where('phone', 'ILIKE', '%' . $phone . '%');
         }
         return $query;
     }
