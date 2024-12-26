@@ -52,6 +52,7 @@ class AdminUserController extends Controller
     }
 
     //update
+
     /**
      * @param UpdateUserRequest $request
      * @param int $id
@@ -88,9 +89,10 @@ class AdminUserController extends Controller
      * @param DeleteMultipleUserRequest $request
      * @return JsonResponse
      */
-    public function destroyMultiple(DeleteMultipleUserRequest $request): JsonResponse
+    public function destroyMultiple(Request $request): JsonResponse
     {
         try {
+//            dd($request->all());
             $this->userService->deleteMultipleUser($request->input('ids'));
             return response()->json(['status' => true, 'message' => 'User deleted successfully']);
         } catch (UserNotFoundException $th) {

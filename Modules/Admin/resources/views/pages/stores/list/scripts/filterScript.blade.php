@@ -1,5 +1,11 @@
 <script>
     $(document).ready(function() {
+        $('.status-select2').select2({
+                dropdownParent: $("#kt_modal_new_target_form"),
+            }
+        );
+
+
         $("#kt_daterangepicker_1").daterangepicker({
             timePicker: true,
             startDate: moment().add(-1, 'month'),

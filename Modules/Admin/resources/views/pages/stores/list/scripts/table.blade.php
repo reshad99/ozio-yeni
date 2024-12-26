@@ -374,6 +374,7 @@
                                         '.id-checkbox')[0];
                                     headerCheckbox.checked = false;
                                     let url = `{{ route('admin.ajax.stores.change-status-multiple', ['ids' => '-1']) }}`;
+                                    console.log(ids);
                                     $.ajax({
                                         url: url,
                                         type: "POST",
@@ -573,55 +574,6 @@
                 }
             });
         });
-
-        {{--$(document).on('click', '.change-status-multiple', function (event) {--}}
-        {{--    event.preventDefault();--}}
-        {{--    let status = $(this).data('status');--}}
-        {{--    console.log(status);--}}
-        {{--    let url = `{{ route('admin.ajax.stores.change-status-multiple', ['ids' => '-1']) }}`;--}}
-        {{--    const container = document.querySelector('#kt_datatable_example_1');--}}
-        {{--    const checkboxes = container.querySelectorAll('.id-checkbox');--}}
-
-        {{--    let ids = [];--}}
-        {{--    // Toggle delete selected toolbar--}}
-        {{--    checkboxes.forEach(c => {--}}
-        {{--        // Checkbox on click event--}}
-        {{--        c.addEventListener('click', function () {--}}
-        {{--            ids.push(c.value);--}}
-
-        {{--            setTimeout(function () {--}}
-        {{--                toggleToolbars();--}}
-        {{--            }, 50);--}}
-        {{--        });--}}
-        {{--    });--}}
-
-
-        {{--    $.ajax({--}}
-        {{--        type: "POST",--}}
-        {{--        url: url,--}}
-        {{--        data: {--}}
-        {{--            status: status,--}}
-        {{--            ids: ids--}}
-        {{--        },--}}
-        {{--        success: function (response) {--}}
-        {{--            Swal.fire({--}}
-        {{--                text: "{{__('admin::general.shared.status_is_changed_successfully') }}",--}}
-        {{--                icon: "success",--}}
-        {{--                buttonsStyling: false,--}}
-        {{--                confirmButtonText: "{{ __('admin::general.shared.got_it') }}",--}}
-        {{--                customClass: {--}}
-        {{--                    confirmButton: "btn fw-bold btn-primary"--}}
-        {{--                }--}}
-        {{--            }).then(function () {--}}
-        {{--                dt.draw();--}}
-        {{--            });--}}
-        {{--        },--}}
-        {{--        error: function (xhr) {--}}
-        {{--            // Handle errors here--}}
-        {{--            customSwal.dataError(xhr);--}}
-        {{--        }--}}
-        {{--    });--}}
-        {{--});--}}
 
         // Public methods
         return {

@@ -121,6 +121,4 @@ class Admin extends Authenticatable
         }
         return $query;
     }
-
-
 }

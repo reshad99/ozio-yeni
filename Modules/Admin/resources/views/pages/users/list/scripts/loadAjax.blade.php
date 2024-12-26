@@ -9,6 +9,7 @@
                 //get department list and roles list
                 //ajax read role data
                 resolve();
+
                 $.ajax({
                     type: "GET",
                     //TODO ROUTE
@@ -16,7 +17,7 @@
                     data: {},
                     success: function(response) {
                         response = JSON.parse(JSON.stringify(response));
-                        console.log(response);
+                        // console.log(response);
                         resolve();
                     },
                     error: function(xhr, status, error) {

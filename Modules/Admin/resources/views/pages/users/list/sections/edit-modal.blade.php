@@ -76,15 +76,6 @@
                                         placeholder="example@domain.com" />
                                     <!--end::Input-->
                                 </div>
-                                <div class="fv-row mb-7">
-                                    <!--begin::Label-->
-                                    <label for="want_notification" class="required fw-semibold fs-6 mb-2">{{ __('admin::general.pages.users.list.table.want_notification') }}</label>
-                                    <!--end::Label-->
-                                    <!--begin::Input (Checkbox)-->
-                                    <input type="checkbox" name="want_notification" id="want_notification" class="form-check-input mb-3 mb-lg-0" />
-                                    <!--end::Input-->
-                                </div>
-
                             </div>
                         </div>
                         <!--begin::Actions-->
