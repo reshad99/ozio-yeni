@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Repositories\Abstract\V1\AdminRepositoryInterface;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\DataTables;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -49,12 +50,12 @@ class AdminRepository extends BaseRepository implements AdminRepositoryInterface
         }
 
         if (isset($request->phone) && !empty($request->phone)) {
-            $query->phone($request->phone);  
+            $query->phone($request->phone);
         }
 
-        if (isset($request->created_at_start) && !empty($request->created_at_start) &&
-            isset($request->created_at_end) && !empty($request->created_at_end)) {
-            $query->createdAtBetween($request->created_at_start, $request->created_at_end);
+        if (isset($request->date_start) && !empty($request->date_start) &&
+            isset($request->date_end) && !empty($request->date_end)) {
+            $query->createdAtBetween($request->date_start, $request->date_end);
         }
 
     }

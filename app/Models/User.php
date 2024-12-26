@@ -177,7 +177,7 @@ class User extends Authenticatable implements JWTSubject
     public function scopeName($query, $name)
     {
         if (isset($name)) {
-            return $query->where('name', 'like', '%' . $name . '%');
+            return $query->where('name', 'ILIKE', '%' . $name . '%');
         }
         return $query;
     }
@@ -192,7 +192,7 @@ class User extends Authenticatable implements JWTSubject
     public function scopeEmail($query, $email)
     {
         if (!empty($email)) {
-            return $query->where('email', 'like', '%' . $email . '%');
+            return $query->where('email', 'ILIKE', '%' . $email . '%');
         }
         return $query;
     }
@@ -207,7 +207,7 @@ class User extends Authenticatable implements JWTSubject
     public function scopePhone($query, $phone)
     {
         if (!empty($phone)) {
-            return $query->where('phone', 'like', '%' . $phone . '%');
+            return $query->where('phone', 'ILIKE', '%' . $phone . '%');
         }
         return $query;
     }
@@ -222,7 +222,7 @@ class User extends Authenticatable implements JWTSubject
     public function scopeBonusCardNo($query, $bonus_card_no)
     {
         if (!empty($bonus_card_no)) {
-            return $query->where('bonus_card_no', 'like', '%' . $bonus_card_no . '%');
+            return $query->where('bonus_card_no', 'ILIKE', '%' . $bonus_card_no . '%');
         }
         return $query;
     }

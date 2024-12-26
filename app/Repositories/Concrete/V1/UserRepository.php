@@ -16,7 +16,8 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
      */
     public function __construct(
         User $model
-    ) {
+    )
+    {
         parent::__construct($model);
     }
 
@@ -33,19 +34,37 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     /** {@inheritDoc} */
     public function yajraDatatableSearch($request): void
     {
+        $request = (object)$request;
         /**
          * @var Builder<User> $query
          */
         $query = $this->query;
-        $query->name($request['name'])
-            ->email($request['email'])
-            ->phone($request['phone'])
-            ->bonusCardNo($request['bonus_card_no'])
-            ->createdAtBetween($request['startDate'], $request['endDate']);
+
+        if (isset($request->name) && !empty($request->name)) {
+            $query->name($request->name);
+        }
+
+        if (isset($request->email) && !empty($request->email)) {
+            $query->email($request->email);
+        }
+
+        if (isset($request->phone) && !empty($request->phone)) {
+            $query->phone($request->phone);
+        }
+
+        if (isset($request->bonus_card_no) && !empty($request->bonus_card_no)) {
+            $query->bonusCardNo($request->bonus_card_no);
+        }
+
+        if (isset($request->date_start) && !empty($request->date_start) &&
+            isset($request->date_end) && !empty($request->date_end)) {
+            $query->createdAtBetween($request->date_start, $request->date_end);
+        }
     }
 
     /** {@inheritDoc} */
-    public function yajraDatatableExport(Request $request): JsonResponse
+    public
+    function yajraDatatableExport(Request $request): JsonResponse
     {
         if ($request->has('filters')) {
             $this->yajraDatatableSearch($request->filters);
@@ -80,11 +99,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         return $data;
     }
 
-        /**
+    /**
      * @param array $ids
      * @return void
      */
-    public function deleteMultiple($ids): void
+    public
+    function deleteMultiple($ids): void
     {
         $this->query->whereIn('id', $ids)->delete();
     }
